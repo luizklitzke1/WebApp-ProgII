@@ -15,14 +15,15 @@ class Personagem(db.Model):
     historia = db.Column(db.Text, nullable=False, default='Nenhuma história informada.')
     data_criacao = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
+    #Endereço em string para o arquivo salvo em Static - gera ao registrar -
     foto = db.Column(db.String(20), nullable=False, default='personagem.png')
 
 
-    #Representação em String
+    #Representação em String - só os dados mais relevantes para identificar mesmo
     def __repr__(self):
         return f"Nome: '{self.nome}', Raca: '{self.raca}', Classe: '{self.classe}', Nivel: '{self.nivel}'"
 
-    #Expressão da classe em Json
+    #Expressão da classe em Json - todos os dados para conversão
     def json(self):
         return{
             "id": self.id, "nome": self.nome,

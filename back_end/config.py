@@ -1,8 +1,11 @@
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from datetime import datetime
+from PIL import Image
+
+import secrets
 import os
 
 app = Flask(__name__)
@@ -16,12 +19,4 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # remover warnings
 
 db = SQLAlchemy(app)
 
-#Importa as rotas dos Blueprints
-from personagens.routes import personagens
-app.register_blueprint(personagens)
 
-from geral.routes import geral
-app.register_blueprint(geral)
-
-#from erros.handlers import erros
-#app.register_blueprint(erros)
