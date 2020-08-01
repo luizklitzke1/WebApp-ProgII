@@ -49,16 +49,6 @@
                 {% endif %}
               </div>
 
-              <!-- Direita da barra - Parte de login -->
-              <div class="navbar-nav">
-                {% if current_user.is_authenticated %}
-                  <a class="nav-item nav-link fonte_mec" href="{{ url_for('usuarios.mostrar_perfil_usuario', usuario_id=current_user.id) }}">{{current_user.nome}}</a>
-                  <a class="nav-item nav-link" href="{{ url_for('usuarios.deslogar_usuario') }}">Deslogar</a>
-                {% else %}
-                  <a class="nav-item nav-link" href="{{ url_for('usuarios.logar_usuario') }}">Login</a>
-                  <a class="nav-item nav-link" href="{{ url_for('usuarios.registrar_usuario') }}">Registrar-se</a>
-                {% endif %}
-              </div>
             </div>
           </div>
         </nav>

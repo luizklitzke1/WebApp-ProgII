@@ -48,27 +48,13 @@ def listar_personagens():
 
 
 # Rota para registrar personagens
-@app.route("/registrar_Personagem", methods=['POST'])
+@app.route("/registrar_personagem", methods=['POST'])
 def registrar_Personagem():
     
     resposta = jsonify({"resultado":"ok","detalhes":ok})
     dados = request.get_json()
     try: #Tenta fazer o registro
         novo_Personagem = Personagem(**dados)
-        """novo_Personagem = Personagem(nome=form_Personagem.nome.data, 
-                                     raca=form_Personagem.raca.data,
-                                     classe=form_Personagem.classe.data, 
-                                     nivel=form_Personagem.nivel.data,
-                                     forca=form_Personagem.forca.data, 
-                                     destreza=form_Personagem.destreza.data,
-                                     constituicao=form_Personagem.constituicao.data, 
-                                     inteligencia=form_Personagem.inteligencia.data,
-                                     sabedoria=form_Personagem.sabedoria.data, 
-                                     carisma=form_Personagem.carisma.data,
-                                     historia=form_Personagem.historia.data, 
-                                     foto=form_Personagem.foto_referencia.data,
-                                     autor=current_user)
-        """
         db.session.add(novo_Personagem)
         db.session.commit()
     except Exception as e: 
