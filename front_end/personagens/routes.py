@@ -7,9 +7,8 @@ personagens = Blueprint('personagens',__name__)
 from flask import render_template, url_for, flash, redirect, request, abort
 from back_end.personagens.forms import (Form_Personagem, Form_Procurar_Personagem, 
                                            Form_Avaliar_Personagem)
-from back_end.models_db import Personagem, Avaliacao, Usuario
+from back_end.models_db import Personagem
 from back_end import app, db
-from flask_login import current_user, login_required
 from back_end.geral.routes import salvar_imagem, apagar_imagem
 from datetime import datetime
 import requests
@@ -129,40 +128,11 @@ def mostrar_personagem(personagem_id):
                                               form_editar_avaliacao = form_editar_avaliacao,
                                               avaliacao_usuario = avaliacao_usuario )
 
-# Rota para apagar um personagem
-@personagens.route("/personagem/<int:personagem_id>/apagar_avaliacao/<int:autor_id>",  methods=['POST', 'GET'])
-@login_required
-def apagar_avaliacao(personagem_id, autor_id):
-
-    avaliacao = Avaliacao.query.get_or_404 ((autor_id, personagem_id))
-    avaliacoes = Avaliacao.query.filter_by(personagem_id = personagem_id)
-
-    personagem = Personagem.query.get_or_404 (personagem_id)
-
-    if (avaliacao.autor != current_user) and not(current_user.isAdmin):
-        abort(403)
-
-    #Verifica se é a única avaliação do personagem
-    #(Caso for, considera ele ainda não avaliado)
-    if avaliacoes.count() == 1:
-        personagem.nota = None
-    else:
-        #Caso não for, remove a nota da média do personagem
-        personagem.nota = ((personagem.nota)*2) - avaliacao.nota
-    
-    db.session.delete(avaliacao)
-    db.session.commit()
-    flash('Avaliação apagada com sucesso!', 'success')
-    return redirect(url_for('personagens.mostrar_personagem', personagem_id=personagem_id))
-
-
 # Rota para editar um personagem
 @personagens.route("/personagem/<int:personagem_id>/editar",  methods=['GET', 'POST'])
 @login_required
 def editar_personagem(personagem_id):
     
-    print("aaaaaaaaaaaaa")
-
     personagem = Personagem.query.get_or_404(personagem_id)
 
     if (personagem.autor != current_user) and not(current_user.isAdmin):

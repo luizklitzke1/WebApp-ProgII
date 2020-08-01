@@ -5,8 +5,8 @@ geral = Blueprint('geral',__name__)
 
 from flask import render_template
 from PIL import Image
-from back_end.models_db import Personagem
-from back_end import app, db
+from models_db import Personagem
+from config import app, db
 import secrets
 import os
 

@@ -9,7 +9,6 @@
                         <div class="row p-0 m-0">
                             <div class="col-md-2 p-0 text-center">
                                     <img class="account-img mt-2" src="{{ url_for('static', filename='imagens_personagens/' + personagem.foto) }}">
-                                    <p class="article-content m-0">Criador por:  <a href="{{url_for('usuarios.mostrar_perfil_usuario', usuario_id = personagem.autor.id)}}"> {{ personagem.autor.nome }}</a></p>
                                     <small class="text-muted">Criado em: {{ personagem.data_criacao.strftime('%d-%m-%Y') }}</small>
                                 <div class="container float-left text-left"></div>
                                 {% if personagem.nota == None %}

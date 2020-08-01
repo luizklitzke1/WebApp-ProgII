@@ -33,7 +33,6 @@
               <a href="{{url_for('personagens.mostrar_personagem', personagem_id=personagem.id)}}">
                 <img class="account-img" src="{{ url_for('static', filename='imagens_personagens/' + personagem.foto) }}">
               </a>
-              <p class="article-content">Criador por: <a href="{{url_for('usuarios.mostrar_perfil_usuario', usuario_id = personagem.autor.id)}}">{{ personagem.autor.nome }}</a></p>
               {% if personagem.nota == None %}
                 <p class="article-content"><span class="fonte_mec", style="color: #CE0000">Ainda não</span> avaliado pela comunidade!</span></p>
               {% else %}

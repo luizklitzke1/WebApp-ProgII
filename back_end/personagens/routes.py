@@ -4,87 +4,66 @@ from flask import Blueprint, jsonify
 #Definição da Blueprint
 personagens = Blueprint('personagens',__name__)
 
-from flask import render_template, url_for, flash, redirect, request, abort
-from back_end.personagens.forms import (Form_Personagem, Form_Procurar_Personagem, 
-                                           Form_Avaliar_Personagem)
-from back_end.models_db import Personagem, Avaliacao, Usuario
-from back_end import app, db
-from flask_login import current_user, login_required
-from back_end.geral.routes import salvar_imagem, apagar_imagem
+from models_db import Personagem
+from config import app, db
+from geral.routes import salvar_imagem, apagar_imagem
 from datetime import datetime
 
-# Rota para registrar personagens
-@personagens.route("/registrar_personagem", methods=['GET', 'POST'])
-@login_required
-def registrar_personagem():
+
+# Rota para listar personagens
+@personagens.route("/listar_personagens")
+def listar_personagens():
+   
+    personagens = db.session.query(Personagem).all()
+    personagens_json = [Personagem.json() for Personagem in personagens]
+    resposta =  jsonify(personagens_json)
+    return resposta
+
     
-    form_personagem = Form_Personagem()
+    #return render_template('procurar_Personagem.html', titulo='Procurar Personagem', 
+    #                        form_procurar_pers = form_procurar_pers, personagens = personagens)
 
-    if form_personagem.validate_on_submit():
 
-        if form_personagem.foto_referencia.data:
-            picture_file = salvar_imagem(
-                'static/imagens_personagens', form_personagem.foto_referencia.data)
-            form_personagem.foto_referencia.data = picture_file
-
-        novo_personagem = Personagem(nome=form_personagem.nome.data, 
-                                     raca=form_personagem.raca.data,
-                                     classe=form_personagem.classe.data, 
-                                     nivel=form_personagem.nivel.data,
-                                     forca=form_personagem.forca.data, 
-                                     destreza=form_personagem.destreza.data,
-                                     constituicao=form_personagem.constituicao.data, 
-                                     inteligencia=form_personagem.inteligencia.data,
-                                     sabedoria=form_personagem.sabedoria.data, 
-                                     carisma=form_personagem.carisma.data,
-                                     historia=form_personagem.historia.data, 
-                                     foto=form_personagem.foto_referencia.data,
+# Rota para registrar personagens
+@personagens.route("/registrar_Personagem", methods=['POST'])
+def registrar_Personagem():
+    
+    resposta = jsonify({"resultado":"ok","detalhes":ok})
+    dados = request.get_json()
+    try: #Tenta fazer o registro
+        novo_Personagem = Personagem(**dados)
+        """novo_Personagem = Personagem(nome=form_Personagem.nome.data, 
+                                     raca=form_Personagem.raca.data,
+                                     classe=form_Personagem.classe.data, 
+                                     nivel=form_Personagem.nivel.data,
+                                     forca=form_Personagem.forca.data, 
+                                     destreza=form_Personagem.destreza.data,
+                                     constituicao=form_Personagem.constituicao.data, 
+                                     inteligencia=form_Personagem.inteligencia.data,
+                                     sabedoria=form_Personagem.sabedoria.data, 
+                                     carisma=form_Personagem.carisma.data,
+                                     historia=form_Personagem.historia.data, 
+                                     foto=form_Personagem.foto_referencia.data,
                                      autor=current_user)
-
-        db.session.add(novo_personagem)
+        """
+        db.session.add(novo_Personagem)
         db.session.commit()
-        flash('Personagem registrado com sucesso!', 'success')
-        return redirect(url_for('geral.mostrar_home'))
+    except Exception as e: 
+        resposta = jsonify({"resultado":"erro","detalhes":str(e)})
+        
+    resposta.headers.add("Access-Control-Allow-Origin","*")
+    
+    return resposta
 
-    return render_template('registrar_personagem.html', titulo='Registrar Personagem', 
-                            form_personagem=form_personagem)
-
-# Rota para vizualizar um personagem
-@personagens.route("/personagem/<int:personagem_id>", methods=['GET', 'POST'])
-def mostrar_personagem(personagem_id):
+    
+# Rota para vizualizar um Personagem
+@personagens.route("/Personagem/<int:Personagem_id>", methods=['GET', 'POST'])
+def mostrar_Personagem(Personagem_id):
 
     pagina = request.args.get('pagina', 1, type=int)
 
-    personagem = Personagem.query.get_or_404(personagem_id)
+    Personagem = Personagem.query.get_or_404(Personagem_id)
 
-
-    if current_user.is_authenticated:
-        #Pega todas as avaliações, fora a do usuário atual
-        avaliacoes = Avaliacao.query.filter(Avaliacao.autor_id.isnot(current_user.id),
-                    Avaliacao.personagem_id.is_(personagem_id)).paginate(page=pagina, per_page=6)
-        #Verificar se o usuáriojá possui alguma avaliação para ser editada
-        avaliacao_usuario = Avaliacao.query.filter_by(autor_id=current_user.id, 
-                                                         personagem_id = personagem_id).first()
-    else:
-        avaliacao_usuario = None
-
-    #Pega todas as avaliações
-        avaliacoes = Avaliacao.query.filter_by(personagem_id = personagem_id).paginate(page=pagina, per_page=6)
-
-    #Atualiza a nota do personagem
-    lista_notas = []
-    nota = 0
-    for avaliacao in avaliacoes.items:
-        lista_notas.append(avaliacao.nota)
-        nota += avaliacao.nota
-    if avaliacao_usuario:
-        lista_notas.append(avaliacao_usuario.nota)
-        nota += avaliacao_usuario.nota
-
-    if len(lista_notas) == 0:
-        personagem.nota = None
-    else:
-        personagem.nota = round((nota/len(lista_notas)),2) 
 
     db.session.commit()
 
@@ -102,12 +81,12 @@ def mostrar_personagem(personagem_id):
 
         db.session.commit()
         flash('Avaliação editada com sucesso!', 'success')
-        return redirect(url_for('personagens.mostrar_personagem', personagem_id=personagem.id))
+        return redirect(url_for('personagens.mostrar_Personagem', Personagem_id=Personagem.id))
 
     #Verifica se uma nova avaliação foi registrada
     elif form_avaliar.validate_on_submit():
 
-        nova_avalicao = Avaliacao(autor_id = current_user.id, personagem_id = personagem_id, 
+        nova_avalicao = Avaliacao(autor_id = current_user.id, Personagem_id = Personagem_id, 
                                   conteudo = form_avaliar.conteudo.data, nota = form_avaliar.nota.data)
 
 
@@ -115,7 +94,7 @@ def mostrar_personagem(personagem_id):
         db.session.commit()
 
         flash('Personagem avaliado com sucesso!', 'success')
-        return redirect(url_for('personagens.mostrar_personagem', personagem_id=personagem.id))
+        return redirect(url_for('personagens.mostrar_Personagem', Personagem_id=Personagem.id))
 
     #Pré-popula os campos da avaliação caso for ser editada
     elif request.method == "GET" and avaliacao_usuario:
@@ -123,135 +102,79 @@ def mostrar_personagem(personagem_id):
         form_editar_avaliacao.nota.data = avaliacao_usuario.nota 
         form_editar_avaliacao.conteudo.data = avaliacao_usuario.conteudo
         
-    return render_template('personagem.html', titulo=personagem.nome,  personagem = personagem,
+    return render_template('Personagem.html', titulo=Personagem.nome,  Personagem = Personagem,
                                               avaliacoes = avaliacoes, form_avaliar = form_avaliar, 
                                               form_editar_avaliacao = form_editar_avaliacao,
                                               avaliacao_usuario = avaliacao_usuario )
 
-# Rota para apagar um personagem
-@personagens.route("/personagem/<int:personagem_id>/apagar_avaliacao/<int:autor_id>",  methods=['POST', 'GET'])
-@login_required
-def apagar_avaliacao(personagem_id, autor_id):
+# Rota para editar um Personagem
+@personagens.route("/Personagem/<int:Personagem_id>/editar",  methods=['GET', 'POST'])
 
-    avaliacao = Avaliacao.query.get_or_404 ((autor_id, personagem_id))
-    avaliacoes = Avaliacao.query.filter_by(personagem_id = personagem_id)
-
-    personagem = Personagem.query.get_or_404 (personagem_id)
-
-    if (avaliacao.autor != current_user) and not(current_user.isAdmin):
-        abort(403)
-
-    #Verifica se é a única avaliação do personagem
-    #(Caso for, considera ele ainda não avaliado)
-    if avaliacoes.count() == 1:
-        personagem.nota = None
-    else:
-        #Caso não for, remove a nota da média do personagem
-        personagem.nota = ((personagem.nota)*2) - avaliacao.nota
+def editar_Personagem(Personagem_id):
     
-    db.session.delete(avaliacao)
-    db.session.commit()
-    flash('Avaliação apagada com sucesso!', 'success')
-    return redirect(url_for('personagens.mostrar_personagem', personagem_id=personagem_id))
 
+    Personagem = Personagem.query.get_or_404(Personagem_id)
 
-# Rota para editar um personagem
-@personagens.route("/personagem/<int:personagem_id>/editar",  methods=['GET', 'POST'])
-@login_required
-def editar_personagem(personagem_id):
-    
-    print("aaaaaaaaaaaaa")
-
-    personagem = Personagem.query.get_or_404(personagem_id)
-
-    if (personagem.autor != current_user) and not(current_user.isAdmin):
+    if (Personagem.autor != current_user) and not(current_user.isAdmin):
         abort(403)
 
     form_editar = Form_Personagem()
 
     if form_editar.validate_on_submit():
 
-        personagem.nome = form_editar.nome.data
-        personagem.raca = form_editar.raca.data
-        personagem.classe = form_editar.classe.data
-        personagem.nivel = form_editar.nivel.data
-        personagem.forca = form_editar.forca.data
-        personagem.destreza = form_editar.destreza.data
-        personagem.constituicao = form_editar.constituicao.data
-        personagem.inteligencia = form_editar.inteligencia.data
-        personagem.sabedoria = form_editar.sabedoria.data
-        personagem.carisma = form_editar.carisma.data
-        personagem.historia = form_editar.historia.data
+        Personagem.nome = form_editar.nome.data
+        Personagem.raca = form_editar.raca.data
+        Personagem.classe = form_editar.classe.data
+        Personagem.nivel = form_editar.nivel.data
+        Personagem.forca = form_editar.forca.data
+        Personagem.destreza = form_editar.destreza.data
+        Personagem.constituicao = form_editar.constituicao.data
+        Personagem.inteligencia = form_editar.inteligencia.data
+        Personagem.sabedoria = form_editar.sabedoria.data
+        Personagem.carisma = form_editar.carisma.data
+        Personagem.historia = form_editar.historia.data
 
         if form_editar.foto_referencia.data:
-            if personagem.foto != 'personagem.png':
-                apagar_imagem('static/imagens_personagens', personagem.foto)
+            if Personagem.foto != 'Personagem.png':
+                apagar_imagem('static/imagens_personagens', Personagem.foto)
             picture_file = salvar_imagem('static/imagens_personagens', form_editar.foto_referencia.data)
-            personagem.foto = picture_file
+            Personagem.foto = picture_file
 
         db.session.commit()
         flash('Personagem editado com sucesso!', 'success')
-        return redirect(url_for('personagens.mostrar_personagem', personagem_id=personagem.id))
+        return redirect(url_for('personagens.mostrar_Personagem', Personagem_id=Personagem.id))
 
     elif request.method == "GET":
         
-        #Pré-popular os campos com os dados do personagem 
-        form_editar = Form_Personagem(personagem.nome, personagem.raca, personagem.classe, personagem.nivel,
-                               personagem.forca, personagem.destreza, personagem.constituicao,
-                               personagem.inteligencia, personagem.sabedoria, personagem.carisma, 
-                               personagem.historia)
+        #Pré-popular os campos com os dados do Personagem 
+        form_editar = Form_Personagem(Personagem.nome, Personagem.raca, Personagem.classe, Personagem.nivel,
+                               Personagem.forca, Personagem.destreza, Personagem.constituicao,
+                               Personagem.inteligencia, Personagem.sabedoria, Personagem.carisma, 
+                               Personagem.historia)
 
 
-    return render_template('editar_personagem.html', titulo='personagem.nome', form_editar=form_editar, 
-                                                     personagem=personagem)
+    return render_template('editar_Personagem.html', titulo='Personagem.nome', form_editar=form_editar, 
+                                                     Personagem=Personagem)
 
-# Rota para apagar um personagem
-@personagens.route("/personagem/<int:personagem_id>/apagar",  methods=['POST'])
-@login_required
-def apagar_personagem(personagem_id):
-    personagem = Personagem.query.get_or_404(personagem_id)
-    if (personagem.autor != current_user) and not(current_user.isAdmin):
+# Rota para apagar um Personagem
+@personagens.route("/Personagem/<int:Personagem_id>/apagar",  methods=['POST'])
+
+def apagar_Personagem(Personagem_id):
+    Personagem = Personagem.query.get_or_404(Personagem_id)
+    if (Personagem.autor != current_user) and not(current_user.isAdmin):
         abort(403)
 
-    #Apagar as avaliações do personagem
+    #Apagar as avaliações do Personagem
     #(Não sei porque não apaga automaticamente na verdade)
-    avaliacoes = Avaliacao.query.filter_by(personagem_id = personagem_id)
+    avaliacoes = Avaliacao.query.filter_by(Personagem_id = Personagem_id)
     for avaliacao in avaliacoes:
         db.session.delete(avaliacao)
         
-    if personagem.foto != 'personagem.png':
-                apagar_imagem('static/imagens_personagens', personagem.foto)
-    db.session.delete(personagem)
+    if Personagem.foto != 'Personagem.png':
+                apagar_imagem('static/imagens_personagens', Personagem.foto)
+    db.session.delete(Personagem)
     db.session.commit()
     flash('Personagem apagado com sucesso!', 'success')
     return redirect(url_for('geral.mostrar_home'))
 
 
-# Rota para a pesquisa de personagem
-@personagens.route("/procurar_personagem/", methods=['GET', 'POST'])
-def procurar_personagem():
-    
-    print("aaaaaaaaa")
-    pagina = request.args.get('pagina', 1, type=int)   
-
-    form_procurar_pers = Form_Procurar_Personagem()
-    pagina = request.args.get('pagina', 1, type=int)
-
-    #Se tiverem sido informados dados para o filtro
-    if form_procurar_pers.validate_on_submit():
-
-        personagens = db.session.query(Personagem).filter(
-                                                          Personagem.nome.like(f"%{form_procurar_pers.nome.data}%"),
-                                                          Personagem.raca.like(f"%{form_procurar_pers.raca.data}%"),
-                                                          Personagem.classe.like(f"%{form_procurar_pers.classe.data}%"),
-                                                          ).from_self().paginate(page=1, per_page=9).items
-    #Se nenhum filtro for informado:
-    else:
-        personagens = db.session.query(Personagem).filter(Personagem.nome.like('%%')).from_self().paginate(page=pagina, 
-                                                                                                           per_page=9).items
-    personagens_json = [personagem.json() for personagem in personagens]
-    return jsonify(personagens_json)
-
-    
-    #return render_template('procurar_personagem.html', titulo='Procurar Personagem', 
-    #                        form_procurar_pers = form_procurar_pers, personagens = personagens)

@@ -1,9 +1,8 @@
 flask 
 flask_sqlalchemy 
 Pillow
-flask_login 
 datetime 
 flask_wtf 
 flask_bcrypt
 itsdangerous
-flask-mail
+flask_cors

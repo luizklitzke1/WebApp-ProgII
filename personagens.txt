@@ -1,0 +1,33 @@
+1	Hulk Preguiçoso	Hulk	Preguiçoso	23	16	10	16	3	4	11	Conhecido como o dono das promessas vazias, o Hulk Baiano assombra a sociedade com suas garantias quase inacreditáveis, após conquistar a simpatia dos cidadãos, Hulk Baiano faz com que os mesmos depositem nele os seus afazeres, porém, nunca os faz, afinal ele está sempre dormindo.	2019-11-09 20:13:59.928474	cc76e0dc2a1cc54f80.png
+
+2	Hulk Padre	Hulk	Padre	23	12	15	11	18	19	16	Esquecido pelo seu povo, Hulk Judeu dedica a sua vida para salvar aqueles que não possuem esperança. Se apresentando como um sol que brilha sobre as trevas, ele busca a chave para a salvação daqueles destruídos por seus semelhantes.	2019-11-09 20:14:57.365719	2b32fbc7b9b2c2aa99.jpg	
+
+3	Hulk Veio	Hulk	Veio	43	19	18	20	19	20	15	O mais antigo de sua raça e o ancião do conhecimento, Hulk Idoso é aquele que transcende os planos racionais, sendo o único de sua espécie a atingir o raciocínio pleno tornando-se capaz de alterar a realidade como um todo. Porém sua sabedoria lhe diz que o mundo deve seguir seu próprio caminho pois em tudo há um propósito, por isso o mesmo permite que criaturas horrendas como Hulk Agiota e Hulk Baiano ajam como bem entendem, pois compreende que tudo age para um bem maior.	2019-11-09 20:15:45.661892	872eb54a9dee2cc7ae.png
+
+
+4	Hulk Agiota	Hulk	Agiota	43	19	18	20	17	13	14	Em meio ao desespero completo, muitos buscam salvação no vazio.
+Acólito do caos, servo da maldade, nomeado como Hulk agiota, é aquele que vende uma falsa esperança para aqueles desprovidos de qualquer reserva monetária. É como a sensação de estar submerso quase sem fôlego e quando finalmente você se aproxima da superfície para enfim respirar, é subitamente puxado de volta para fundo. A falsa esperança que vem acompanhada de terror, sofrimento e acima de tudo, arrependimento. Por isso lembre-se, uma dívida com o Hulk Agiota, NUNCA será esquecida.
+	2019-11-09 20:17:41.882690	1a9460c091846ad35f.png
+
+
+5	Onerom	Humano	Guerreiro	82	20	15	19	15	17	18	Lendário guerreiro, conhecido por toda a  extensão do mundo conhecido, amado por um grupo seleto, porém temido por todos.
+Porta sua característica arma de duas mão, famosa por sua letalidade em ataques diretos, além de sua incrível capacidade de intimidação.	2019-11-13 02:03:58.832595	d0912a5bfa2c778266.png	
+
+
+6	Clint com o Anão	Humano e Anão	Sharpshooter	53	13	17	14	12	17	20	Um grupo que, de tanto unido, caracteriza uma única entidade.
+Formado por uma série de fatos improváveis, tal dupla se concretiza como sérios contratantes da região mais hostil e selvagem da Fronteira	2019-11-13 02:06:22.803131	564424e3928ba1c88a.png		
+
+
+7	Deivola	Deivid Elton	Deusvis	21	11	17	19	1	1	20	Sua origem ainda é incerta, porém sua fama o precede.
+Sua chegada nunca é anunciada formalmente, porém Deivola pode ser sentido a 21cm de distância por vários sentidos distintos.
+
+Seu rastro de destruição se espalha por todas as faixas etárias, gêneros, etnias, Deivola não descrimina.
+
+TEODORO	2019-11-13 13:06:13.877547	7a03cfee7a20c52bef.png	
+
+
+
+8	Jarbas do Sul	Humano do Sul	Sinuqueiro	23	11	7	8	5	11	16	Grandíssimo mestre da arte da sinuca, porém superado devido ao seu ego e pressa, sendo a contrapartida perfeita para o mestre de Mauá	2019-11-22 00:33:40.475315	20a9de87e4f9fa687d.png	
+
+
+9	Mangle	Animatronic	Monstro	69	5	5	10	5	10	5	QUer comer pizza? Tenha cuidado para não ser comido também! :0	2019-11-22 11:18:38.395139	c34cb551ebee1df255.png	
