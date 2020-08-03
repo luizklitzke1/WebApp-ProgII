@@ -4,6 +4,9 @@ from models_db import Personagem
 
 # Rota para a home
 @app.route("/")
+def inicio_backend():
+    return "<a href='/listar_personagens'>Listar personagens</a>"
+
 @app.route("/home")
 def mostrar_home():
 
@@ -39,8 +42,7 @@ def listar_personagens():
    
     personagens = db.session.query(Personagem).all()
     personagens_json = [Personagem.json() for Personagem in personagens]
-    resposta =  jsonify(personagens_json)
-    return resposta
+    return (jsonify(personagens_json))
 
     
     #return render_template('procurar_Personagem.html', titulo='Procurar Personagem', 
