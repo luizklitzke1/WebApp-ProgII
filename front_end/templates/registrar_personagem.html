@@ -1,204 +1,175 @@
-{% extends "layout.html" %}
-{% block content %}
+!DOCTYPE html>
+<html>
+  <head>
+      <!-- Meta Tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="author" content="Ace of Spades">
+      <meta name="description" content="Site com um sistema simples e pratico de registro e edição de personagens de RPG ">
+      <meta name="keywords" content="rpg, personagens, crud">
+      <link rel="icon" type="image/png" href="../static/d20_logo.png" />
 
+      <!--Link para CSS  do Bootstrap-->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+      <!-- Link para estilo customizado-->
+      <link rel="stylesheet" type="text/css" href="../static/style.css">
+      <link href="https://fonts.googleapis.com/css?family=Supermercado+One&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+      <title>Projeto RPG JS - Registrar_personagem </title>
+
+
+  </head>
+  <body class='pt-4'>
+      <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+          <div class="container">
+
+            <!-- Logo do site -->
+            <a href="/"><img src="../static/d20_logo.png" width="60" height="60" class="d-inline-block align-top p-0 mr-2" alt="logo_site"></a>
+            <a class="navbar-brand mr-4 fonte_mec" href="/">Projeto RPG</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" 
+                    aria-label="Alternar visualização">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Itens - Menu do Cabeçalho -->
+            <div class="collapse navbar-collapse" id="navbarToggle">
+              <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="home.html">Home</a>
+                <a class="nav-item nav-link" href="#" id="linkListarPessoas">Procurar</a>
+                <a class="nav-item nav-link" href="registrar_personagem.html">Registrar personagem</a>
+              </div>
+
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Parte principal do site - Conteúdo -->
+      <main role="main" class="container ml- p-0 principal1">
     <div class="content-section p-4 pl-4 pr-4">
 
         <form method="POST" action="" enctype="multipart/form-data">
-            {{ form_personagem.hidden_tag() }}
+
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Registrar Personagem</legend>
 
                 <!-- Nome do personagem-->
                 <div class="form-group row pr-3 pl-3">
-                    {{ form_personagem.nome.label(class="form-control-label") }}
-                    {% if form_personagem.nome.errors %}
-                        {{ form_personagem.nome(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form_personagem.nome.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form_personagem.nome(class="form-control form-control-lg") }}
-                    {% endif %}
+                    <label for="campoNome">Nome</label>
+                    <input type="text" class="form-control form-control-lg" id="campoNome">
                 </div>
 
                 <div class="row">
                     <!-- Raça do personagem-->
                     <div class="form-group col-sm-6">
-                        {{ form_personagem.raca.label(class="form-control-label") }}
-                        {% if form_personagem.raca.errors %}
-                            {{ form_personagem.raca(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form_personagem.raca.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_personagem.raca(class="form-control form-control-lg") }}
-                        {% endif %}
+                        <label for="campoRaca">Raça</label>
+                        <input type="text" class="form-control form-control-lg" id="campoRaca">
                     </div>
 
                     <!-- Classe do personagem-->
                     <div class="form-group col-sm-6">
-                        {{ form_personagem.classe.label(class="form-control-label") }}
-                        {% if form_personagem.classe.errors %}
-                            {{ form_personagem.classe(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form_personagem.classe.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_personagem.classe(class="form-control form-control-lg") }}
-                        {% endif %}
+                        <label for="campoClasse">Classe</label>
+                        <input type="text" class="form-control form-control-lg" id="campoClasse">
                     </div>
-                </div>
+                    </div>
 
                 <!-- Nível do personagem-->
                 <div class="form-group">
-                    {{ form_personagem.nivel.label(class="form-control-label", type="number", min="1", max="99") }}
-                    {% if form_personagem.nivel.errors %}
-                        {{ form_personagem.nivel(class="form-control form-control-lg is-invalid", type="number", min="1", max="99")  }}
-                        <div class="invalid-feedback">
-                            {% for error in form_personagem.nivel.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form_personagem.nivel(class="form-control form-control-lg", type="number", min="1", max="99" ) }}
-                    {% endif %}
+                    <label for="campoNivel">Nivel</label>
+                    <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoNivel">
                 </div>
 
                 <div class="row">
                     <!-- Força-->
                     <div class="form-group col-sm-4">
-                        {{ form_personagem.forca.label(class="form-control-label", type="number", min="1", max="99") }}
-                        {% if form_personagem.forca.errors %}
-                            {{ form_personagem.forca(class="form-control form-control-lg is-invalid", type="number", min="1", max="99" ) }}
-                            <div class="invalid-feedback">
-                                {% for error in form_personagem.forca.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_personagem.forca(class="form-control form-control-lg", type="number", min="1", max="99" ) }}
-                        {% endif %}
+                        <label for="campoForca">Força</label>
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoForca">   
                     </div>
 
                     <!-- Destreza -->
                     <div class="form-group col-sm-4">
-                        {{ form_personagem.destreza.label(class="form-control-label", type="number", min="1", max="99") }}
-                        {% if form_personagem.destreza.errors %}
-                            {{ form_personagem.destreza(class="form-control form-control-lg is-invalid", type="number", min="1", max="99") }}
-                            <div class="invalid-feedback">
-                                {% for error in form_personagem.destreza.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_personagem.destreza(class="form-control form-control-lg", type="number", min="1", max="99") }}
-                        {% endif %}
+                        <label for="campoDestreza">Destreza</label>
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoDestreza">   
                     </div>
 
                     <!-- Constituicao -->
                     <div class="form-group col-sm-4">
-                        {{ form_personagem.constituicao.label(class="form-control-label", type="number", min="1", max="99" ) }}
-                        {% if form_personagem.constituicao.errors %}
-                            {{ form_personagem.constituicao(class="form-control form-control-lg is-invalid", type="number", min="1", max="99" ) }}
-                            <div class="invalid-feedback">
-                                {% for error in form_personagem.constituicao.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_personagem.constituicao(class="form-control form-control-lg ", type="number", min="1", max="99") }}
-                        {% endif %}
+                        <label for="campoConstituicao">Constituicao</label>
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoConstituicao">   
                     </div>
 
                 </div>
                 <div class="row">
                 <!-- Inteligencia -->
                     <div class="form-group col-sm-4">
-                        {{ form_personagem.inteligencia.label(class="form-control-label ", type="number", min="1", max="99") }}
-                        {% if form_personagem.inteligencia.errors %}
-                            {{ form_personagem.inteligencia(class="form-control form-control-lg is-invalid", type="number", min="1", max="99" ) }}
-                            <div class="invalid-feedback">
-                                {% for error in form_personagem.inteligencia.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_personagem.inteligencia(class="form-control form-control-lg ", type="number", min="1", max="99") }}
-                        {% endif %}
+                        <label for="campoInteligencia">Inteligência</label>
+                        <input type="number" min="1", max="99" class="form-control form-control-lg" id="campoInteligencia">   
                     </div>
 
                     <!-- Sabedoria -->
                     <div class="form-group col-sm-4">
-                        {{ form_personagem.sabedoria.label(class="form-control-label ", type="number", min="1", max="99") }}
-                        {% if form_personagem.sabedoria.errors %}
-                            {{ form_personagem.sabedoria(class="form-control form-control-lg is-invalid ", type="number", min="1", max="99") }}
-                            <div class="invalid-feedback">
-                                {% for error in form_personagem.sabedoria.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_personagem.sabedoria(class="form-control form-control-lg ", type="number", min="1", max="99") }}
-                        {% endif %}
+                        <label for="campoSabedoria">Sabedoria</label>
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoSabedoria">  
                     </div>
 
                     <!-- Carisma -->
                     <div class="form-group col-sm-4">
-                        {{ form_personagem.carisma.label(class="form-control-label ", type="number", min="1", max="99") }}
-                        {% if form_personagem.carisma.errors %}
-                            {{ form_personagem.carisma(class="form-control form-control-lg is-invalid ", type="number", min="1", max="99") }}
-                            <div class="invalid-feedback">
-                                {% for error in form_personagem.carisma.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_personagem.carisma(class="form-control form-control-lg ", type="number", min="1", max="99") }}
-                        {% endif %}
+                        <label for="campoCarisma">Carisma</label>
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoCarisma">  
                     </div>
                 </div>
 
                 <!-- Historia -->
                 <div class="form-group">
-                    {{ form_personagem.historia.label(class="form-control-label") }}
-                    {% if form_personagem.historia.errors %}
-                        {{ form_personagem.historia(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form_personagem.historia.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form_personagem.historia(class="form-control form-control-lg") }}
-                    {% endif %}
-                
+                    <label for="campoHistoria">História</label>
+                    <input type="textbox" class="form-control form-control-lg h-25" id="campoHistoria"> 
                 </div>
 
                 <!-- Foto de referência -->
-                <div class="form-group">
-                    {{ form_personagem.foto_referencia.label() }}
-                    {{ form_personagem.foto_referencia(class='form-control-file') }}
-                    {% if form_personagem.foto_referencia.errors %}
-                            {% for error in form_personagem.foto_referencia.errors %}
-                                <span class='text-danger'>{{ error }}</span></br>
-                            {% endfor %}
-                    {% endif %}
+                <div>
+                    <label for="campoImage">Imagem de referência</label>
+                    <input type='file' class="" onchange="readURL(this);" />
+                    <img id="test" src="#" />
+
                 </div>
+
 
                 <!-- Enviar -->
                 <div class="form-group text-right">
-                    {{ form_personagem.botao_enviar(class="btn btn-success") }}
+                    <button id="btIncluirPersonagem" type="button" class="btn btn-success">Registrar</button>
                 </div>
-
+             
             </fieldset>
         </form>
     </div>
 
+</main>
+        
+<!-- Footer -->
+  <footer class="page-footer font-small special-color-dark pt-4">
+    <div class="container">
+      <div class="footer-copyright text-center py-3">© 2019 Copyright:
+        <a href="/"> ProjetoRPG.com</a>
+      </div>
+    </div>
+  </footer>
 
-{% endblock content %}
+ <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+<!-- código específico do front-end -->
+<script src="../js/meuscript.js"></script>
+ 
+</body>
+</html>
+
