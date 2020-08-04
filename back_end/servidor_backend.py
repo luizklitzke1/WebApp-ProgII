@@ -53,12 +53,14 @@ def listar_personagens():
 @app.route("/registrar_personagem", methods=['POST'])
 def registrar_Personagem():
     
-    resposta = jsonify({"resultado":"ok","detalhes":ok})
+    resposta = jsonify({"resultado":"ok","detalhes": "ok"})
     dados = request.get_json()
     try: #Tenta fazer o registro
         novo_Personagem = Personagem(**dados)
+        
         db.session.add(novo_Personagem)
         db.session.commit()
+        
     except Exception as e: 
         resposta = jsonify({"resultado":"erro","detalhes":str(e)})
         

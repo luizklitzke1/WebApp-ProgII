@@ -29,51 +29,67 @@ $(function() { // quando o documento estiver pronto/carregado
         }
     }
 
-    // função que mostra um conteúdo e esconde os outros
-    function mostrar_conteudo(identificador) {
-        // esconde todos os conteúdos
-        $("#tabelaPessoas").addClass('invisible');
-        $("#conteudoInicial").addClass('invisible');
-        // torna o conteúdo escolhido visível
-        $("#"+identificador).removeClass('invisible');      
-    }
 
     // código para mapear o click do link Listar
-    $(document).on("click", "#linkListarPessoas", function() {
+    $(document).on("click", "#linkListarPers", function() {
         exibir_personagens();
     });
-    
-    // código para mapear click do link Inicio
-    $(document).on("click", "#linkInicio", function() {
-        mostrar_conteudo("conteudoInicial");
-    });
 
-    // código para mapear click do botão incluir pessoa
-    $(document).on("click", "#btIncluirPessoa", function() {
+
+
+    // Código para inclusão de personagens
+    $(document).on("click", "#btIncluirPersonagem", function() {
         //pegar dados da tela
+        console.log("Registrando...")
         nome = $("#campoNome").val();
-        email = $("#campoEmail").val();
-        tel = $("#campoTelefone").val();
-        // preparar dados no formato json
-        var dados = JSON.stringify({ nome: nome, email: email, telefone: tel });
-        // fazer requisição para o back-end
+        raca = $("#campoRaca").val();
+        classe = $("#campoClasse").val();
+        nivel = $("#campoNivel").val();
+        forca = $("#campoForca").val();
+        destreza = $("#campoDestreza").val();
+        constituicao = $("#campoConstituicao").val();
+        inteligencia = $("#campoInteligencia").val();
+        sabedoria = $("#campoSabedoria").val();
+        carisma = $("#campoCarisma").val();
+        historia = $("#campoHistoria").val();
+    
+        foto = $("#campoFoto").val();
+
+
+        var dados = JSON.stringify({ nome: nome, raca: raca, classe: classe,
+                                    nivel: nivel, forca: forca, destreza: destreza,
+                                    constituicao: constituicao, inteligencia: inteligencia, sabedoria: sabedoria,
+                                    carisma: carisma, historia: historia, foto: foto});
+
+        // Enivo dos dados ao back-end para a inclusão
         $.ajax({
-            url: 'http://localhost:5000/incluir_pessoa',
+            url: 'http://localhost:5000/registrar_personagem',
             type: 'POST',
-            dataType: 'json', // os dados são recebidos no formato json
-            contentType: 'application/json', // tipo dos dados enviados
-            data: dados, // estes são os dados enviados
-            success: pessoaIncluida, // chama a função listar para processar o resultado
+            dataType: 'json', contentType: 'application/json',
+            data: dados, 
+            success: pessoaIncluida, 
             error: erroAoIncluir
+
         });
         function pessoaIncluida (retorno) {
-            if (retorno.resultado == "ok") { // a operação deu certo?
-                // informar resultado de sucesso
-                alert("Pessoa incluída com sucesso!");
+            if (retorno.resultado == "ok") { 
+                alert("Personagem " + nome + "registrado com sucesso!");
                 // limpar os campos
                 $("#campoNome").val("");
-                $("#campoEmail").val("");
-                $("#campoTelefone").val("");
+                $("#campoRaca").val("");
+                $("#campoClasse").val("");
+                $("#campoNivel").val("");
+                $("#campoForca").val("");
+                $("#campoDestreza").val("");
+                $("#campoConstituicao").val("");
+                $("#campoInteligencia").val("");
+                $("#campoSabedoria").val("");
+                $("#campoCarisma").val("");
+                $("#campoHistoria").val("");
+
+                $("#campoFoto").val("");
+
+                
             } else {
                 // informar mensagem de erro
                 alert(retorno.resultado + ":" + retorno.detalhes);
@@ -84,6 +100,7 @@ $(function() { // quando o documento estiver pronto/carregado
             alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes);
         }
     });
+
 
     // código a ser executado quando a janela de inclusão de pessoas for fechada
     $('#modalIncluirPessoa').on('hide.bs.modal', function (e) {
