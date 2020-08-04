@@ -58,6 +58,8 @@ def registrar_Personagem():
     try: #Tenta fazer o registro
         novo_Personagem = Personagem(**dados)
         
+        print( novo_Personagem.json())
+        
         db.session.add(novo_Personagem)
         db.session.commit()
         
@@ -150,7 +152,7 @@ def editar_Personagem(Personagem_id):
         if form_editar.foto_referencia.data:
             if Personagem.foto != 'Personagem.png':
                 apagar_imagem('static/imagens_personagens', Personagem.foto)
-            picture_file = salvar_imagem('static/imagens_personagens', form_editar.foto_referencia.data)
+            picture_file = salvar_imagem('../front_end/static/imagens_personagens', form_editar.foto_referencia.data)
             Personagem.foto = picture_file
 
         db.session.commit()

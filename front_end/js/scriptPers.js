@@ -14,7 +14,7 @@ $(function() { // quando o documento estiver pronto/carregado
 
         function listar (personagens) {
             // Limpa a tabela
-            $('#corpoTabelaPersonagens').empty();
+            $('#cards').empty();
         
             // Percorre a lista
             for (var i in personagens) { 
@@ -23,8 +23,26 @@ $(function() { // quando o documento estiver pronto/carregado
                 '<td>' + personagens[i].email + '</td>' + 
                 '<td>' + personagens[i].telefone + '</td>' + 
                 '</tr>';
+
+                //Cria o  HTML de um Card custom para os dados do personagem
+                card = 
+                "<card class='content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1' style='max-width: 340px; min-width: 310px; text-align: center;' >" +
+                    "<div class='media-body'>" +
+                        "<div class='article-metadata'>" +
+                            "<span >Raça: " + personagens[i].raca + "</span>" + 
+                            "<small class='text-muted'>Classe: " + personagens[i].classe + "</small>" + 
+                        "</div>" +
+                        "<h2> <a class='article-title' href='#'>" + personagens[i].nome + "</a> </h2>" +
+                        "<p class='article-content'>Nível: " + personagens[i].nivel + "</p>" +
+                        "<img class='account-img' src='../static/imagens_personagens/" + personagens[i].foto +".png' >" + 
+                        "<br><small class='text-muted'>Criado em: " + personagens[i].data_criacao + "</small>" +
+                    "</div>" + 
+                "</card>"
+
+                console.log(personagens[i].nome,personagens[i].nivel)
+            
                 // adiciona a linha no corpo da tabela
-                $('#corpoTabelaPersonagens').append(lin);
+                $('#cards').append(card);
             }
         }
     }
@@ -41,6 +59,7 @@ $(function() { // quando o documento estiver pronto/carregado
     $(document).on("click", "#btIncluirPersonagem", function() {
         //pegar dados da tela
         console.log("Registrando...")
+        
         nome = $("#campoNome").val();
         raca = $("#campoRaca").val();
         classe = $("#campoClasse").val();
@@ -112,7 +131,7 @@ $(function() { // quando o documento estiver pronto/carregado
     });
 
     //Chama listagem caso esteja na página com a tabela
-    if($("#corpoTabelaPersonagens").length){
+    if($("#cards").length){
         exibir_personagens()
     }; 
 

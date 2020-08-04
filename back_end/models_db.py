@@ -106,7 +106,7 @@ if __name__ == "__main__":
                     fôlego e quando finalmente você se aproxima da superfície para enfim respirar, é subitamente puxado de 
                     volta para fundo. A falsa esperança que vem acompanhada de terror, sofrimento e acima de tudo, arrependimento.
                     Por isso lembre-se, uma dívida com o Hulk Agiota, NUNCA será esquecida.""", 
-                    foto="c34cb551ebee1df255")
+                    foto="1a9460c091846ad35f")
     
     p5 = Personagem(nome="Jarbas do Sul", 
                     raca="Humano",

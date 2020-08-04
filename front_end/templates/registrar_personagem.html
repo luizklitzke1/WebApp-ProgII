@@ -30,7 +30,7 @@
 
             <!-- Logo do site -->
             <a href="/"><img src="../static/d20_logo.png" width="60" height="60" class="d-inline-block align-top p-0 mr-2" alt="logo_site"></a>
-            <a class="navbar-brand mr-4 fonte_mec" href="/">Projeto RPG</a>
+            <a class="navbar-brand mr-4 fonte_mec" href="home.html">Projeto RPG</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" 
                     aria-label="Alternar visualização">
               <span class="navbar-toggler-icon"></span>
@@ -61,46 +61,46 @@
                 <!-- Nome do personagem-->
                 <div class="form-group row pr-3 pl-3">
                     <label for="campoNome">Nome</label>
-                    <input type="text" class="form-control form-control-lg" id="campoNome">
+                    <input type="text" class="form-control form-control-lg" id="campoNome" required>
                 </div>
 
                 <div class="row">
                     <!-- Raça do personagem-->
                     <div class="form-group col-sm-6">
                         <label for="campoRaca">Raça</label>
-                        <input type="text" class="form-control form-control-lg" id="campoRaca">
+                        <input type="text" class="form-control form-control-lg" id="campoRaca" required >
                     </div>
 
                     <!-- Classe do personagem-->
                     <div class="form-group col-sm-6">
                         <label for="campoClasse">Classe</label>
-                        <input type="text" class="form-control form-control-lg" id="campoClasse">
+                        <input type="text" class="form-control form-control-lg" id="campoClasse" required>
                     </div>
                     </div>
 
                 <!-- Nível do personagem-->
                 <div class="form-group">
                     <label for="campoNivel">Nivel</label>
-                    <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoNivel">
+                    <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoNivel" required>
                 </div>
 
                 <div class="row">
                     <!-- Força-->
                     <div class="form-group col-sm-4">
                         <label for="campoForca">Força</label>
-                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoForca">   
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoForca" required>   
                     </div>
 
                     <!-- Destreza -->
                     <div class="form-group col-sm-4">
                         <label for="campoDestreza">Destreza</label>
-                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoDestreza">   
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoDestreza" required>   
                     </div>
 
                     <!-- Constituicao -->
                     <div class="form-group col-sm-4">
                         <label for="campoConstituicao">Constituicao</label>
-                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoConstituicao">   
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoConstituicao" required>   
                     </div>
 
                 </div>
@@ -108,32 +108,32 @@
                 <!-- Inteligencia -->
                     <div class="form-group col-sm-4">
                         <label for="campoInteligencia">Inteligência</label>
-                        <input type="number" min="1", max="99" class="form-control form-control-lg" id="campoInteligencia">   
+                        <input type="number" min="1", max="99" class="form-control form-control-lg" id="campoInteligencia" required>   
                     </div>
 
                     <!-- Sabedoria -->
                     <div class="form-group col-sm-4">
                         <label for="campoSabedoria">Sabedoria</label>
-                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoSabedoria">  
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoSabedoria" required>  
                     </div>
 
                     <!-- Carisma -->
                     <div class="form-group col-sm-4">
                         <label for="campoCarisma">Carisma</label>
-                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoCarisma">  
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoCarisma" required>  
                     </div>
                 </div>
 
                 <!-- Historia -->
                 <div class="form-group">
                     <label for="campoHistoria">História</label>
-                    <input type="textbox" class="form-control form-control-lg h-25" id="campoHistoria"> 
+                    <input type="textbox" class="form-control form-control-lg h-25" id="campoHistoria" required> 
                 </div>
 
                 <!-- Foto de referência -->
                 <div>
                     <label for="campoImage">Imagem de referência</label>
-                    <input type='file' class="" onchange="readURL(this);" />
+                    <input type='file' class="" onchange="readURL(this);" required />
                     <img id="test" src="#" />
 
                 </div>
