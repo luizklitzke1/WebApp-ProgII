@@ -1,5 +1,5 @@
 $(function() { // quando o documento estiver pronto/carregado
-    
+
     // função para exibir pessoas na tabela
     function exibir_personagens() {
         $.ajax({
@@ -37,6 +37,9 @@ $(function() { // quando o documento estiver pronto/carregado
                         "<img class='account-img' src='../static/imagens_personagens/" + personagens[i].foto +".png' >" + 
                         "<br><small class='text-muted'>Criado em: " + personagens[i].data_criacao + "</small>" +
                     "</div>" + 
+                    "<div>" +
+                        "<button class='btn btn-danger float-right mt-2' onClick='apagarPers(" + personagens[i].id + ");'>Apagar </button>"+
+                    "</div>"+
                 "</card>"
 
                 console.log(personagens[i].nome,personagens[i].nivel)
@@ -45,14 +48,16 @@ $(function() { // quando o documento estiver pronto/carregado
                 $('#cards').append(card);
             }
         }
+
     }
+
+    
 
 
     // código para mapear o click do link Listar
     $(document).on("click", "#linkListarPers", function() {
         exibir_personagens();
     });
-
 
 
     // Código para inclusão de personagens
@@ -72,7 +77,7 @@ $(function() { // quando o documento estiver pronto/carregado
         carisma = $("#campoCarisma").val();
         historia = $("#campoHistoria").val();
     
-        foto = $("#campoFoto").val();
+        foto = $("#campoImagem").val();
 
 
         var dados = JSON.stringify({ nome: nome, raca: raca, classe: classe,

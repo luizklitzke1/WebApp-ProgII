@@ -16,19 +16,14 @@ def mostrar_home():
 # Método para salvar imagens de perfil compactadas
 def salvar_imagem(diretorio, form_picture):
     rhex = secrets.token_hex(9)
-    _, foto_ext = os.path.splitext(form_picture.filename)
-    print(foto_ext)
-    nome_foto = rhex + foto_ext
+    nome_foto = rhex + ".png"
     caminho = os.path.join(app.root_path, diretorio, nome_foto)
 
     # Resize na imagem antes de upar, se não for GIF
-    if foto_ext != '.gif':
-        tamanho_imagem = (200, 200)
-        imagem_menor = Image.open(form_picture)
-        imagem_menor.thumbnail(tamanho_imagem)
-        imagem_menor.save(caminho)
-    else:
-        form_picture.save(caminho)
+    tamanho_imagem = (200, 200)
+    imagem_menor = Image.open(form_picture)
+    imagem_menor.thumbnail(tamanho_imagem)
+    imagem_menor.save(caminho)
     return nome_foto
 
 # Método para apagar as imagens ao apagar um usuário ou personagem
@@ -56,9 +51,13 @@ def registrar_Personagem():
     resposta = jsonify({"resultado":"ok","detalhes": "ok"})
     dados = request.get_json()
     try: #Tenta fazer o registro
+        
         novo_Personagem = Personagem(**dados)
         
-        print( novo_Personagem.json())
+        #Descobrir como salvar as imgs 
+        novo_Personagem.foto = "personagem"
+        
+        print(novo_Personagem.foto)
         
         db.session.add(novo_Personagem)
         db.session.commit()
@@ -70,6 +69,21 @@ def registrar_Personagem():
     
     return resposta
 
+# Rota para apagar um Personagem
+@app.route("/apagar_pers",  methods=['POST'])
+
+def apagar_Personagem():
+    
+    resposta = jsonify({"resultado":"ok","detalhes": "ok"})
+    dados = request.get_json()
+    
+    personagem = Personagem.query.get_or_404(dados.get("id"))
+    db.session.delete(personagem)
+    db.session.commit()
+        
+    resposta.headers.add("Access-Control-Allow-Origin","*")
+    
+    return resposta
     
 # Rota para vizualizar um Personagem
 @app.route("/Personagem/<int:Personagem_id>", methods=['GET', 'POST'])
@@ -85,37 +99,6 @@ def mostrar_Personagem(Personagem_id):
     form_avaliar = Form_Avaliar_Personagem()
     form_editar_avaliacao = Form_Avaliar_Personagem()
 
-    #Verifica se uma avaliação foi editada
-    if avaliacao_usuario and form_editar_avaliacao.validate_on_submit():
-
-        avaliacao_usuario.data_postagem = datetime.now()
-
-        avaliacao_usuario.conteudo = form_editar_avaliacao.conteudo.data
-
-        avaliacao_usuario.nota = form_editar_avaliacao.nota.data
-
-        db.session.commit()
-        flash('Avaliação editada com sucesso!', 'success')
-        return redirect(url_for('personagens.mostrar_Personagem', Personagem_id=Personagem.id))
-
-    #Verifica se uma nova avaliação foi registrada
-    elif form_avaliar.validate_on_submit():
-
-        nova_avalicao = Avaliacao(autor_id = current_user.id, Personagem_id = Personagem_id, 
-                                  conteudo = form_avaliar.conteudo.data, nota = form_avaliar.nota.data)
-
-
-        db.session.add(nova_avalicao)
-        db.session.commit()
-
-        flash('Personagem avaliado com sucesso!', 'success')
-        return redirect(url_for('personagens.mostrar_Personagem', Personagem_id=Personagem.id))
-
-    #Pré-popula os campos da avaliação caso for ser editada
-    elif request.method == "GET" and avaliacao_usuario:
-
-        form_editar_avaliacao.nota.data = avaliacao_usuario.nota 
-        form_editar_avaliacao.conteudo.data = avaliacao_usuario.conteudo
         
     return render_template('Personagem.html', titulo=Personagem.nome,  Personagem = Personagem,
                                               avaliacoes = avaliacoes, form_avaliar = form_avaliar, 
@@ -170,27 +153,6 @@ def editar_Personagem(Personagem_id):
 
     return render_template('editar_Personagem.html', titulo='Personagem.nome', form_editar=form_editar, 
                                                      Personagem=Personagem)
-
-# Rota para apagar um Personagem
-@app.route("/Personagem/<int:Personagem_id>/apagar",  methods=['POST'])
-
-def apagar_Personagem(Personagem_id):
-    Personagem = Personagem.query.get_or_404(Personagem_id)
-    if (Personagem.autor != current_user) and not(current_user.isAdmin):
-        abort(403)
-
-    #Apagar as avaliações do Personagem
-    #(Não sei porque não apaga automaticamente na verdade)
-    avaliacoes = Avaliacao.query.filter_by(Personagem_id = Personagem_id)
-    for avaliacao in avaliacoes:
-        db.session.delete(avaliacao)
-        
-    if Personagem.foto != 'Personagem.png':
-                apagar_imagem('static/imagens_personagens', Personagem.foto)
-    db.session.delete(Personagem)
-    db.session.commit()
-    flash('Personagem apagado com sucesso!', 'success')
-    return redirect(url_for('geral.mostrar_home'))
 
 
 
