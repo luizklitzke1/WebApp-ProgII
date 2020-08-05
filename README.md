@@ -9,6 +9,6 @@ Aplicação Web em Python desenvolvida utilizando, **Flask** e com front-end em 
 #Imagens do projeto
 (Mais disponíveis em https://github.com/luizklitzke1/WebApp-ProgII/tree/master/imgs%20-%20Hylson)
 
-![Home](https://ibb.co/PzVt9hH)
+![Home](https://i.ibb.co/zHtN7Rv/home-frontend1.png)
 
-![Tela de Registro](https://ibb.co/jzF9RRq)
+![Tela de Registro](https://i.ibb.co/5kVXFFC/registro-frontend2.png)
