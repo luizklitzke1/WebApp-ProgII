@@ -12,7 +12,7 @@ $(function() { // quando o documento estiver pronto/carregado
             dataType: 'json',
             success: listar, 
             error: function() {
-            alert("erro ao ler dados, verifique o backend");
+            alert("Erro ao ler dados, verifique o backend");
             }
         });
 
@@ -34,7 +34,7 @@ $(function() { // quando o documento estiver pronto/carregado
                     "<div class='media-body'>" +
                         "<div class='article-metadata'>" +
                             "<span >Raça: " + personagens[i].raca + "</span>" + 
-                            "<small class='text-muted'>Classe: " + personagens[i].classe + "</small>" + 
+                            "<small class='text-muted ml-1'>Classe: " + personagens[i].classe + "</small>" + 
                         "</div>" +
                         "<h2> <a class='article-title' href='#'>" + personagens[i].nome + "</a> </h2>" +
                         "<p class='article-content'>Nível: " + personagens[i].nivel + "</p>" +
@@ -114,7 +114,7 @@ $(function() { // quando o documento estiver pronto/carregado
         });
         function pessoaIncluida (retorno) {
             if (retorno.resultado == "ok") { 
-                alert("Personagem " + nome + "registrado com sucesso!");
+                alert("Personagem " + nome + " registrado com sucesso!");
                 // limpar os campos
                 $("#campoNome").val("");
                 $("#campoRaca").val("");

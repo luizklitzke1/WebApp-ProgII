@@ -42,6 +42,7 @@
                 <a class="nav-item nav-link" href="home.html">Home</a>
                 <a class="nav-item nav-link" href="#" id="linkListarPessoas">Procurar</a>
                 <a class="nav-item nav-link" href="registrar_personagem.html">Registrar personagem</a>
+
               </div>
 
             </div>
@@ -53,13 +54,15 @@
       <main role="main" class="container ml- p-0 principal1">
     <div class="content-section p-4 pl-4 pr-4">
 
-        <form method="POST" action="" enctype="multipart/form-data">
-
+        <form method="POST" action="" enctype="multipart/form-data" id="form_registro">
+            
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Registrar Personagem</legend>
+                
+                <legend class="border-bottom">Registrar Personagem</legend>
+                <small class='text-muted color-red mb-4'>Não validando os dados ainda - aceita NULLS</small>
 
                 <!-- Nome do personagem-->
-                <div class="form-group row pr-3 pl-3">
+                <div class="form-group row pr-3 pl-3 mt-3">
                     <label for="campoNome">Nome</label>
                     <input type="text" class="form-control form-control-lg" id="campoNome" required>
                 </div>
@@ -124,10 +127,11 @@
                     </div>
                 </div>
 
+            </form>
                 <!-- Historia -->
                 <div class="form-group">
                     <label for="campoHistoria">História</label>
-                    <input type="textbox" class="form-control form-control-lg h-25" id="campoHistoria" required> 
+                    <textarea class="form-control form-control-lg h-25" id="campoHistoria"  form="form_registro"> </textarea>
                 </div>
 
                 <!-- Foto de referência -->
@@ -147,7 +151,7 @@
                 </div>
              
             </fieldset>
-        </form>
+        
     </div>
 
 </main>
