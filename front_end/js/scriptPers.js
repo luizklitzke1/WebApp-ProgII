@@ -1,5 +1,9 @@
 $(function() { // quando o documento estiver pronto/carregado
 
+    function exibir_dados_pers(id){
+
+    }
+
     // função para exibir pessoas na tabela
     function exibir_personagens() {
         $.ajax({
@@ -35,10 +39,26 @@ $(function() { // quando o documento estiver pronto/carregado
                         "<h2> <a class='article-title' href='#'>" + personagens[i].nome + "</a> </h2>" +
                         "<p class='article-content'>Nível: " + personagens[i].nivel + "</p>" +
                         "<img class='account-img' src='../static/imagens_personagens/" + personagens[i].foto +".png' >" + 
-                        "<br><small class='text-muted'>Criado em: " + personagens[i].data_criacao + "</small>" +
                     "</div>" + 
+                    
+                    " <div class='container mt-4'> "+
+                        "<div class='row p-0 text-center'>" +
+                            "<div class='col' >" +
+                                 "<span class='col mr-3 pl-4 vermelho fonte_mec'>Força</span>" + personagens[i].forca +
+                           "</div>" +
+                            "<div class='col'> "+
+                            "<span class='col vermelho fonte_mec'>Destreza</span>" + personagens[i].destreza +
+                            "</div>"+
+                            "<div class='col'>" +
+                            "<span class='col vermelho fonte_mec'>Const</span> "+ personagens[i].constituicao +
+                            "</div> <div class='col'> <span class='col vermelho fonte_mec'>Inte</span>" + personagens[i].inteligencia +
+                            "</div>" +
+                            "<div class='col'> <span class='col vermelho fonte_mec'>Sabedoria</span>" + personagens[i].sabedoria +
+                            "</div> <div class='col'> <span class='col vermelho fonte_mec'>Carisma</span>" + personagens[i].carisma +
+                            "</span> </div> </div>"+
+                    "<br><small class='text-muted'>Criado em: " + personagens[i].data_criacao + "</small>" +
                     "<div>" +
-                        "<button class='btn btn-danger float-right mt-2' onClick='apagarPers(" + personagens[i].id + ");'>Apagar </button>"+
+                    "<button class='btn btn-danger float-right mt-3' onClick='apagarPers(" + personagens[i].id + ");'>Apagar </button>"+
                     "</div>"+
                 "</card>"
 
@@ -50,9 +70,6 @@ $(function() { // quando o documento estiver pronto/carregado
         }
 
     }
-
-    
-
 
     // código para mapear o click do link Listar
     $(document).on("click", "#linkListarPers", function() {
@@ -143,6 +160,40 @@ $(function() { // quando o documento estiver pronto/carregado
     
 });
 
+function apagarPers(id){
+    $.ajax({
+        url: 'http://localhost:5000/apagar_pers',
+        type: 'POST',
+        dataType: 'json', contentType: 'application/json',
+        data: JSON.stringify({ id: id}), 
+        success: function (result) {
+          alert("Personagem apagado com sucesso!")
+          document.location.reload(true);
+      },
+      error: function (error) {
+          alert("Algo de errado aconteceu...");
+      }
+    })
+    
+};
+
+function verPers(id){
+    $.ajax({
+        url: 'http://localhost:5000/personagem',
+        type: 'POST',
+        dataType: 'json', contentType: 'application/json',
+        data: JSON.stringify({ id: id }), 
+        success: function (result) {
+          alert("Personagem apagado com sucesso!")
+          document.location.reload(true);
+      },
+      error: function (error) {
+          alert("Algo de errado aconteceu...");
+      }
+    })
+    
+};
+
 function readURL(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
@@ -155,3 +206,4 @@ function readURL(input) {
       reader.readAsDataURL(input.files[0]);
     }
   };
+

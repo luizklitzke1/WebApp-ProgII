@@ -22,27 +22,6 @@
       
       <title>Projeto RPG JS - Home </title>
 
-      <script>
-        
-      function apagarPers(id){
-          $.ajax({
-              url: 'http://localhost:5000/apagar_pers',
-              type: 'POST',
-              dataType: 'json', contentType: 'application/json',
-              data: JSON.stringify({ id: id}), 
-              success: function (result) {
-                alert("Personagem apagado com sucesso!")
-                document.location.reload(true);
-            },
-            error: function (error) {
-                alert("Algo de errado aconteceu...");
-            }
-          })
-          
-      };
-      </script>
-
-
   </head>
   <body class='pt-4'>
       <header class="site-header">

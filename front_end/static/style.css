@@ -214,6 +214,7 @@ footer a{
 
 .fonte_mec{
   font-family: 'Supermercado One', cursive;
+  text-align: left;
 }
 
 .login{
@@ -242,6 +243,7 @@ footer a{
 
 .vermelho{
   color: #CE0000;
+  text-align: left;
 }
 
 .aviso_erro{
