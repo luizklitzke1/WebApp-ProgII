@@ -5,7 +5,7 @@ Aplicação Web em Python desenvolvida utilizando, **Flask** e com front-end em 
 # To do List
 1. Reinstituir a divisão de routes
 2. Descobrir um jeito eficiente de validar os forms
-3 .Fazer um sistema para passar as imagens do form de registro para o backend processar*
+3. Fazer um sistema para passar as imagens do form de registro para o backend processar*
 
 #Imagens do projeto
 (Mais disponíveis em https://github.com/luizklitzke1/WebApp-ProgII/tree/master/imgs%20-%20Hylson)
