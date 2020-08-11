@@ -15,7 +15,7 @@ Porta sua característica arma de duas mão, famosa por sua letalidade em ataque
 
 
 6	Clint com o Anão	Humano e Anão	Sharpshooter	53	13	17	14	12	17	20	Um grupo que, de tanto unido, caracteriza uma única entidade.
-Formado por uma série de fatos improváveis, tal dupla se concretiza como sérios contratantes da região mais hostil e selvagem da Fronteira	2019-11-13 02:06:22.803131	564424e3928ba1c88a.png		
+2019-11-13 02:06:22.803131	564424e3928ba1c88a.png		
 
 
 7	Deivola	Deivid Elton	Deusvis	21	11	17	19	1	1	20	Sua origem ainda é incerta, porém sua fama o precede.

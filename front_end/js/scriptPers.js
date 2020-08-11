@@ -19,11 +19,6 @@ $(function() { // quando o documento estiver pronto/carregado
         
             // Percorre a lista
             for (var i in personagens) { 
-                lin = '<tr>' +
-                '<td>' + personagens[i].nome + '</td>' + 
-                '<td>' + personagens[i].email + '</td>' + 
-                '<td>' + personagens[i].telefone + '</td>' + 
-                '</tr>';
 
                 //Cria o  HTML de um Card custom para os dados do personagem
                 card = 
@@ -55,7 +50,6 @@ $(function() { // quando o documento estiver pronto/carregado
                             "</span> </div> </div>"+
                     "<br><small class='text-muted'>Criado em: " + personagens[i].data_criacao + "</small>" +
                     "<div>" +
-                    "<button class='btn btn-info float-left mt-3' onClick='apagarPers(" + personagens[i].id + ");'>Editar </button>"+
                     "<button class='btn btn-danger float-right mt-3' onClick='apagarPers(" + personagens[i].id + ");'>Apagar </button>"+
                     "</div>"+
                 "</card>"
@@ -169,22 +163,19 @@ function apagarPers(id){
     
 };
 
-//Procurar o personagem no BD com dados informados
-function procurarPers(nome,raca,classe){
-    $.ajax({
-        url: 'http://localhost:5000/procurar_pers',
-        type: 'POST',
-        dataType: 'json', contentType: 'application/json',
-        data: JSON.stringify({ nome: nome, raca: raca, classe: classe}), 
-        success: function (result) {
-          alert(data)
-      },
-      error: function (error) {
-          alert("Algo de errado aconteceu...");
-      }
-    })
-    
-};
+//Função para pre-render da img do personagem no registro
+function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#test')
+          .attr('src', e.target.result)
+          .width(200)
+          .height(200);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  };
 
 
 //--  [WIP] -- Mostrar os dados de um personagem em uma página específica 
@@ -205,19 +196,20 @@ function verPers(id){
     
 };
 
-//Função para pre-render da img do personagem no registro
-function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $('#test')
-          .attr('src', e.target.result)
-          .width(200)
-          .height(200);
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  };
+//-- [WIP] -- Procurar o personagem no BD com dados informados
+function procurarPers(nome,raca,classe){
+    //Envia os dados para pesquisa
+    $.ajax({
+        url: 'http://localhost:5000/procurar_pers',
+        type: 'POST',
+        dataType: 'json', contentType: 'application/json',
+        data: JSON.stringify({ nome: nome, raca: raca, classe: classe}), 
+        error: function (error) {
+          alert("Algo de errado aconteceu...");
+      }
+    });
+    
+};
 
 
 

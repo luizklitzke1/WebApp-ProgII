@@ -40,7 +40,7 @@
             <div class="collapse navbar-collapse" id="navbarToggle">
               <div class="navbar-nav mr-auto">
                 <a class="nav-item nav-link" href="home.html">Home</a>
-                <a class="nav-item nav-link" href="#" id="linkListarPessoas">Procurar</a>
+                <a class="nav-item nav-link" href="procurar_pers.html" id="linkListarPessoas">Procurar</a>
                 <a class="nav-item nav-link" href="registrar_personagem.html">Registrar personagem</a>
               </div>
 
@@ -51,11 +51,12 @@
 
       <!-- Parte principal do site - Conteúdo -->
       <main role="main" class="container ml- p-0 principal1">
-    <div class="content-section">
+      <div class="content-section">
         <form method="POST" action="" enctype="multipart/form-data" id="form_procurar">
 
                 <fieldset class="form-group">
-                    <legend class="border-bottom mb-4 pt-3">Procurar por Personagem</legend>
+                    <legend class="border-bottom pt-3">Procurar por Personagem</legend>
+                    <small class='text-muted color-red mb-4'>Lógica back-end funcional - não sei como pegar os result</small>
 
                     <!-- Nome do personagem-->
                     <div class="form-group row pr-3 pl-3">
@@ -92,7 +93,7 @@
         <fieldset class="justify-content-xl-center procurar1">
             <h2 class="mt-4">Personagens encontrados:</h2>
             <div class="container-fluid">
-                <div class="row" id="pers_econtrados">
+                <div class="row" id="cards">
                    
                 </div>
             </div>
