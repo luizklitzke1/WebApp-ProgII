@@ -51,30 +51,53 @@
 
       <!-- Parte principal do site - Conteúdo -->
       <main role="main" class="container ml- p-0 principal1">
- 
-      <div class="container-fluid">
+    <div class="content-section">
+        <form method="POST" action="" enctype="multipart/form-data" id="form_procurar">
 
-        <section class="jumbotron text-center p-5">
-          <div class="container">
-              <h1 class="jumbotron-heading mb-4">Projeto RPG</h1>
-              <p class="lead text-muted mb-5">O Site <span color="#9F0000">Projeto RPG</span> é desenvolvido com a finalidade de 
-                permitir que jogadores de RPG possam registrar os dados e fichas de seus personagens, mantê-los e atualizá-los de
-                maneira simples e prática, além de compartilhá-los com amigos e toda a comunidade.
-              </p>
-            <div class="row">
-              <a href="procurar_pers.html" class="btn-lg col btn-primary p-3 mr-3 ml-3 mb-4">Procurar Personagem</a>
-              <a href="registrar_personagem.html" class="btn-lg col btn-primary p-3 mr-3 ml-3 mb-4">Registrar Personagem</a>
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4 pt-3">Procurar por Personagem</legend>
+
+                    <!-- Nome do personagem-->
+                    <div class="form-group row pr-3 pl-3">
+                        <div class="form-group row pr-3 pl-3 mt-3">
+                            <label for="campoNome">Nome</label>
+                            <input type="text" class="form-control form-control-lg" id="campoNome">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Raça do personagem-->
+                        <div class="form-group col-sm-6">
+                            <label for="campoRaca">Raça</label>
+                            <input type="text" class="form-control form-control-lg" id="campoRaca" >
+                        </div>
+
+                        <!-- Classe do personagem-->
+                        <div class="form-group col-sm-6">
+                            <label for="campoClasse">Classe</label>
+                            <input type="text" class="form-control form-control-lg" id="campoClasse" required>
+                        </div>
+                    </div>
+
+                    <!-- Enviar -->
+                    <div class="form-group text-right">
+                        <button id="btnProcurarPers" type="button" class="btn btn-success">Procurar</button>
+                    </div>
+
+                </fieldset>
+        </form>
+    </div>
+
+        <!-- Mostrar os personagens encontrados na pesquisa -->
+        <fieldset class="justify-content-xl-center procurar1">
+            <h2 class="mt-4">Personagens encontrados:</h2>
+            <div class="container-fluid">
+                <div class="row" id="pers_econtrados">
+                   
+                </div>
             </div>
-          </div>
-        </section>
-
-        <h2 class="ml-1 text-center mb-3">Ultimos personagens registrados no site</h2>
-        <div class="row pl-3" style="margin: 0 auto;" id="cards">
-          
-
-
-        </div>
-      </div>
+                
+        </fieldset>
     </main>
         
     <!-- Footer -->

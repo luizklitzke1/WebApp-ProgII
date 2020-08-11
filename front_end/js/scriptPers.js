@@ -1,8 +1,5 @@
 $(function() { // quando o documento estiver pronto/carregado
 
-    function exibir_dados_pers(id){
-
-    }
 
     // função para exibir pessoas na tabela
     function exibir_personagens() {
@@ -58,6 +55,7 @@ $(function() { // quando o documento estiver pronto/carregado
                             "</span> </div> </div>"+
                     "<br><small class='text-muted'>Criado em: " + personagens[i].data_criacao + "</small>" +
                     "<div>" +
+                    "<button class='btn btn-info float-left mt-3' onClick='apagarPers(" + personagens[i].id + ");'>Editar </button>"+
                     "<button class='btn btn-danger float-right mt-3' onClick='apagarPers(" + personagens[i].id + ");'>Apagar </button>"+
                     "</div>"+
                 "</card>"
@@ -70,13 +68,7 @@ $(function() { // quando o documento estiver pronto/carregado
         }
 
     }
-
-    // código para mapear o click do link Listar
-    $(document).on("click", "#linkListarPers", function() {
-        exibir_personagens();
-    });
-
-
+    
     // Código para inclusão de personagens
     $(document).on("click", "#btIncluirPersonagem", function() {
         //pegar dados da tela
@@ -143,23 +135,23 @@ $(function() { // quando o documento estiver pronto/carregado
     });
 
 
-    // código a ser executado quando a janela de inclusão de pessoas for fechada
-    $('#modalIncluirPessoa').on('hide.bs.modal', function (e) {
-        // se a página de listagem não estiver invisível
-        if (! $("#tabelaPessoas").hasClass('invisible')) {
-            // atualizar a página de listagem
-            exibir_personagens();
-        }
-    });
-
     //Chama listagem caso esteja na página com a tabela
     if($("#cards").length){
         exibir_personagens()
     }; 
 
+    // Código para pesquisa de personagens
+    $(document).on("click", "#btnProcurarPers", function() {
+        nome = $("#campoNome").val();
+        raca = $("#campoRaca").val();
+        classe = $("#campoClasse").val();
+        procurarPers(nome,raca,classe);
+
+    });
     
 });
 
+//Apagar o personagem do BD baseado no ID
 function apagarPers(id){
     $.ajax({
         url: 'http://localhost:5000/apagar_pers',
@@ -177,6 +169,25 @@ function apagarPers(id){
     
 };
 
+//Procurar o personagem no BD com dados informados
+function procurarPers(nome,raca,classe){
+    $.ajax({
+        url: 'http://localhost:5000/procurar_pers',
+        type: 'POST',
+        dataType: 'json', contentType: 'application/json',
+        data: JSON.stringify({ nome: nome, raca: raca, classe: classe}), 
+        success: function (result) {
+          alert(data)
+      },
+      error: function (error) {
+          alert("Algo de errado aconteceu...");
+      }
+    })
+    
+};
+
+
+//--  [WIP] -- Mostrar os dados de um personagem em uma página específica 
 function verPers(id){
     $.ajax({
         url: 'http://localhost:5000/personagem',
@@ -194,6 +205,7 @@ function verPers(id){
     
 };
 
+//Função para pre-render da img do personagem no registro
 function readURL(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
@@ -206,4 +218,6 @@ function readURL(input) {
       reader.readAsDataURL(input.files[0]);
     }
   };
+
+
 
