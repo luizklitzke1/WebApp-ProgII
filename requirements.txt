@@ -2,6 +2,6 @@ flask
 flask_sqlalchemy 
 Pillow
 datetime 
-flask_wtf 
 flask_bcrypt
+flask_cors
 
