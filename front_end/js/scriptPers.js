@@ -18,43 +18,60 @@ $(function() { // quando o documento estiver pronto/carregado
             $('#cards').empty();
         
             // Percorre a lista
-            for (var i in personagens) { 
+            for (personagem of personagens) { 
 
                 //Cria o  HTML de um Card custom para os dados do personagem
                 card = 
                 "<card class='content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1' style='max-width: 340px; min-width: 310px; text-align: center;' >" +
                     "<div class='media-body'>" +
                         "<div class='article-metadata'>" +
-                            "<span >Raça: " + personagens[i].raca + "</span>" + 
-                            "<small class='text-muted ml-1'>Classe: " + personagens[i].classe + "</small>" + 
+                            "<span >Raça: " + personagem.raca + "</span>" + 
+                            "<small class='text-muted ml-1'>Classe: " + personagem.classe + "</small>" + 
                         "</div>" +
-                        "<h2> <a class='article-title' href='#'>" + personagens[i].nome + "</a> </h2>" +
-                        "<p class='article-content'>Nível: " + personagens[i].nivel + "</p>" +
-                        "<img class='account-img' src='../static/imagens_personagens/" + personagens[i].foto +".png' >" + 
+                        "<h2> <a class='article-title' href='#'>" + personagem.nome + "</a> </h2>" +
+                        "<p class='article-content'>Nível: " + personagem.nivel + "</p>" +
+                        "<img class='account-img' src='../static/imagens_personagens/" + personagem.foto +".png' >" + 
                     "</div>" + 
                     
                     " <div class='container mt-4'> "+
                         "<div class='row p-0 text-center'>" +
                             "<div class='col' >" +
-                                 "<span class='col mr-3 pl-4 vermelho fonte_mec'>Força</span>" + personagens[i].forca +
+                                 "<span class='col mr-3 pl-4 vermelho fonte_mec'>Força</span>" + personagem.forca +
                            "</div>" +
                             "<div class='col'> "+
-                            "<span class='col vermelho fonte_mec'>Destreza</span>" + personagens[i].destreza +
+                            "<span class='col vermelho fonte_mec'>Destreza</span>" + personagem.destreza +
                             "</div>"+
                             "<div class='col'>" +
-                            "<span class='col vermelho fonte_mec'>Const</span> "+ personagens[i].constituicao +
-                            "</div> <div class='col'> <span class='col vermelho fonte_mec'>Inte</span>" + personagens[i].inteligencia +
+                            "<span class='col vermelho fonte_mec'>Const</span> "+ personagem.constituicao +
+                            "</div> <div class='col'> <span class='col vermelho fonte_mec'>Inte</span>" + personagem.inteligencia +
                             "</div>" +
-                            "<div class='col'> <span class='col vermelho fonte_mec'>Sabedoria</span>" + personagens[i].sabedoria +
-                            "</div> <div class='col'> <span class='col vermelho fonte_mec'>Carisma</span>" + personagens[i].carisma +
+                            "<div class='col'> <span class='col vermelho fonte_mec'>Sabedoria</span>" + personagem.sabedoria +
+                            "</div> <div class='col'> <span class='col vermelho fonte_mec'>Carisma</span>" + personagem.carisma +
                             "</span> </div> </div>"+
-                    "<br><small class='text-muted'>Criado em: " + personagens[i].data_criacao + "</small>" +
+                    "<br><small class='text-muted'>Criado em: " + personagem.data_criacao + "</small>" +
                     "<div>" +
-                    "<button class='btn btn-danger float-right mt-3' onClick='apagarPers(" + personagens[i].id + ");'>Apagar </button>"+
+                    //"<button class='btn btn-danger float-right mt-3' onClick='apagarPers(" + personagem.id + ");'>Apagar </button>"+
+                    "<button type='button' class='btn btn-danger btn-sm m-1'  data-toggle='modal' data-target='#DeleteModal"+ personagem.id + "'>Apagar</button>"+
                     "</div>"+
-                "</card>"
+                "</card>"+
+                // Modal para apagar o personagem //
+                "<div class='modal fade' id='DeleteModal"+ personagem.id + "' tabindex='-1' role='dialog' aria-labelledby='DeleteModalLongTitle' aria-hidden='true'>"+
+                "<div class='modal-dialog' role='document'>" +
+                    "<div class='modal-content'>" +
+                        "<div class='modal-header'>" +
+                            "<h5 class='modal-title' id='DeleteModalLongTitle'>Apagar <span class='modal-nome'>"+personagem.nome+"</span></h5>" +
+                            "<span class='modal-span'>Tem certeza que deseja apagar esse personagem?</span>" +
+                        "</div>" +
+                        "<div class='modal-body'>" +
+                            "Uma vez apagado, esse personagem não podera mais ser recuperado!" +
+                        "</div>" +
+                    "<div class='modal-footer'>" +
+                    "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Fechar</button>" +
+                    "<button type='button' class='btn btn-danger' onClick='apagarPers(" + personagem.id + ");'>Apagar </button>"+
+                    "</div>" +
+                "</div>"
 
-                console.log(personagens[i].nome,personagens[i].nivel)
+                console.log(personagem.nome,personagem.nivel)
             
                 // adiciona a linha no corpo da tabela
                 $('#cards').append(card);
