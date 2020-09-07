@@ -114,8 +114,8 @@ a.article-title:hover {
 }
 
 .btn-danger {
-  background: #CE0000;
-  border-color: #9F0000;
+  background: #CE0000 !important; 
+  border-color: #9F0000 !important;
 }
 
 a {
@@ -194,8 +194,8 @@ footer a{
 }
 
 .btn-primary{
-  background: #CE0000;
-  border-color: #9F0000;
+  background: #CE0000 !important;
+  border-color: #9F0000 !important;
 }
 
 .btn-primary:hover{

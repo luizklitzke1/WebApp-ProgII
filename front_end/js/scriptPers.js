@@ -22,7 +22,7 @@ $(function() { // quando o documento estiver pronto/carregado
 
                 //Cria o  HTML de um Card custom para os dados do personagem
                 card = 
-                "<card class='content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1' style='max-width: 340px; min-width: 310px; text-align: center;' >" +
+                "<card class='content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1 animated slideInUp' style='max-width: 340px; min-width: 310px; text-align: center;' >" +
                     "<div class='media-body'>" +
                         "<div class='article-metadata'>" +
                             "<span >Raça: " + personagem.raca + "</span>" + 
@@ -55,20 +55,27 @@ $(function() { // quando o documento estiver pronto/carregado
                     "</div>"+
                 "</card>"+
                 // Modal para apagar o personagem //
-                "<div class='modal fade' id='DeleteModal"+ personagem.id + "' tabindex='-1' role='dialog' aria-labelledby='DeleteModalLongTitle' aria-hidden='true'>"+
-                "<div class='modal-dialog' role='document'>" +
-                    "<div class='modal-content'>" +
-                        "<div class='modal-header'>" +
-                            "<h5 class='modal-title' id='DeleteModalLongTitle'>Apagar <span class='modal-nome'>"+personagem.nome+"</span></h5>" +
-                            "<span class='modal-span'>Tem certeza que deseja apagar esse personagem?</span>" +
-                        "</div>" +
-                        "<div class='modal-body'>" +
-                            "Uma vez apagado, esse personagem não podera mais ser recuperado!" +
-                        "</div>" +
-                    "<div class='modal-footer'>" +
-                    "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Fechar</button>" +
-                    "<button type='button' class='btn btn-danger' onClick='apagarPers(" + personagem.id + ");'>Apagar </button>"+
-                    "</div>" +
+
+                "<div class='modal fade' id='DeleteModal"+ personagem.id + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel'aria-hidden='true'>"+
+                    "<div class='modal-dialog modal-sm modal-notify modal-danger' role='document'>"+
+                        "<div class='modal-content text-center'>"+
+                        "<div class='modal-header d-flex justify-content-center'>"+
+                            "<p class='heading'>Apagar Personagem</p>"+
+                        "</div>"+
+
+                        "<div class='modal-body'>"+
+
+                            "<i class='fas fa-times fa-4x animated rotateIn'></i>"+
+
+                        "</div>"+
+
+                        "<div class='modal-footer flex-center'>"+
+                            "<a href='' class='btn  btn-outline-danger'>Yes</a>"+
+                            "<a type='button' class='btn  btn-danger waves-effect' data-dismiss='modal' onClick='apagarPers(" + personagem.id + ");'>No</a>"+
+                        "</div>"+
+                        "</div>"+
+
+                    "</div>"+
                 "</div>"
 
                 console.log(personagem.nome,personagem.nivel)
