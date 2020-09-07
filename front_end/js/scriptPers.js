@@ -21,6 +21,7 @@ $(function() { // quando o documento estiver pronto/carregado
             for (personagem of personagens) { 
 
                 //Cria o  HTML de um Card custom para os dados do personagem
+
                 card = 
                 "<card class='content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1 animated slideInUp' style='max-width: 340px; min-width: 310px; text-align: center;' >" +
                     "<div class='media-body'>" +
@@ -51,37 +52,39 @@ $(function() { // quando o documento estiver pronto/carregado
                     "<br><small class='text-muted'>Criado em: " + personagem.data_criacao + "</small>" +
                     "<div>" +
                     //"<button class='btn btn-danger float-right mt-3' onClick='apagarPers(" + personagem.id + ");'>Apagar </button>"+
-                    "<button type='button' class='btn btn-danger btn-sm m-1'  data-toggle='modal' data-target='#DeleteModal"+ personagem.id + "'>Apagar</button>"+
+                    "<button type='button' class='btn btn-mec btn-danger btn-m p-2 float-right' data-toggle='modal' data-target='#DeleteModal"+ personagem.id + "'>Apagar</button>"+
+                    "<button type='button' class='btn btn-mec btn-info btn-m p-2 float-left'  data-toggle='modal' data-target='#DeleteModal"+ personagem.id + "'>Editar</button>"+
                     "</div>"+
-                "</card>"+
+                "</card>"
                 // Modal para apagar o personagem //
+                modal = 
+                "<div class='modal fade ' id='DeleteModal" + personagem.id + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>"+
+                "<div class='modal-dialog modal-m modal-notify modal-danger modal-bg' role='document'>"+
 
-                "<div class='modal fade' id='DeleteModal"+ personagem.id + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel'aria-hidden='true'>"+
-                    "<div class='modal-dialog modal-sm modal-notify modal-danger' role='document'>"+
-                        "<div class='modal-content text-center'>"+
-                        "<div class='modal-header d-flex justify-content-center'>"+
-                            "<p class='heading'>Apagar Personagem</p>"+
-                        "</div>"+
-
-                        "<div class='modal-body'>"+
-
-                            "<i class='fas fa-times fa-4x animated rotateIn'></i>"+
-
-                        "</div>"+
-
-                        "<div class='modal-footer flex-center'>"+
-                            "<a href='' class='btn  btn-outline-danger'>Yes</a>"+
-                            "<a type='button' class='btn  btn-danger waves-effect' data-dismiss='modal' onClick='apagarPers(" + personagem.id + ");'>No</a>"+
-                        "</div>"+
-                        "</div>"+
-
+                    "<div class='modal-content text-center'>"+
+                    "<div class='modal-header d-flex justify-content-center'>"+
+                        "<p class='heading'>Apagar personagem</p>"+
                     "</div>"+
+
+                    "<div class='modal-body'>"+
+                        "<p class='p2'>Você tem certeza que deseja apagar o personagem</p>"+
+                        "<spam class='h3 strong vermelho fonte_mec'>"+personagem.nome+"?</span>"+
+                    "</div>"+
+
+                    "<div class='modal-footer flex-center'>"+
+                        "<p class='p-2 m-2'>Uma vez apagado, esse personagem não podera mais ser recuperado!</p>"+
+                        "<button type='button' class='btn btn-outline-danger' onClick='apagarPers(" + personagem.id + ");'>Apagar </button>"+
+                        "<a type='button' class='btn  btn-danger waves-effect' data-dismiss='modal'>Não</a>"+
+                    "</div>"+
+                    "</div>"+
+                "</div>"+
                 "</div>"
 
                 console.log(personagem.nome,personagem.nivel)
             
                 // adiciona a linha no corpo da tabela
                 $('#cards').append(card);
+                $('#modals').append(modal);
             }
         }
 

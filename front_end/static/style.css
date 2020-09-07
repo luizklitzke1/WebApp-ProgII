@@ -10,7 +10,7 @@ body {
   background-size: cover;
 
   font-family: 'Noto Sans', sans-serif;
-  font-size: 1em;
+  font-size: 1em !important;
 
   min-height:100%; 
   padding:0; 
@@ -41,16 +41,16 @@ h2{
 
 .site-header .navbar-nav .nav-link {
   color: #C60000;
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .site-header .navbar-nav .nav-link:hover {
   color: #CE0000;
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .site-header .navbar-nav .nav-link.active {
-  font-weight: 800;
+  font-weight: 800 !important;
 }
 
 .content-section {
@@ -118,6 +118,25 @@ a.article-title:hover {
   border-color: #9F0000 !important;
 }
 
+.btn-outline-danger{
+  border-color: #9F0000 !important;
+  color: #9F0000 !important;
+  font-weight: bold;
+}
+
+.btn-mec{
+  font-size: .8em !important; 
+}
+.modal-header{
+  background-color: #9F0000 !important;
+}
+
+.btn-outline-danger:hover{
+  border-color: #9F0000 !important;
+  color: wheat !important;
+  font-weight: bold;
+}
+
 a {
   color: #CE0000;
   text-decoration: none;
@@ -144,22 +163,25 @@ a:hover {
 }
 
 .page-footer{
-  background-color: #141515; 
+  background-color: #141515 !important; 
 }
 
 footer a{
-  color: #9F0000;
+  color: #9F0000 !important;
 }
 
 .modal-content{
   background-color: #0F0F0F;
-  color: #D2D0CC
+  color: #D2D0CC !important;
 }
 
 .modal-nome{
   color: #9F0000;
 }
 
+.modal-body{
+  color: #D2D0CC !important;
+}
 .modal-span{
   color: #CE0000;
   text-decoration: none;
@@ -244,6 +266,11 @@ footer a{
 .vermelho{
   color: #CE0000;
   text-align: left;
+  font-weight: bold !important;
+}
+
+.nav-item{
+  font-weight: bold !important;
 }
 
 .aviso_erro{
