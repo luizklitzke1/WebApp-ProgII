@@ -67,8 +67,8 @@ $(function() { // quando o documento estiver pronto/carregado
                     "</div>"+
 
                     "<div class='modal-body'>"+
-                        "<p class='p2'>Você tem certeza que deseja apagar o personagem</p>"+
-                        "<spam class='h3 strong vermelho fonte_mec'>"+personagem.nome+"?</span>"+
+                        "<p class='p2'>Você tem certeza que deseja o personagem</p>"+
+                        "<spam class='h3 vermelho fonte_mec'>"+personagem.nome+"</span> <span style='color: white; font-weight: normal'>?</span>"+
                     "</div>"+
 
                     "<div class='modal-footer flex-center'>"+
@@ -80,7 +80,7 @@ $(function() { // quando o documento estiver pronto/carregado
                 "</div>"+
                 "</div>"
 
-                console.log(personagem.nome,personagem.nivel)
+                console.log(personagem.nome,personagem.nivel);
             
                 // adiciona a linha no corpo da tabela
                 $('#cards').append(card);
@@ -237,6 +237,3 @@ function procurarPers(nome,raca,classe){
     });
     
 };
-
-
-
