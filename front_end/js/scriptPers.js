@@ -94,6 +94,14 @@ $(function() { // quando o documento estiver pronto/carregado
         //pegar dados da tela
 
         nome = $("#campoNome").val();
+        $("#campoNome").on('input', function() {
+            console.log($(this).val());
+        });
+        if (nome.length < 3){
+            console.log("alo?");
+            $("#inv-nome").innerHTML ="O nome deve ter no mínimo 3 caracteres!";
+            return false;
+        } 
         raca = $("#campoRaca").val();
         classe = $("#campoClasse").val();
         nivel = $("#campoNivel").val();
@@ -106,6 +114,8 @@ $(function() { // quando o documento estiver pronto/carregado
         historia = $("#campoHistoria").val();
     
         foto = $("#campoImagem").val();
+
+
 
 
         var dados = JSON.stringify({ nome: nome, raca: raca, classe: classe,

@@ -303,3 +303,8 @@ card{
 card:hover {
   transform: scale(1.5);
 }
+
+input:invalid{
+  color:red;
+  border-color: red;
+}

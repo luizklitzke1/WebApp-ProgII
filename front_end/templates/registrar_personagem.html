@@ -64,13 +64,20 @@
                 <!-- Nome do personagem-->
                 <div class="form-group row pr-3 pl-3 mt-3">
                     <label for="campoNome">Nome</label>
-                    <input type="text" class="form-control form-control-lg" id="campoNome" required>
+                    
+                    <input type="text" class="form-control form-control-lg valid" id="campoNome" required>
+                    <div class="invalid-feedback" id="inv-nome">
+                        aaaaaaaa
+                    </div>
                 </div>
 
                 <div class="row">
                     <!-- Raça do personagem-->
                     <div class="form-group col-sm-6">
                         <label for="campoRaca">Raça</label>
+                        <div class="invalid-feedback">
+                            <span id="inv-raca"></span>
+                        </div>
                         <input type="text" class="form-control form-control-lg" id="campoRaca" required >
                     </div>
 
@@ -147,7 +154,7 @@
 
                 <!-- Enviar -->
                 <div class="form-group text-right">
-                    <button id="btIncluirPersonagem" type="button" class="btn btn-success">Registrar</button>
+                    <button id="btIncluirPersonagem" type="button" class="btn btn-success" disabled>Registrar</button>
                 </div>
              
             </fieldset>
@@ -175,6 +182,7 @@
     crossorigin="anonymous"></script>
 <!-- código específico do front-end -->
 <script src="../js/scriptPers.js"></script>
+<script src="../js/real_time_form.js"></script>
  
 </body>
 </html>
