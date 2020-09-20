@@ -72,7 +72,7 @@ $(function() { // quando o documento estiver pronto/carregado
 
                     "<div class='modal-footer flex-center'>"+
                         "<p class='p-2 m-2'>Uma vez apagado, esse personagem não podera mais ser recuperado!</p>"+
-                        "<button type='button' class='btn btn-outline-danger' onClick='apagarPers(" + personagem.id + ");'>Apagar </button>"+
+                        "<button type='button' class='btn btn-outline-danger' data-dismiss='modal' onClick='apagarPers(" + personagem.id + ");'>Apagar </button>"+
                         "<a type='button' class='btn  btn-danger waves-effect' data-dismiss='modal'>Não</a>"+
                     "</div>"+
                     "</div>"+
@@ -180,6 +180,7 @@ function apagarPers(id_pers){
         success: function(retorno){
             if (retorno.resultado == "ok") {
                 $("#card_" + id_pers).fadeOut(1000, function(){ 
+                $("#DeleteModal" + id_pers).remove();
                 alert("Personagem removido com sucesso!"); 
             });
         }
