@@ -23,7 +23,7 @@ $(function() { // quando o documento estiver pronto/carregado
                 //Cria o  HTML de um Card custom para os dados do personagem
 
                 card = 
-                "<card class='content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1 animated slideInUp' style='max-width: 340px; min-width: 310px; text-align: center;' >" +
+                "<card class='content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1 animated slideInUp' style='max-width: 340px; min-width: 310px; text-align: center;' id='card_"+ personagem.id+ "'> " +
                     "<div class='media-body'>" +
                         "<div class='article-metadata'>" +
                             "<span >Raça: " + personagem.raca + "</span>" + 
@@ -51,7 +51,6 @@ $(function() { // quando o documento estiver pronto/carregado
                             "</span> </div> </div>"+
                     "<br><small class='text-muted'>Criado em: " + personagem.data_criacao + "</small>" +
                     "<div>" +
-                    //"<button class='btn btn-danger float-right mt-3' onClick='apagarPers(" + personagem.id + ");'>Apagar </button>"+
                     "<button type='button' class='btn btn-mec btn-danger btn-m p-2 float-right' data-toggle='modal' data-target='#DeleteModal"+ personagem.id + "'>Apagar</button>"+
                     "<button type='button' class='btn btn-mec btn-info btn-m p-2 float-left'  data-toggle='modal' data-target='#DeleteModal"+ personagem.id + "'>Editar</button>"+
                     "</div>"+
@@ -93,8 +92,7 @@ $(function() { // quando o documento estiver pronto/carregado
     // Código para inclusão de personagens
     $(document).on("click", "#btIncluirPersonagem", function() {
         //pegar dados da tela
-        console.log("Registrando...")
-        
+
         nome = $("#campoNome").val();
         raca = $("#campoRaca").val();
         classe = $("#campoClasse").val();
@@ -173,22 +171,30 @@ $(function() { // quando o documento estiver pronto/carregado
 });
 
 //Apagar o personagem do BD baseado no ID
-function apagarPers(id){
+function apagarPers(id_pers){
     $.ajax({
-        url: 'http://localhost:5000/apagar_pers',
-        type: 'POST',
+        url: 'http://localhost:5000/apagar_pers/'+id_pers,
+        type: 'DELETE',
         dataType: 'json', contentType: 'application/json',
-        data: JSON.stringify({ id: id}), 
-        success: function (result) {
-          alert("Personagem apagado com sucesso!")
-          document.location.reload(true);
-      },
-      error: function (error) {
-          alert("Algo de errado aconteceu...");
-      }
+        data: JSON.stringify({ id_pers: id_pers}), 
+        success: function(retorno){
+            if (retorno.resultado == "ok") {
+                $("#card_" + id_pers).fadeOut(1000, function(){ 
+                alert("Personagem removido com sucesso!"); 
+            });
+        }
+            else {
+                alert(retorno.resultado + " : " + retorno.detalhes);
+            }
+        },
+        error: function (error){
+            alert("Ocorreu um erro ao apagar esse personagem!");
+        }
     })
-    
 };
+
+
+
 
 //Função para pre-render da img do personagem no registro
 function readURL(input) {

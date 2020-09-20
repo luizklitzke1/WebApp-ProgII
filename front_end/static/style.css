@@ -295,3 +295,11 @@ footer{
   margin-top: 100px;
   margin-bottom: 50px;
 }
+
+card{
+  transition: all .2s ease-in-out;
+}
+
+card:hover {
+  transform: scale(1.5);
+}

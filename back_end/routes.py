@@ -41,18 +41,20 @@ def registrar_Personagem():
     return resposta
 
 # Rota para apagar um Personagem
-@app.route("/apagar_pers",  methods=['POST'])
-def apagar_Personagem():
+@app.route("/apagar_pers/<int:id_pers>",  methods=['DELETE'])
+def apagar_Personagem(id_pers):
     
     resposta = jsonify({"resultado":"ok","detalhes": "ok"})
-    dados = request.get_json()
     
-    personagem = Personagem.query.get_or_404(dados.get("id"))
-    db.session.delete(personagem)
-    db.session.commit()
+    try: #Tentar realizar a exclusão
+        personagem = Personagem.query.get_or_404(id_pers)
+        db.session.delete(personagem)
+        db.session.commit()
+        
+    except Exception as e:  #Envie mensagem em caso de erro
+        resposta = jsonify({"resultado":"erro", "detalhes":str(e)}) 
         
     resposta.headers.add("Access-Control-Allow-Origin","*")
-    
     return resposta
 
 # Rota para procurar personagens
