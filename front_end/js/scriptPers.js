@@ -29,9 +29,10 @@ $(function() { // quando o documento estiver pronto/carregado
                             "<span >Raça: " + personagem.raca + "</span>" + 
                             "<small class='text-muted ml-1'>Classe: " + personagem.classe + "</small>" + 
                         "</div>" +
-                        "<h2> <a class='article-title' href='#'>" + personagem.nome + "</a> </h2>" +
+                        "<h2> <a class='article-title' href='../templates/personagem.html?pers_id="+personagem.id+"'>" + personagem.nome + "</a> </h2>" +
                         "<p class='article-content'>Nível: " + personagem.nivel + "</p>" +
-                        "<img class='account-img' src='../static/imagens_personagens/" + personagem.foto +".png' >" + 
+                        "<a class='article-title' href='../templates/personagem.html?pers_id="+personagem.id+"'>"+
+                            "<img class='account-img' src='../static/imagens_personagens/" + personagem.foto +".png' ></a>" + 
                     "</div>" + 
                     
                     " <div class='container mt-4'> "+
@@ -253,7 +254,7 @@ function apagarPers(id_pers){
 
 
 //Editar o personagem baseado no ID
-function dados_pers(){
+function dados_pers(tipo){
     let pers_id = document.location.search.replace(/^.*?\=/,'');
     console.log("opa mano");
     $.ajax({
@@ -262,12 +263,13 @@ function dados_pers(){
         dataType: 'json',
         success: function(personagem){
             //Verifica se deseja editar ou visualizar na página específica
-            if ($("#form_editar")){
+            if (tipo == "edit"){
                 console.log("Editar");
                 povoar_campos(personagem);
             }
             else{
                 console.log("Vizualizar na pag");
+                mostrar_especifico(personagem);
             };
         },
         error: function() {
@@ -277,6 +279,29 @@ function dados_pers(){
   
 };
 
+//Mostras os dados de um pers especifico em uma pag
+function mostrar_especifico(personagem){
+    document.title += (" " + personagem.nome);
+    $("#nome").text(personagem.nome);
+    $("#raca").text(personagem.raca);
+    $("#classe").text(personagem.classe);
+    $("#nivel").text(personagem.nivel);
+
+    $("#forca").text(personagem.forca);
+    $("#destreza").text(personagem.destreza);
+    $("#constituicao").text(personagem.constituicao);
+    $("#inteligencia").text(personagem.inteligencia);
+    $("#sabedoria").text(personagem.sabedoria);
+    $("#carisma").text(personagem.carisma);
+
+    $("#historia").text(personagem.historia);
+
+    $("#img_pers").attr("src","../static/imagens_personagens/"+personagem.foto+".png");
+    $("#datacriacao").text(personagem.data_criacao);
+    
+};
+
+//Povoar os campos de um form com dados do personagem
 function povoar_campos(personagem){
     console.log(personagem);
     $("#campoNome").val(personagem.nome);

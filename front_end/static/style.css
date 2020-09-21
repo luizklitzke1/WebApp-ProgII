@@ -300,10 +300,6 @@ card{
   transition: all .2s ease-in-out;
 }
 
-card:hover {
-  transform: scale(1.5);
-}
-
 /*input:invalid{
   color:red;
   border: solid 0.08em red;
