@@ -57,6 +57,40 @@ def apagar_Personagem(id_pers):
     resposta.headers.add("Access-Control-Allow-Origin","*")
     return resposta
 
+# Rota para editar um Personagem
+@app.route("/editar_personagem/<int:id_pers>",  methods=['POST'])
+def editar_Personagem(id_pers):
+    
+    resposta = jsonify({"resultado":"ok","detalhes": "ok"})
+    dados = request.get_json()
+    
+    try: #Tentar realizar a edição
+        
+        p = Personagem.query.get_or_404(id_pers)
+        print(p)
+        #Tentei fazer com definição direta, mas a edição tem que ser um dado por vez
+        p.nome = dados["nome"]
+        p.raca = dados["raca"]
+        p.classe = dados["classe"]  
+        p.nivel = dados["nivel"]
+        p.forca = dados["forca"]
+        p.destreza = dados["destreza"]
+        p.constituicao = dados["constituicao"]
+        p.inteligencia = dados["inteligencia"]
+        p.sabedoria = dados["sabedoria"]
+        p.carisma = dados["carisma"]
+        p.historia = dados["historia"]
+        
+        print(p)
+
+        db.session.commit()
+        
+    except Exception as e:  #Envie mensagem em caso de erro
+        resposta = jsonify({"resultado":"erro", "detalhes":str(e)}) 
+        
+    resposta.headers.add("Access-Control-Allow-Origin","*")
+    return resposta
+
 # Rota pegar os dados de um Personagem específico
 @app.route("/dados_pers/<int:id_pers>",  methods=['GET'])
 def dados_Personagem(id_pers):

@@ -87,73 +87,9 @@ $(function() { // quando o documento estiver pronto/carregado
             }
         }
 
-    }
+    };
     
-    // Código para inclusão de personagens
-    $(document).on("click", "#btIncluirPersonagem", function() {
-        //pegar dados da tela
-
-        nome = $("#campoNome").val();
-        raca = $("#campoRaca").val();
-        classe = $("#campoClasse").val();
-        nivel = $("#campoNivel").val();
-        forca = $("#campoForca").val();
-        destreza = $("#campoDestreza").val();
-        constituicao = $("#campoConstituicao").val();
-        inteligencia = $("#campoInteligencia").val();
-        sabedoria = $("#campoSabedoria").val();
-        carisma = $("#campoCarisma").val();
-        historia = $("#campoHistoria").val();
     
-        foto = $("#campoImagem").val();
-
-
-
-
-        var dados = JSON.stringify({ nome: nome, raca: raca, classe: classe,
-                                    nivel: nivel, forca: forca, destreza: destreza,
-                                    constituicao: constituicao, inteligencia: inteligencia, sabedoria: sabedoria,
-                                    carisma: carisma, historia: historia, foto: foto});
-
-        // Enivo dos dados ao back-end para a inclusão
-        $.ajax({
-            url: 'http://localhost:5000/registrar_personagem',
-            type: 'POST',
-            dataType: 'json', contentType: 'application/json',
-            data: dados, 
-            success: pessoaIncluida, 
-            error: erroAoIncluir
-
-        });
-        function pessoaIncluida (retorno) {
-            if (retorno.resultado == "ok") { 
-                alert("Personagem " + nome + " registrado com sucesso!");
-                // limpar os campos
-                $("#campoNome").val("");
-                $("#campoRaca").val("");
-                $("#campoClasse").val("");
-                $("#campoNivel").val("");
-                $("#campoForca").val("");
-                $("#campoDestreza").val("");
-                $("#campoConstituicao").val("");
-                $("#campoInteligencia").val("");
-                $("#campoSabedoria").val("");
-                $("#campoCarisma").val("");
-                $("#campoHistoria").val("");
-
-                $("#campoFoto").val("");
-
-                
-            } else {
-                // informar mensagem de erro
-                alert(retorno.resultado + ":" + retorno.detalhes);
-            }            
-        }
-        function erroAoIncluir (retorno) {
-            // informar mensagem de erro
-            alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes);
-        }
-    });
 
 
     //Chama listagem caso esteja na página com a tabela
@@ -171,6 +107,125 @@ $(function() { // quando o documento estiver pronto/carregado
     });
     
 });
+    // Código para inclusão de personagens
+    function registrar_pers() {
+        //pegar dados da tela
+
+    nome = $("#campoNome").val();
+    raca = $("#campoRaca").val();
+    classe = $("#campoClasse").val();
+    nivel = $("#campoNivel").val();
+    forca = $("#campoForca").val();
+    destreza = $("#campoDestreza").val();
+    constituicao = $("#campoConstituicao").val();
+    inteligencia = $("#campoInteligencia").val();
+    sabedoria = $("#campoSabedoria").val();
+    carisma = $("#campoCarisma").val();
+    historia = $("#campoHistoria").val();
+
+    foto = $("#campoImagem").val();
+
+
+
+
+    var dados = JSON.stringify({ nome: nome, raca: raca, classe: classe,
+                                nivel: nivel, forca: forca, destreza: destreza,
+                                constituicao: constituicao, inteligencia: inteligencia, sabedoria: sabedoria,
+                                carisma: carisma, historia: historia, foto: foto});
+
+    // Enivo dos dados ao back-end para a inclusão
+    $.ajax({
+        url: 'http://localhost:5000/registrar_personagem',
+        type: 'POST',
+        dataType: 'json', contentType: 'application/json',
+        data: dados, 
+        success: personagemIncluido, 
+        error: erroAoIncluir
+
+    });
+    function personagemIncluido (retorno) {
+        if (retorno.resultado == "ok") { 
+            alert("Personagem " + nome + " registrado com sucesso!");
+            // limpar os campos
+            $("#campoNome").val("");
+            $("#campoRaca").val("");
+            $("#campoClasse").val("");
+            $("#campoNivel").val("");
+            $("#campoForca").val("");
+            $("#campoDestreza").val("");
+            $("#campoConstituicao").val("");
+            $("#campoInteligencia").val("");
+            $("#campoSabedoria").val("");
+            $("#campoCarisma").val("");
+            $("#campoHistoria").val("");
+
+            $("#campoFoto").val("");
+
+            
+        } else {
+            // informar mensagem de erro
+            alert(retorno.resultado + ":" + retorno.detalhes);
+            }            
+        }
+        function erroAoIncluir (retorno) {
+            // informar mensagem de erro
+            alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes);
+        }
+    };
+
+    // Código para a edição de um personagem
+    function editar_pers()  {
+
+        let pers_id = document.location.search.replace(/^.*?\=/,'');
+
+        console.log("Editando: "+pers_id);
+        
+        //Pegar os dados dos campos
+        nome = $("#campoNome").val();
+        raca = $("#campoRaca").val();
+        classe = $("#campoClasse").val();
+        nivel = $("#campoNivel").val();
+        forca = $("#campoForca").val();
+        destreza = $("#campoDestreza").val();
+        constituicao = $("#campoConstituicao").val();
+        inteligencia = $("#campoInteligencia").val();
+        sabedoria = $("#campoSabedoria").val();
+        carisma = $("#campoCarisma").val();
+        historia = $("#campoHistoria").val();
+
+        //Manter a mesma imagem caso nenhuma nova seja informada
+        if ($("#campoImagem").val())
+        {
+            foto = $("#campoImagem").val();
+        }
+        else{
+            foto = null;
+        };
+
+        var dados = JSON.stringify({ nome: nome, raca: raca, classe: classe,
+                                    nivel: nivel, forca: forca, destreza: destreza,
+                                    constituicao: constituicao, inteligencia: inteligencia, sabedoria: sabedoria,
+                                    carisma: carisma, historia: historia, foto: foto});
+
+        // Enivo dos dados ao back-end para a inclusão
+        $.ajax({
+            url: 'http://localhost:5000/editar_personagem/'+pers_id,
+            type: 'POST',
+            dataType: 'json', contentType: 'application/json',
+            data: dados, 
+            success: function(){
+                alert("Personagem editado com sucesso!");
+            }, 
+            error: function(){
+                alert("Ocorreu um erro ao editar esse personagem!");
+            }, 
+
+        });
+    
+    };
+
+
+
 
 //Apagar o personagem do BD baseado no ID
 function apagarPers(id_pers){
