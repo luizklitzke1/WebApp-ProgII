@@ -304,7 +304,12 @@ card:hover {
   transform: scale(1.5);
 }
 
-input:invalid{
+/*input:invalid{
   color:red;
-  border-color: red;
+  border: solid 0.08em red;
 }
+
+input:valid{
+  border: solid 0.08em green;
+}
+*/

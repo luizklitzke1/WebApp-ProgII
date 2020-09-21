@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
       <!-- Meta Tags -->
@@ -59,58 +59,67 @@
             <fieldset class="form-group">
                 
                 <legend class="border-bottom">Registrar Personagem</legend>
-                <small class='text-muted color-red mb-4'>Não validando os dados ainda - aceita NULLS</small>
 
                 <!-- Nome do personagem-->
                 <div class="form-group row pr-3 pl-3 mt-3">
                     <label for="campoNome">Nome</label>
                     
-                    <input type="text" class="form-control form-control-lg valid" id="campoNome" required>
-                    <div class="invalid-feedback" id="inv-nome">
-                        aaaaaaaa
-                    </div>
+                    <input type="text" class="form-control form-control-lg invalid" id="campoNome" required>
+                    <span class="invalid-feedback" id="inv-nome">
+                    </span>
                 </div>
 
                 <div class="row">
                     <!-- Raça do personagem-->
                     <div class="form-group col-sm-6">
                         <label for="campoRaca">Raça</label>
-                        <div class="invalid-feedback">
-                            <span id="inv-raca"></span>
-                        </div>
-                        <input type="text" class="form-control form-control-lg" id="campoRaca" required >
+
+                        <input type="text" class="form-control form-control-lg invalid" id="campoRaca" required >
+                        <span class="invalid-feedback" id="inv-raca">
+                        </span>
                     </div>
 
                     <!-- Classe do personagem-->
                     <div class="form-group col-sm-6">
                         <label for="campoClasse">Classe</label>
-                        <input type="text" class="form-control form-control-lg" id="campoClasse" required>
+
+                        <input type="text" class="form-control form-control-lg invalid" id="campoClasse" required>
+                        <span class="invalid-feedback" id="inv-classe">
+                        </span>
                     </div>
                     </div>
 
                 <!-- Nível do personagem-->
                 <div class="form-group">
                     <label for="campoNivel">Nivel</label>
-                    <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoNivel" required>
+                    <input type="number"  min="1"  max="99" class="form-control form-control-lg invalid" id="campoNivel" required>
+                    <span class="invalid-feedback" id="inv-nivel">
+                    </span>
                 </div>
 
                 <div class="row">
                     <!-- Força-->
                     <div class="form-group col-sm-4">
                         <label for="campoForca">Força</label>
-                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoForca" required>   
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg invalid" id="campoForca" required>   
+                        <span class="invalid-feedback" id="inv-forca">
+                        </span>
                     </div>
 
                     <!-- Destreza -->
                     <div class="form-group col-sm-4">
                         <label for="campoDestreza">Destreza</label>
-                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoDestreza" required>   
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg invalid" id="campoDestreza" required>   
+                        <span class="invalid-feedback" id="inv-destreza">
+                        </span>
                     </div>
 
                     <!-- Constituicao -->
                     <div class="form-group col-sm-4">
                         <label for="campoConstituicao">Constituicao</label>
-                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoConstituicao" required>   
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg invalid" id="campoConstituicao" required>   
+                        <span class="invalid-feedback" id="inv-constituicao">
+                        </span>
                     </div>
 
                 </div>
@@ -118,19 +127,25 @@
                 <!-- Inteligencia -->
                     <div class="form-group col-sm-4">
                         <label for="campoInteligencia">Inteligência</label>
-                        <input type="number" min="1", max="99" class="form-control form-control-lg" id="campoInteligencia" required>   
+                        <input type="number" min="1", max="99" class="form-control form-control-lg invalid" id="campoInteligencia" required>   
+                        <span class="invalid-feedback" id="inv-inteligencia">
+                        </span>
                     </div>
 
                     <!-- Sabedoria -->
                     <div class="form-group col-sm-4">
                         <label for="campoSabedoria">Sabedoria</label>
-                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoSabedoria" required>  
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg invalid" id="campoSabedoria" required>  
+                        <span class="invalid-feedback" id="inv-sabedoria">
+                        </span>
                     </div>
 
                     <!-- Carisma -->
                     <div class="form-group col-sm-4">
                         <label for="campoCarisma">Carisma</label>
-                        <input type="number"  min="1"  max="99" class="form-control form-control-lg" id="campoCarisma" required>  
+                        <input type="number"  min="1"  max="99" class="form-control form-control-lg invalid" id="campoCarisma" required>  
+                        <span class="invalid-feedback" id="inv-carisma">
+                        </span>
                     </div>
                 </div>
 
@@ -138,14 +153,18 @@
                 <!-- Historia -->
                 <div class="form-group">
                     <label for="campoHistoria">História</label>
-                    <textarea class="form-control form-control-lg h-25" id="campoHistoria"  form="form_registro"> </textarea>
+                    
+                    <textarea class="form-control form-control-lg h-25" id="campoHistoria"  form="form_registro"></textarea>
+                    <span class="invalid-feedback" id="inv-historia">
+                    </span>
+                    
                 </div>
 
                 <!-- Foto de referência -->
                 <div>
                     <label for="campoImagem">Imagem de referência</label>
                     
-                    <input type='file' class="" onchange="readURL(this);" required  id="campoImagem"/>
+                    <input type='file' class="valid" onchange="readURL(this);"  id="campoImagem"/>
                     <img id="test" src="#" /><br>
                     <small class='text-muted color-red'>Não funcionando no momento - usa a padrão</small>
 

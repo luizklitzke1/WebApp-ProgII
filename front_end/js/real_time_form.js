@@ -1,15 +1,25 @@
+//Script para declaração e controle da validação dos forumários
+
 $(document).ready(function() {
 
     //Variável que garante que todos os campos sejam válidos 
     var formValid = {
-        nome : true,
-        carlos: false,
+        nome : false,
+        raca: false,
+        classe : false,
+        nivel : false,
+        forca : false,
+        destreza : false,
+        constituicao : false,
+        inteligencia : false,
+        sabedoria : false,
+        carisma : false,
+        historia : true,
     }
 
     function checkForm(){
         var check = true;
         $.each(formValid, function(index, element) {
-            console.log(element); 
             if (!element){
                 check = false;
             };
@@ -17,18 +27,15 @@ $(document).ready(function() {
 
         //Tive que fazer isso em outra variável pois só returne dentro se mostrava inconsistente
         if (check){
-            console.log("Deu bom!");
-            return true;
+            //console.log("Formulário validado!");
+            $('#btIncluirPersonagem').removeAttr('disabled');
         }
         else{
-            console.log("Deu ruim!");
-            return false;
+            //console.log("Deu ruim!");
+            $('#btIncluirPersonagem').attr('disabled', true);
         }
         
         };
-    
-
-    checkForm();
     
     //Muda a mensagem de erro nos inputs
     function msg(id,message){
@@ -40,42 +47,245 @@ $(document).ready(function() {
         $(id).show();
     }
 
-    nome = $("#campoNome").val();
+    //Padrão de verificação dos caracteres de texto
+    var textEsp = new RegExp(/^[a-zA-Z0-9]+$/);
+
+    //Verificação customizada do nome
     $("#campoNome").on('input', function() {
         var input= $(this);
-        var textEsp = new RegExp(/^[a-zA-Z0-9]+$/);
         if (!(textEsp.test(input.val()))){
             msg("#inv-nome","O nome não pode conter caracteres especiais!");
-            show("#inv-nome");
-            input.removeClass("valid").addClass("invalid");
+            formValid["nome"] = false;
         }   
         else if (input.val().length <3){
             msg("#inv-nome","O nome deve ter no mínimo 3 caracteres!");
-            show("#inv-nome");
+            formValid["nome"] = false;
         }
         else {
-            input.removeClass("invalid").addClass("valid");
-            $("#inv-nome").hide();
+            formValid["nome"] = true;
         }   
+
+        if (formValid["nome"]){
+            $("#inv-nome").hide();
+            input.removeClass("invalid").addClass("valid");
+        }
+        else{
+            show("#inv-nome");
+            input.removeClass("valid").addClass("invalid");
             
+        };
+        checkForm();
        
     });
 
-	
+    //Verificação customizada da raça
+    $("#campoRaca").on('input', function() {
+        var input= $(this);
+        if (!(textEsp.test(input.val()))){
+            msg("#inv-raca","A raca não pode conter caracteres especiais!");
+            formValid["raca"] = false;
+        }   
+        else if (input.val().length <3){
+            msg("#inv-raca","O raca deve ter no mínimo 3 caracteres!");
+            formValid["raca"] = false;
+        }
+        else {
+            formValid["raca"] = true;
+        }   
 
-    
-    
-    raca = $("#campoRaca").val();
-    classe = $("#campoClasse").val();
-    nivel = $("#campoNivel").val();
-    forca = $("#campoForca").val();
-    destreza = $("#campoDestreza").val();
-    constituicao = $("#campoConstituicao").val();
-    inteligencia = $("#campoInteligencia").val();
-    sabedoria = $("#campoSabedoria").val();
-    carisma = $("#campoCarisma").val();
-    historia = $("#campoHistoria").val();
+        if (formValid["raca"]){
+            $("#inv-raca").hide();
+            input.removeClass("invalid").addClass("valid");
 
-    foto = $("#campoImagem").val();
+        }
+        else{
+            show("#inv-raca");
+            input.removeClass("valid").addClass("invalid");
+            
+        };
+        checkForm();
+       
+    });
+
+    //Verificação customizada da classe
+    $("#campoClasse").on('input', function() {
+        var input= $(this);
+        if (!(textEsp.test(input.val()))){
+            msg("#inv-classe","A classe não pode conter caracteres especiais!");
+            formValid["classe"] = false;
+        }   
+        else if (input.val().length <3){
+            msg("#inv-classe","O classe deve ter no mínimo 3 caracteres!");
+            formValid["classe"] = false;
+        }
+        else {
+            formValid["classe"] = true;
+        }   
+
+        if (formValid["classe"]){
+            $("#inv-classe").hide();
+            input.removeClass("invalid").addClass("valid");
+
+        }
+        else{
+            show("#inv-classe");
+            input.removeClass("valid").addClass("invalid");
+            
+        };
+        checkForm();
+       
+    });
+
+    //Padrão de teste e respostas para os valores inteiros
+    var testeNums = new RegExp(/^[0-9]+$/);
+    var txt_ints = new String("O valor deve ser inteiro e entre 0 e 99!");
+
+    //Verificação customizada do nível
+    $("#campoNivel").on('input', function() {
+        var input= $(this);
+        if (!(testeNums.test(input.val())) || (input.val()>99)){
+            
+            msg("#inv-nivel", txt_ints);
+            formValid["nivel"] = false;
+            input.removeClass("valid").addClass("invalid");
+            show("#inv-nivel");
+        }   
+        else {
+            formValid["nivel"] = true;
+            $("#inv-nivel").hide();
+            input.removeClass("invalid").addClass("valid");
+        }   
+        checkForm();
+    });
+
+    //Verificação customizada da força
+    $("#campoForca").on('input', function() {
+        var input= $(this);
+        if (!(testeNums.test(input.val())) || (input.val()>99)){
+            
+            msg("#inv-forca", txt_ints);
+            formValid["forca"] = false;
+            input.removeClass("valid").addClass("invalid");
+            show("#inv-forca");
+        }   
+        else {
+            formValid["forca"] = true;
+            $("#inv-forca").hide();
+            input.removeClass("invalid").addClass("valid");
+        }   
+        checkForm();
+    });
+
+    //Verificação customizada da destreza
+    $("#campoDestreza").on('input', function() {
+        var input= $(this);
+        if (!(testeNums.test(input.val())) || (input.val()>99)){
+            
+            msg("#inv-destreza", txt_ints);
+            formValid["destreza"] = false;
+            input.removeClass("valid").addClass("invalid");
+            show("#inv-destreza");
+        }   
+        else {
+            formValid["destreza"] = true;
+            $("#inv-destreza").hide();
+            input.removeClass("invalid").addClass("valid");
+        }   
+        checkForm();
+    });
+
+    //Verificação customizada da consituição
+    $("#campoConstituicao").on('input', function() {
+        var input= $(this);
+        if (!(testeNums.test(input.val())) || (input.val()>99)){
+            
+            msg("#inv-constituicao", txt_ints);
+            formValid["constituicao"] = false;
+            input.removeClass("valid").addClass("invalid");
+            show("#inv-constituicao");
+        }   
+        else {
+            formValid["constituicao"] = true;
+            $("#inv-constituicao").hide();
+            input.removeClass("invalid").addClass("valid");
+        }   
+        checkForm();
+    });
+
+    //Verificação customizada da inteligencia
+    $("#campoInteligencia").on('input', function() {
+        var input= $(this);
+        if (!(testeNums.test(input.val())) || (input.val()>99)){
+            
+            msg("#inv-inteligencia", txt_ints);
+            formValid["inteligencia"] = false;
+            input.removeClass("valid").addClass("invalid");
+            show("#inv-inteligencia");
+        }   
+        else {
+            formValid["inteligencia"] = true;
+            $("#inv-inteligencia").hide();
+            input.removeClass("invalid").addClass("valid");
+        }   
+        checkForm();
+    });
+
+    //Verificação customizada da sabedoria
+    $("#campoSabedoria").on('input', function() {
+        var input= $(this);
+        if (!(testeNums.test(input.val())) || (input.val()>99)){
+            
+            msg("#inv-sabedoria", txt_ints);
+            formValid["sabedoria"] = false;
+            input.removeClass("valid").addClass("invalid");
+            show("#inv-sabedoria");
+        }   
+        else {
+            formValid["sabedoria"] = true;
+            $("#inv-sabedoria").hide();
+            input.removeClass("invalid").addClass("valid");
+        }   
+        checkForm();
+    });
+
+    //Verificação customizada do carisma
+    $("#campoCarisma").on('input', function() {
+        var input= $(this);
+        if (!(testeNums.test(input.val())) || (input.val()>99)){
+            
+            msg("#inv-carisma", txt_ints);
+            formValid["carisma"] = false;
+            input.removeClass("valid").addClass("invalid");
+            show("#inv-carisma");
+        }   
+        else {
+            formValid["carisma"] = true;
+            $("#inv-carisma").hide();
+            input.removeClass("invalid").addClass("valid");
+        }  
+        checkForm();
+    });
+
+    //Padrão de verificação dos caracteres de texto para a história
+    var textEspHist = new RegExp(/^[a-zA-Z0-9-!?,. ]+$/);
+
+    //Verificação customizada da história
+    $("#campoHistoria").on('input', function() {
+        var input= $(this);
+        if ((input.val().length>0) && (!(textEspHist.test(input.val())))){
+            msg("#inv-historia","A história não pode conter aspas e outro caracteres especiais!");
+            formValid["historia"] = false;
+            show("#inv-historia");
+            input.removeClass("valid").addClass("invalid");
+        }   
+        else {
+            formValid["historia"] = true;
+            $("#inv-historia").hide();
+            input.removeClass("invalid").addClass("valid");
+        }   
+
+        checkForm();
+    });
+
 
 });
