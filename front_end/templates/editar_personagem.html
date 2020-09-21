@@ -19,12 +19,12 @@
       <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       
-      <title>Projeto RPG JS - Registrar Personagem </title>
+      <title>Projeto RPG JS - Editar Personagem </title>
 
 
   </head>
-  <body class='pt-4'>
-      <header class="site-header">
+  <body class='pt-4' onload="dados_pers()">
+        <header class="site-header">
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
           <div class="container">
 
@@ -54,11 +54,11 @@
       <main role="main" class="container ml- p-0 principal1">
     <div class="content-section p-4 pl-4 pr-4">
 
-        <form method="POST" action="" enctype="multipart/form-data" id="form_registro">
+        <form method="POST" action="" enctype="multipart/form-data" id="form_editar">
             
             <fieldset class="form-group">
                 
-                <legend class="border-bottom">Registrar Personagem</legend>
+                <legend class="border-bottom">Editar Personagem</legend>
 
                 <!-- Nome do personagem-->
                 <div class="form-group row pr-3 pl-3 mt-3">
@@ -173,7 +173,7 @@
 
                 <!-- Enviar -->
                 <div class="form-group text-right">
-                    <button id="btIncluirPersonagem" type="button" class="btn btn-success" disabled>Registrar</button>
+                    <button id="btIncluirPersonagem" type="button" class="btn btn-success" disabled>Editar</button>
                 </div>
              
             </fieldset>

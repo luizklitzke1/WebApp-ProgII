@@ -52,7 +52,7 @@ $(function() { // quando o documento estiver pronto/carregado
                     "<br><small class='text-muted'>Criado em: " + personagem.data_criacao + "</small>" +
                     "<div>" +
                     "<button type='button' class='btn btn-mec btn-danger btn-m p-2 float-right' data-toggle='modal' data-target='#DeleteModal"+ personagem.id + "'>Apagar</button>"+
-                    "<button type='button' class='btn btn-mec btn-info btn-m p-2 float-left'  data-toggle='modal' data-target='#DeleteModal"+ personagem.id + "'>Editar</button>"+
+                    "<a href = '../templates/editar_personagem.html?pers_id="+personagem.id+"'><button type='button' class='btn btn-mec btn-info btn-m p-2 float-left'  data-toggle='modal'>Editar</button></a>"+
                     "</div>"+
                 "</card>"
                 // Modal para apagar o personagem //
@@ -94,14 +94,6 @@ $(function() { // quando o documento estiver pronto/carregado
         //pegar dados da tela
 
         nome = $("#campoNome").val();
-        $("#campoNome").on('input', function() {
-            console.log($(this).val());
-        });
-        if (nome.length < 3){
-            console.log("alo?");
-            $("#inv-nome").innerHTML ="O nome deve ter no mínimo 3 caracteres!";
-            return false;
-        } 
         raca = $("#campoRaca").val();
         classe = $("#campoClasse").val();
         nivel = $("#campoNivel").val();
@@ -202,6 +194,48 @@ function apagarPers(id_pers){
             alert("Ocorreu um erro ao apagar esse personagem!");
         }
     })
+};
+
+
+//Editar o personagem baseado no ID
+function dados_pers(){
+    let pers_id = document.location.search.replace(/^.*?\=/,'');
+    console.log("opa mano");
+    $.ajax({
+        url: 'http://localhost:5000/dados_pers/'+pers_id,
+        method: 'GET',
+        dataType: 'json',
+        success: function(personagem){
+            //Verifica se deseja editar ou visualizar na página específica
+            if ($("#form_editar")){
+                console.log("Editar");
+                povoar_campos(personagem);
+            }
+            else{
+                console.log("Vizualizar na pag");
+            };
+        },
+        error: function() {
+        alert("Erro ao receber os dados do personagem!, verifique o backend");
+        }
+    });
+  
+};
+
+function povoar_campos(personagem){
+    console.log(personagem);
+    $("#campoNome").val(personagem.nome);
+    $("#campoRaca").val(personagem.raca);
+    $("#campoClasse").val(personagem.classe);
+    $("#campoNivel").val(personagem.nivel);
+    $("#campoForca").val(personagem.forca);
+    $("#campoDestreza").val(personagem.destreza);
+    $("#campoConstituicao").val(personagem.constituicao);
+    $("#campoInteligencia").val(personagem.inteligencia);
+    $("#campoSabedoria").val(personagem.sabedoria);
+    $("#campoCarisma").val(personagem.carisma);
+    $("#campoHistoria").val(personagem.historia);
+    
 };
 
 

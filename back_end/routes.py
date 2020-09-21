@@ -57,6 +57,21 @@ def apagar_Personagem(id_pers):
     resposta.headers.add("Access-Control-Allow-Origin","*")
     return resposta
 
+# Rota pegar os dados de um Personagem específico
+@app.route("/dados_pers/<int:id_pers>",  methods=['GET'])
+def dados_Personagem(id_pers):
+    
+    try: #Tentar achar o personagem
+        personagem = Personagem.query.get_or_404(id_pers)
+        resposta = jsonify(personagem.json())
+        
+    except Exception as e:  #Envie mensagem em caso de erro
+        resposta = jsonify({"resultado":"erro", "detalhes":str(e)}) 
+        
+    resposta.headers.add("Access-Control-Allow-Origin","*")
+    return resposta
+
+
 # Rota para procurar personagens
 @app.route("/procurar_pers", methods=['GET'])
 def procurar_pers():
@@ -67,20 +82,10 @@ def procurar_pers():
                                                         Personagem.raca.like(f"%{dados['raca']}%"),
                                                         Personagem.classe.like(f"%{dados['classe']}%"),
                                                         )
-    for p in personagens:
-        print(p)
     personagens_json = [Personagem.json() for Personagem in personagens]
     resposta = jsonify(personagens_json)
     resposta.headers.add("Access-Control-Allow-Origin","*")
     return resposta
-    
-    
-# [WIP] Rota para vizualizar um Personagem
-@app.route("/Personagem/<int:Personagem_id>", methods=['GET', 'POST'])
-def mostrar_Personagem(Personagem_id):
-
-    Personagem = Personagem.query.get_or_404(Personagem_id)
-    db.session.commit()
 
 
 # Método para salvar imagens de perfil compactadas

@@ -15,8 +15,26 @@ $(document).ready(function() {
         sabedoria : false,
         carisma : false,
         historia : true,
-    }
+    };
 
+    //Torna todos os valores válidos caso estiver apenas editando
+    if ($("#form_editar")){
+        //Aparentemente não tem como definir os valores com loop
+        formValid = { 
+            nome : true,
+            raca: true,
+            classe : true,
+            nivel : true,
+            forca : true,
+            destreza : true,
+            constituicao : true,
+            inteligencia : true,
+            sabedoria : true,
+            carisma : true,
+            historia : true,
+        };
+        checkForm();
+    }
     function checkForm(){
         var check = true;
         $.each(formValid, function(index, element) {

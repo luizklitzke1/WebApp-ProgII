@@ -59,18 +59,18 @@
                     <div class="card-body p-0">
                         <div class="row p-0 m-0">
                             <div class="col-md-2 p-0 text-center">
-                                    <img class="account-img mt-2" src="{{ url_for('static', filename='imagens_personagens/' + personagem.foto) }}">
+                                    <img class="account-img mt-2" id="img_pers">
                                     <small class="text-muted">Criado em: <span id="datacriacao" ></span></small>
                                 <div class="container float-left text-left"></div>
                             </div>
                             <div class="col-md-10 ml-0">
                                 <div class="p-1 text-center">
-                                        <h2><a class="article-title" href="#">  <span id="nomepers"></span> </a></h2>
+                                        <h2><a class="article-title" href="#">  <span id="nome_pers">Carlos?</span> </a></h2>
                                 </div>
 
                                     <div class="row text-center">
                                         <span class="col-md lead"><span class="vermelho">Raça:</span> <span id="raca"></span></span>
-                                        <span class="col-md lead"><span class="vermelho">Classe:</span> <span id="classe"></span> }</span>
+                                        <span class="col-md lead"><span class="vermelho">Classe:</span> <span id="classe"></span> </span>
                                         <span class="col-md lead"><span class="vermelho">Nível: </span> <span id="nivel"></span> </span>
                                     </div>
 
@@ -102,7 +102,7 @@
                             
                                             <div class="col">
                                                 <span class="col vermelho fonte_mec">Carisma</span> 
-                                                <span class="col"  id="carisma">{</span> 
+                                                <span class="col"  id="carisma"></span> 
                                             </div>
                                         </div>
 
