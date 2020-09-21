@@ -309,3 +309,7 @@ input:valid{
   border: solid 0.08em green;
 }
 */
+
+*{
+  box-shadow: none !important;
+}

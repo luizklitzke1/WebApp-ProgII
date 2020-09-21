@@ -16,9 +16,9 @@ $(document).ready(function() {
         carisma : false,
         historia : true,
     };
-
+    
     //Torna todos os valores válidos caso estiver apenas editando
-    if ($("#form_editar")){
+    if ($("#form_editar").length){
         //Aparentemente não tem como definir os valores com loop
         formValid = { 
             nome : true,
