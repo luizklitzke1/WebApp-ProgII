@@ -105,23 +105,6 @@ def dados_Personagem(id_pers):
     resposta.headers.add("Access-Control-Allow-Origin","*")
     return resposta
 
-
-# Rota para procurar personagens
-@app.route("/procurar_pers", methods=['GET'])
-def procurar_pers():
-    
-    dados = request.get_json()
-    personagens = db.session.query(Personagem).filter(
-                                                        Personagem.nome.like(f"%{dados['nome']}%"),
-                                                        Personagem.raca.like(f"%{dados['raca']}%"),
-                                                        Personagem.classe.like(f"%{dados['classe']}%"),
-                                                        )
-    personagens_json = [Personagem.json() for Personagem in personagens]
-    resposta = jsonify(personagens_json)
-    resposta.headers.add("Access-Control-Allow-Origin","*")
-    return resposta
-
-
 # Método para salvar imagens de perfil compactadas
 def salvar_imagem(diretorio, form_picture):
     rhex = secrets.token_hex(9)
