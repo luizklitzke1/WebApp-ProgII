@@ -1,3 +1,5 @@
+//Obs: Algumas funções estão fora dessa chamada inicial feita pelo professor devido a chamada em outros documentos!
+
 $(function() { // quando o documento estiver pronto/carregado
 
 
@@ -79,8 +81,6 @@ $(function() { // quando o documento estiver pronto/carregado
                     "</div>"+
                 "</div>"+
                 "</div>"
-
-                console.log(personagem.nome,personagem.nivel);
             
                 // adiciona a linha no corpo da tabela
                 $('#cards').append(card);
@@ -178,9 +178,7 @@ $(function() { // quando o documento estiver pronto/carregado
     function editar_pers()  {
 
         let pers_id = document.location.search.replace(/^.*?\=/,'');
-
-        console.log("Editando: "+pers_id);
-        
+       
         //Pegar os dados dos campos
         nome = $("#campoNome").val();
         raca = $("#campoRaca").val();
@@ -256,7 +254,6 @@ function apagarPers(id_pers){
 //Editar o personagem baseado no ID
 function dados_pers(tipo){
     let pers_id = document.location.search.replace(/^.*?\=/,'');
-    console.log("opa mano");
     $.ajax({
         url: 'http://localhost:5000/dados_pers/'+pers_id,
         method: 'GET',
@@ -264,16 +261,14 @@ function dados_pers(tipo){
         success: function(personagem){
             //Verifica se deseja editar ou visualizar na página específica
             if (tipo == "edit"){
-                console.log("Editar");
                 povoar_campos(personagem);
             }
             else{
-                console.log("Vizualizar na pag");
                 mostrar_especifico(personagem);
             };
         },
         error: function() {
-        alert("Erro ao receber os dados do personagem, verifique o backend!");
+        alert("Erro ao receber os dados do personagem, verifique o backend");
         }
     });
   
@@ -303,7 +298,6 @@ function mostrar_especifico(personagem){
 
 //Povoar os campos de um form com dados do personagem
 function povoar_campos(personagem){
-    console.log(personagem);
     $("#campoNome").val(personagem.nome);
     $("#campoRaca").val(personagem.raca);
     $("#campoClasse").val(personagem.classe);
@@ -317,9 +311,6 @@ function povoar_campos(personagem){
     $("#campoHistoria").val(personagem.historia);
     
 };
-
-
-
 
 //Função para pre-render da img do personagem no registro
 function readURL(input) {

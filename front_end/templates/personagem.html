@@ -59,7 +59,7 @@
         <div class="media-body " >
             <div class="container p-0 m-0 ">                
                 <div class="card ">
-                    <div class="card-body p-0">
+                    <div class="card-body p-0 mt-3">
                         <div class="row p-0 m-0">
                             <div class="col-md-2 p-0 text-center">
                                     <img class="account-img mt-2" id="img_pers"><br>
@@ -112,6 +112,10 @@
                                         <div class="ml-3 p-3 text-justify">
                                             <span  id="historia"></span>
                                         </div>
+                                    </div>
+                                    <div> 
+                                      <button type='button' class='btn btn-mec btn-danger btn-m p-2 float-right' data-toggle='modal' data-target='#DeleteModal+ personagem.id '>Apagar</button>
+                                      <a href = '../templates/editar_personagem.html?pers_id="+personagem.id+"'><button type='button' class='btn btn-mec btn-info btn-m p-2 float-right '  data-toggle='modal'>Editar</button></a>
                                     </div>
                             </div>
                         </div>   
