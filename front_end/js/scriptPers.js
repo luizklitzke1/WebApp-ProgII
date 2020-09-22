@@ -273,7 +273,7 @@ function dados_pers(tipo){
             };
         },
         error: function() {
-        alert("Erro ao receber os dados do personagem!, verifique o backend");
+        alert("Erro ao receber os dados do personagem, verifique o backend!");
         }
     });
   

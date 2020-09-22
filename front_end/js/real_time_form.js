@@ -66,16 +66,13 @@ $(document).ready(function() {
     }
 
     //Padrão de verificação dos caracteres de texto
-    var textEsp = new RegExp(/^[a-zA-Z0-9]+$/);
+    //var textEsp = new RegExp(/^[a-zA-Z0-9]+$/);
 
     //Verificação customizada do nome
     $("#campoNome").on('input', function() {
         var input= $(this);
-        if (!(textEsp.test(input.val()))){
-            msg("#inv-nome","O nome não pode conter caracteres especiais!");
-            formValid["nome"] = false;
-        }   
-        else if (input.val().length <3){
+ 
+        if (input.val().length <3){
             msg("#inv-nome","O nome deve ter no mínimo 3 caracteres!");
             formValid["nome"] = false;
         }
@@ -98,12 +95,8 @@ $(document).ready(function() {
 
     //Verificação customizada da raça
     $("#campoRaca").on('input', function() {
-        var input= $(this);
-        if (!(textEsp.test(input.val()))){
-            msg("#inv-raca","A raca não pode conter caracteres especiais!");
-            formValid["raca"] = false;
-        }   
-        else if (input.val().length <3){
+        var input= $(this); 
+        if (input.val().length <3){
             msg("#inv-raca","O raca deve ter no mínimo 3 caracteres!");
             formValid["raca"] = false;
         }
@@ -127,12 +120,8 @@ $(document).ready(function() {
 
     //Verificação customizada da classe
     $("#campoClasse").on('input', function() {
-        var input= $(this);
-        if (!(textEsp.test(input.val()))){
-            msg("#inv-classe","A classe não pode conter caracteres especiais!");
-            formValid["classe"] = false;
-        }   
-        else if (input.val().length <3){
+        var input= $(this);  
+        if (input.val().length <3){
             msg("#inv-classe","O classe deve ter no mínimo 3 caracteres!");
             formValid["classe"] = false;
         }
@@ -155,7 +144,7 @@ $(document).ready(function() {
     });
 
     //Padrão de teste e respostas para os valores inteiros
-    var testeNums = new RegExp(/^[0-9]+$/);
+    var testeNums = new RegExp(/^[\p{L}a-zA-Z0-9 ]+$/);
     var txt_ints = new String("O valor deve ser inteiro e entre 0 e 99!");
 
     //Verificação customizada do nível
@@ -285,25 +274,8 @@ $(document).ready(function() {
     });
 
     //Padrão de verificação dos caracteres de texto para a história
-    var textEspHist = new RegExp(/^[a-zA-Z0-9-!?,. ]+$/);
+    //var textEspHist = new RegExp(/^[\p{L}a-zA-Z0-9-!?"'/,. ]+$/);
 
-    //Verificação customizada da história
-    $("#campoHistoria").on('input', function() {
-        var input= $(this);
-        if ((input.val().length>0) && (!(textEspHist.test(input.val())))){
-            msg("#inv-historia","A história não pode conter aspas e outro caracteres especiais!");
-            formValid["historia"] = false;
-            show("#inv-historia");
-            input.removeClass("valid").addClass("invalid");
-        }   
-        else {
-            formValid["historia"] = true;
-            $("#inv-historia").hide();
-            input.removeClass("invalid").addClass("valid");
-        }   
-
-        checkForm();
-    });
 
 
 });
