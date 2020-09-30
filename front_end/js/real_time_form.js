@@ -1,4 +1,4 @@
-//Script para declaração e controle da validação dos forumários
+//Script para declaração e controle da validação dos forumários em tempo real
 
 $(document).ready(function() {
 
@@ -274,6 +274,7 @@ $(document).ready(function() {
     });
 
     //Padrão de verificação dos caracteres de texto para a história
+    //Desativado por problemas com UTF-8
     //var textEspHist = new RegExp(/^[\p{L}a-zA-Z0-9-!?"'/,. ]+$/);
 
 

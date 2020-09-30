@@ -218,12 +218,8 @@ $(function() { // quando o documento estiver pronto/carregado
             error: function(){
                 alert("Ocorreu um erro ao editar esse personagem!");
             }, 
-
         });
-    
     };
-
-
 
 
 //Apagar o personagem do BD baseado no ID
@@ -238,7 +234,15 @@ function apagarPers(id_pers){
                 $("#card_" + id_pers).fadeOut(1000, function(){ 
                 $("#DeleteModal" + id_pers).remove();
                 alert("Personagem removido com sucesso!"); 
+                
             });
+            //Redireciona para a home caso o pers seja apagado em pag esp
+            if ($("#DeleteModal").length){
+                window.location.href = "index.html";
+                alert("Personagem removido com sucesso!\nConfirme para voltar para a Home..."); 
+            }
+            
+            
         }
             else {
                 alert(retorno.resultado + " : " + retorno.detalhes);
@@ -262,6 +266,10 @@ function dados_pers(tipo){
             //Verifica se deseja editar ou visualizar na página específica
             if (tipo == "edit"){
                 povoar_campos(personagem);
+            }
+            else if (tipo == "delete_esp"){
+                $("#pers_nome").text(personagem.nome);
+                console.log("alo");
             }
             else{
                 mostrar_especifico(personagem);
@@ -293,6 +301,8 @@ function mostrar_especifico(personagem){
 
     $("#img_pers").attr("src","../static/imagens_personagens/"+personagem.foto+".png");
     $("#datacriacao").text(personagem.data_criacao);
+
+    $("#edit_btn").attr("href",("../templates/editar_personagem.html?pers_id="+personagem.id));
     
 };
 
@@ -312,6 +322,18 @@ function povoar_campos(personagem){
     
 };
 
+//Adicionar os dados de delete do personagem em sua página esp
+function apagarEsp() {
+    let pers_id = document.location.search.replace(/^.*?\=/,'');
+
+
+    //Pega o personagem em si e muda o nome no modal
+    dados_pers("delete_esp");
+    //Adiciona a função ao botão do modal
+    document.getElementById("btn_delete").setAttribute( "onClick", ("apagarPers("+pers_id+");"));
+
+};
+
 //Função para pre-render da img do personagem no registro
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -327,35 +349,3 @@ function readURL(input) {
   };
 
 
-//--  [WIP] -- Mostrar os dados de um personagem em uma página específica 
-function verPers(id){
-    $.ajax({
-        url: 'http://localhost:5000/personagem',
-        type: 'POST',
-        dataType: 'json', contentType: 'application/json',
-        data: JSON.stringify({ id: id }), 
-        success: function (result) {
-          alert("Personagem apagado com sucesso!")
-          document.location.reload(true);
-      },
-      error: function (error) {
-          alert("Algo de errado aconteceu...");
-      }
-    })
-    
-};
-
-//-- [WIP] -- Procurar o personagem no BD com dados informados
-function procurarPers(nome,raca,classe){
-    //Envia os dados para pesquisa
-    $.ajax({
-        url: 'http://localhost:5000/procurar_pers',
-        type: 'POST',
-        dataType: 'json', contentType: 'application/json',
-        data: JSON.stringify({ nome: nome, raca: raca, classe: classe}), 
-        error: function (error) {
-          alert("Algo de errado aconteceu...");
-      }
-    });
-    
-};
