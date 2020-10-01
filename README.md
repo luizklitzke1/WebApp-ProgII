@@ -1,5 +1,9 @@
 # WebApp - Projeto RPG
 
+![Logo](https://i.ibb.co/YXHNnTH/gp2.gif) 
+
+
+
 Aplicação Web em Python desenvolvida utilizando, **Flask** e com front-end em **JavaScript**,
 
 
