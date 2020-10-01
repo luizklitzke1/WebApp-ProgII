@@ -34,7 +34,7 @@ $(function() { // quando o documento estiver pronto/carregado
                         "<h2> <a class='article-title' href='../templates/personagem.html?pers_id="+personagem.id+"'>" + personagem.nome + "</a> </h2>" +
                         "<p class='article-content'>Nível: " + personagem.nivel + "</p>" +
                         "<a class='article-title' href='../templates/personagem.html?pers_id="+personagem.id+"'>"+
-                            "<img class='account-img' src='../static/imagens_personagens/" + personagem.foto +".png' ></a>" + 
+                            "<img class='account-img' src='../static/imagens_personagens/" + personagem.foto +"' ></a>" + 
                     "</div>" + 
                     
                     " <div class='container mt-4'> "+
@@ -305,7 +305,7 @@ function mostrar_especifico(personagem){
 
     $("#historia").text(personagem.historia);
 
-    $("#img_pers").attr("src","../static/imagens_personagens/"+personagem.foto+".png");
+    $("#img_pers").attr("src","../static/imagens_personagens/"+personagem.foto);
     $("#datacriacao").text(personagem.data_criacao);
 
     $("#edit_btn").attr("href",("../templates/editar_personagem.html?pers_id="+personagem.id));

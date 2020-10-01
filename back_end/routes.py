@@ -1,5 +1,8 @@
 from models_db import Personagem
+from PIL import Image
+import base64
 from config import *
+import os, io
 
 # Rota para a home
 @app.route("/")
@@ -25,10 +28,7 @@ def registrar_Personagem():
         
         novo_Personagem = Personagem(**dados)
         
-        #Descobrir como salvar as imgs 
-        novo_Personagem.foto = "personagem"
-        
-        print(novo_Personagem.foto)
+        novo_Personagem.foto = salvar_imagem_base64('../front_end/static/imagens_personagens',(dados["foto"]))
         
         db.session.add(novo_Personagem)
         db.session.commit()
@@ -48,8 +48,10 @@ def apagar_Personagem(id_pers):
     
     try: #Tentar realizar a exclusão
         personagem = Personagem.query.get_or_404(id_pers)
+        apagar_imagem('../front_end/static/imagens_personagens', personagem.foto)
         db.session.delete(personagem)
         db.session.commit()
+        
         
     except Exception as e:  #Envie mensagem em caso de erro
         resposta = jsonify({"resultado":"erro", "detalhes":str(e)}) 
@@ -105,18 +107,23 @@ def dados_Personagem(id_pers):
     resposta.headers.add("Access-Control-Allow-Origin","*")
     return resposta
 
+
 # Método para salvar imagens de perfil compactadas
-def salvar_imagem(diretorio, form_picture):
+def salvar_imagem_base64(diretorio, base64str):
+    
     rhex = secrets.token_hex(9)
     nome_foto = rhex + ".png"
     caminho = os.path.join(app.root_path, diretorio, nome_foto)
-
-    # Resize na imagem antes de upar, se não for GIF
     tamanho_imagem = (200, 200)
-    imagem_menor = Image.open(form_picture)
+    
+    image = base64.b64decode(str(base64str)) 
+    
+    imagem_menor = Image.open(io.BytesIO(image))
     imagem_menor.thumbnail(tamanho_imagem)
     imagem_menor.save(caminho)
+    
     return nome_foto
+
 
 # Método para apagar as imagens ao apagar um usuário ou personagem
 def apagar_imagem(diretorio, foto):
