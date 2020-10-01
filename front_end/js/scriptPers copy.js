@@ -126,13 +126,15 @@ const registrar_pers = async() =>  {
 
     //Pegar a img da tela e converter em base64
     var img_file = document.getElementById("campoImagem").files[0];
+    console.log("File: " + img_file);
     if (img_file != undefined){
         console.log("Tem foto!");
-        foto = await readFile(img_file);
+        const foto = await readFile("campoImagem");
+        console.log("Awaited:" + foto);
     }
     else{
         console.log("Não tem foto!");
-        foto = null;
+        const foto = null;
     };
 
     var dados = JSON.stringify({ nome: nome, raca: raca, classe: classe,
@@ -354,23 +356,26 @@ function readURL(input) {
     }
 };
 
+function callback(result){
+    console.log(result);
+    return result;
+   
+};
+
+var base64;
 
 //Ler a imagem adicionada pelo usuário e converter em base64
-async function readFile(file_img) {
+function readFile(file_img) {
 
-    return new Promise((resolve, reject) => {
-        reader = new FileReader();
-        
+    reader = new FileReader();
 
-        reader.onload = () => {
-            let base64 = (reader.result.split(",")[1]);
-            resolve(base64);
-        };
-
-        reader.readAsDataURL(file_img);
-        
-    });
-
+    reader.onload= function () {
+        window.base64 = (reader.result.split(",")[1]);
+        //console.log("Dentro: \n" + window.base64);
+    };
+    console.log("URL: " + reader.readAsDataURL(file));
+    //console.log("Antes return: \n" + base64);
+    return window.base64
 
 };
   

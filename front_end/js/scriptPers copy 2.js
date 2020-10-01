@@ -134,6 +134,8 @@ const registrar_pers = async() =>  {
         console.log("Não tem foto!");
         foto = null;
     };
+    console.log(foto);
+
 
     var dados = JSON.stringify({ nome: nome, raca: raca, classe: classe,
                                 nivel: nivel, forca: forca, destreza: destreza,
@@ -354,7 +356,6 @@ function readURL(input) {
     }
 };
 
-
 //Ler a imagem adicionada pelo usuário e converter em base64
 async function readFile(file_img) {
 
@@ -374,4 +375,3 @@ async function readFile(file_img) {
 
 };
   
-//alert("Return:" + foo());
