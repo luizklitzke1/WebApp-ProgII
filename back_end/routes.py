@@ -83,7 +83,10 @@ def editar_Personagem(id_pers):
         p.carisma = dados["carisma"]
         p.historia = dados["historia"]
         
-        print(p)
+        if dados["foto"] != 'null':
+            apagar_imagem('../front_end/static/imagens_personagens', p.foto)
+            p.foto = salvar_imagem_base64('../front_end/static/imagens_personagens', dados["foto"])
+            
 
         db.session.commit()
         

@@ -54,8 +54,8 @@
       </header>
 
       <!-- Parte principal do site - Conteúdo -->
-      <main role="main" class="container ml- p-0 principal1">
-    <div class="content-section p-4 pl-4 pr-4">
+    <main role="main" class="container ml- p-0 principal1 animated slideInUp">
+    <div class="content-section p-4 pl-4 pr-4 ">
 
         <form method="POST" action="" enctype="multipart/form-data" id="form_editar">
             
@@ -167,9 +167,10 @@
                 <div>
                     <label for="campoImagem">Imagem de referência</label>
                     
+                    <br><img id="test" src="#" /><br>
                     <input type='file' class="valid" onchange="readURL(this);"  id="campoImagem"/>
-                    <img id="test" src="#" /><br>
-                    <small class='text-muted color-red'>Não funcionando no momento - usa a padrão</small>
+
+                    
 
                 </div>
 

@@ -182,7 +182,7 @@ const registrar_pers = async() =>  {
 };
 
 // Código para a edição de um personagem
-function editar_pers()  {
+const  editar_pers = async() =>  { 
 
     let pers_id = document.location.search.replace(/^.*?\=/,'');
     
@@ -199,12 +199,15 @@ function editar_pers()  {
     carisma = $("#campoCarisma").val();
     historia = $("#campoHistoria").val();
 
+
     //Manter a mesma imagem caso nenhuma nova seja informada
-    if ($("#campoImagem").val())
-    {
-        foto = $("#campoImagem").val();
+    var img_file = document.getElementById("campoImagem").files[0];
+    if (img_file != undefined){
+        console.log("Tem foto!");
+        foto = await readFile(img_file);
     }
     else{
+        console.log("Não tem foto!");
         foto = null;
     };
 
@@ -368,10 +371,9 @@ async function readFile(file_img) {
         };
 
         reader.readAsDataURL(file_img);
-        
+    
     });
-
 
 };
   
-//alert("Return:" + foo());
+
