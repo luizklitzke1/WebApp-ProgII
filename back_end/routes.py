@@ -133,6 +133,7 @@ def salvar_imagem_base64(diretorio, base64str):
 
 # Método para apagar as imagens ao apagar um usuário ou personagem
 def apagar_imagem(diretorio, foto):
-    caminho = os.path.join(app.root_path, diretorio, foto)
-    os.remove(caminho)
+    if (foto != "personagem.png"):
+        caminho = os.path.join(app.root_path, diretorio, foto)
+        os.remove(caminho)
 
