@@ -28,7 +28,8 @@ def registrar_Personagem():
         
         novo_Personagem = Personagem(**dados)
         
-        novo_Personagem.foto = salvar_imagem_base64('../front_end/static/imagens_personagens',(dados["foto"]))
+        if (dados["foto"] != None):
+            novo_Personagem.foto = salvar_imagem_base64('../front_end/static/imagens_personagens',(dados["foto"]))
         
         db.session.add(novo_Personagem)
         db.session.commit()
@@ -83,11 +84,13 @@ def editar_Personagem(id_pers):
         p.carisma = dados["carisma"]
         p.historia = dados["historia"]
         
-        if dados["foto"] != 'null':
-            apagar_imagem('../front_end/static/imagens_personagens', p.foto)
-            p.foto = salvar_imagem_base64('../front_end/static/imagens_personagens', dados["foto"])
-            
 
+        if (dados["foto"] != None):
+
+            apagar_imagem('../front_end/static/imagens_personagens', (p.foto))
+            p.foto = salvar_imagem_base64('../front_end/static/imagens_personagens', dados["foto"])
+
+            
         db.session.commit()
         
     except Exception as e:  #Envie mensagem em caso de erro

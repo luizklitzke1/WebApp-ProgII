@@ -166,7 +166,11 @@ const registrar_pers = async() =>  {
             $("#campoCarisma").val("");
             $("#campoHistoria").val("");
 
-            $("#campoFoto").val("");
+            $("#campoImagem").val("");
+            $('#img_pers')
+            .attr('src', " ")
+            .width(0)
+            .height(0);
 
             
         } 
@@ -328,6 +332,8 @@ function povoar_campos(personagem){
     $("#campoSabedoria").val(personagem.sabedoria);
     $("#campoCarisma").val(personagem.carisma);
     $("#campoHistoria").val(personagem.historia);
+
+    $("#img_pers").attr("src","../static/imagens_personagens/"+personagem.foto);
     
 };
 
@@ -348,7 +354,7 @@ function readURL(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
       reader.onload = function (e) {
-        $('#test')
+        $('#img_pers')
           .attr('src', e.target.result)
           .width(200)
           .height(200);

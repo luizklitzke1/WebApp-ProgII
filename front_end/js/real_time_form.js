@@ -278,5 +278,4 @@ $(document).ready(function() {
     //var textEspHist = new RegExp(/^[\p{L}a-zA-Z0-9-!?"'/,. ]+$/);
 
 
-
 });
