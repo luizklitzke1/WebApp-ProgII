@@ -5,15 +5,15 @@
 Aplicação Web com front-end em **JavaScript**,  e lógica do back-end em **Flask** e outras biblioteca em **Python**.
 
 ## Observações
-- Todos os requisitos estação especificados no *requirements.txt*, junto da pasta back-end
-- Os *scritps* utilizados estão nas pastas **js** e **src**, vários sendo vindos direto do MaterialDesignBoostrap e os realmente desenvolvidos do zero são:
+- Todos os requisitos estão especificados no *requirements.txt*, junto da pasta back-end.
+- Os *scritps* utilizados estão nas pastas **js** e **src**, vários vindos direto do **MaterialDesignBoostrap**, porém os realmente desenvolvidos do zero são:
   - **js/scriptPers.js** : Responsável pelas funções gerais e chamadas do back-end.
   - **js/real_time_form.js** : Responsável pela definição e checagem das diretrizes dos *forms*.
   
 
 ## To-do List
 - [x] Lógica back-end
-- [x] Adicionar novos dados pelo front
+- [x] Adicionar novos dados pelo *front-end*
 - [x] Validação dos forms
 - [x] Envio de imagens por Ajax
 - [x] Edição e remoção de dados presentes
