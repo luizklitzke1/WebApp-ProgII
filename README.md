@@ -1,7 +1,12 @@
 # WebApp - Projeto RPG
 
-![Logo](https://i.ibb.co/YXHNnTH/gp2.gif) 
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![made-with-js](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com/)
+[![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/) 
+<br>
+![Logo](https://i.ibb.co/YXHNnTH/gp2.gif)
 
+ 
 Aplicação Web com front-end em **JavaScript**,  e lógica do back-end em **Flask** e outras biblioteca em **Python**.
 
 ## Observações
