@@ -1,9 +1,9 @@
-//Obs: Algumas funções estão fora dessa chamada inicial feita pelo professor devido a chamada em outros documentos!
+//Obs: Algumas funções estão fora dessa chamada inicial do documento devido a natureza de suas chamadas !
 
 $(function() { // quando o documento estiver pronto/carregado
 
 
-    // função para exibir pessoas na tabela
+    // Exibir personagens registrados
     function exibir_personagens() {
         $.ajax({
             url: 'http://localhost:5000/listar_personagens',
@@ -16,14 +16,13 @@ $(function() { // quando o documento estiver pronto/carregado
         });
 
         function listar (personagens) {
-            // Limpa a tabela
+            // Limpa a div com as cards
             $('#cards').empty();
         
-            // Percorre a lista
+            // Percorre a lista recebida
             for (personagem of personagens) { 
 
                 //Cria o  HTML de um Card custom para os dados do personagem
-
                 card = 
                 "<card class='content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1 animated slideInUp' style='max-width: 340px; min-width: 310px; text-align: center;' id='card_"+ personagem.id+ "'> " +
                     "<div class='media-body'>" +
@@ -58,7 +57,8 @@ $(function() { // quando o documento estiver pronto/carregado
                     "<a href = '../templates/editar_personagem.html?pers_id="+personagem.id+"'><button type='button' class='btn btn-mec btn-info btn-m p-2 float-left'  data-toggle='modal'>Editar</button></a>"+
                     "</div>"+
                 "</card>";
-                // Modal para apagar o personagem //
+
+                // Modal separado para apagar o personagem 
                 modal = 
                 "<div class='modal fade ' id='DeleteModal" + personagem.id + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>"+
                 "<div class='modal-dialog modal-m modal-notify modal-danger modal-bg' role='document'>"+
@@ -82,7 +82,7 @@ $(function() { // quando o documento estiver pronto/carregado
                 "</div>"+
                 "</div>"
             
-                // adiciona a linha no corpo da tabela
+                // Adiciona a card e o modal
                 $('#cards').append(card);
                 $('#modals').append(modal);
             }
@@ -90,27 +90,17 @@ $(function() { // quando o documento estiver pronto/carregado
 
     };
     
-    
 
-
-    //Chama listagem caso esteja na página com a tabela
+    //Chama listagem caso esteja na página 
     if($("#cards").length){
         exibir_personagens()
     }; 
 
-    // Código para pesquisa de personagens
-    $(document).on("click", "#btnProcurarPers", function() {
-        nome = $("#campoNome").val();
-        raca = $("#campoRaca").val();
-        classe = $("#campoClasse").val();
-        procurarPers(nome,raca,classe);
 
-    });
-    
 });
 // Código para inclusão de personagens
+// Com execução asincrona devído a um call de await da img
 const registrar_pers = async() =>  {
-
 
     nome = $("#campoNome").val();
     raca = $("#campoRaca").val();
@@ -124,14 +114,13 @@ const registrar_pers = async() =>  {
     carisma = $("#campoCarisma").val();
     historia = $("#campoHistoria").val();
 
-    //Pegar a img da tela e converter em base64
+    //Verifica se alguma imagem foi enviada
     var img_file = document.getElementById("campoImagem").files[0];
     if (img_file != undefined){
-        console.log("Tem foto!");
+        //Converte o BLOB em Base64 para passar por Json 
         foto = await readFile(img_file);
     }
     else{
-        console.log("Não tem foto!");
         foto = null;
     };
 
@@ -166,6 +155,7 @@ const registrar_pers = async() =>  {
             $("#campoCarisma").val("");
             $("#campoHistoria").val("");
 
+            //Limpa o campo e preview da img
             $("#campoImagem").val("");
             $('#img_pers')
             .attr('src', " ")
@@ -186,8 +176,10 @@ const registrar_pers = async() =>  {
 };
 
 // Código para a edição de um personagem
+// Também execução asincrona devido a conversão de img
 const  editar_pers = async() =>  { 
 
+    //Pega o ID pelo link 
     let pers_id = document.location.search.replace(/^.*?\=/,'');
     
     //Pegar os dados dos campos
@@ -207,11 +199,10 @@ const  editar_pers = async() =>  {
     //Manter a mesma imagem caso nenhuma nova seja informada
     var img_file = document.getElementById("campoImagem").files[0];
     if (img_file != undefined){
-        console.log("Tem foto!");
+        //Processamento da img informada para Base64
         foto = await readFile(img_file);
     }
     else{
-        console.log("Não tem foto!");
         foto = null;
     };
 
@@ -271,6 +262,7 @@ function apagarPers(id_pers){
 
 //Editar o personagem baseado no ID
 function dados_pers(tipo){
+    //Pega o ID através do link
     let pers_id = document.location.search.replace(/^.*?\=/,'');
     $.ajax({
         url: 'http://localhost:5000/dados_pers/'+pers_id,
@@ -278,6 +270,7 @@ function dados_pers(tipo){
         dataType: 'json',
         success: function(personagem){
             //Verifica se deseja editar ou visualizar na página específica
+            //Feito com um teste de tipo para facilitar callbacks e evitar muitas async
             if (tipo == "edit"){
                 povoar_campos(personagem);
             }
@@ -297,7 +290,10 @@ function dados_pers(tipo){
 
 //Mostras os dados de um pers especifico em uma pag
 function mostrar_especifico(personagem){
+
+    //Adiciona o nome ao title da pag
     document.title += (" " + personagem.nome);
+
     $("#nome").text(personagem.nome);
     $("#raca").text(personagem.raca);
     $("#classe").text(personagem.classe);
@@ -315,6 +311,7 @@ function mostrar_especifico(personagem){
     $("#img_pers").attr("src","../static/imagens_personagens/"+personagem.foto);
     $("#datacriacao").text(personagem.data_criacao);
 
+    //Adicionar ID ao botão de edit
     $("#edit_btn").attr("href",("../templates/editar_personagem.html?pers_id="+personagem.id));
     
 };
@@ -339,8 +336,8 @@ function povoar_campos(personagem){
 
 //Adicionar os dados de delete do personagem em sua página esp
 function apagarEsp() {
+    //Pega o ID através do link
     let pers_id = document.location.search.replace(/^.*?\=/,'');
-
 
     //Pega o personagem em si e muda o nome no modal
     dados_pers("delete_esp");
@@ -369,7 +366,6 @@ async function readFile(file_img) {
 
     return new Promise((resolve, reject) => {
         reader = new FileReader();
-        
 
         reader.onload = () => {
             let base64 = (reader.result.split(",")[1]);
