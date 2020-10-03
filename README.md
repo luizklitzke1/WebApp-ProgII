@@ -22,7 +22,7 @@ Aplicação Web com front-end em **JavaScript**,  e lógica do back-end em **Fla
 - [x] Validação dos forms
 - [x] Envio de imagens por Ajax
 - [x] Edição e remoção de dados presentes
-- [ ] Limpeza dos arquivos e funções
+- [x] Limpeza dos arquivos e funções
 
 
 ## Imagens do projeto
