@@ -59,6 +59,7 @@ $(function() { // quando o documento estiver pronto/carregado
                 "</card>";
 
                 // Modal separado para apagar o personagem 
+                // Mais fácil do que ficar mudando com cada clique, e remover, como feito no esp.
                 modal = 
                 "<div class='modal fade ' id='DeleteModal" + personagem.id + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>"+
                 "<div class='modal-dialog modal-m modal-notify modal-danger modal-bg' role='document'>"+
@@ -246,7 +247,6 @@ function apagarPers(id_pers){
                 window.location.href = "index.html";
                 alert("Personagem removido com sucesso!\nConfirme para voltar para a Home..."); 
             }
-            
             
         }
             else {
