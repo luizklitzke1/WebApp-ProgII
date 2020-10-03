@@ -28,6 +28,7 @@ def registrar_Personagem():
         
         novo_Personagem = Personagem(**dados)
         
+        #Testa se foi informada alguma foto, ou mantém a padrão
         if (dados["foto"] != None):
             novo_Personagem.foto = salvar_imagem_base64('../front_end/static/imagens_personagens',(dados["foto"]))
         
@@ -71,7 +72,7 @@ def editar_Personagem(id_pers):
         
         p = Personagem.query.get_or_404(id_pers)
         print(p)
-        #Tentei fazer com definição direta, mas a edição tem que ser um dado por vez
+
         p.nome = dados["nome"]
         p.raca = dados["raca"]
         p.classe = dados["classe"]  
@@ -84,12 +85,11 @@ def editar_Personagem(id_pers):
         p.carisma = dados["carisma"]
         p.historia = dados["historia"]
         
-
+        #Se foi informada uma novo imagem, ou apenas manter a antiga
         if (dados["foto"] != None):
 
             apagar_imagem('../front_end/static/imagens_personagens', (p.foto))
             p.foto = salvar_imagem_base64('../front_end/static/imagens_personagens', dados["foto"])
-
             
         db.session.commit()
         
@@ -133,6 +133,8 @@ def salvar_imagem_base64(diretorio, base64str):
 
 # Método para apagar as imagens ao apagar um usuário ou personagem
 def apagar_imagem(diretorio, foto):
+    
+    #Verifica se não é a imagem padrão
     if (foto != "personagem.png"):
         caminho = os.path.join(app.root_path, diretorio, foto)
         os.remove(caminho)

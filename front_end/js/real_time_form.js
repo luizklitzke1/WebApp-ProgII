@@ -19,7 +19,6 @@ $(document).ready(function() {
     
     //Torna todos os valores válidos caso estiver apenas editando
     if ($("#form_editar").length){
-        //Aparentemente não tem como definir os valores com loop
         formValid = { 
             nome : true,
             raca: true,
@@ -35,6 +34,8 @@ $(document).ready(function() {
         };
         checkForm();
     }
+
+    //Verifica se todos os campos estão válidos
     function checkForm(){
         var check = true;
         $.each(formValid, function(index, element) {
@@ -43,7 +44,7 @@ $(document).ready(function() {
             };
         });
 
-        //Tive que fazer isso em outra variável pois só returne dentro se mostrava inconsistente
+        //Fora do loop para evitar problemas com sync 
         if (check){
             //console.log("Formulário validado!");
             $('#btIncluirPersonagem').removeAttr('disabled');
@@ -97,7 +98,7 @@ $(document).ready(function() {
     $("#campoRaca").on('input', function() {
         var input= $(this); 
         if (input.val().length <3){
-            msg("#inv-raca","O raca deve ter no mínimo 3 caracteres!");
+            msg("#inv-raca","O raça deve ter no mínimo 3 caracteres!");
             formValid["raca"] = false;
         }
         else {
@@ -122,7 +123,7 @@ $(document).ready(function() {
     $("#campoClasse").on('input', function() {
         var input= $(this);  
         if (input.val().length <3){
-            msg("#inv-classe","O classe deve ter no mínimo 3 caracteres!");
+            msg("#inv-classe","A classe deve ter no mínimo 3 caracteres!");
             formValid["classe"] = false;
         }
         else {

@@ -34,7 +34,8 @@ class Personagem(db.Model):
             "carisma": self.carisma, "historia": self.historia,
             "data_criacao": self.data_criacao, "foto": self.foto,
         }
-        
+
+#Cria os valores para teste, caso executado esse modulo diretamente
 if __name__ == "__main__":
     
     #Apaga o db, se já existir

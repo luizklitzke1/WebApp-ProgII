@@ -74,7 +74,7 @@ $(function() { // quando o documento estiver pronto/carregado
                     "</div>"+
 
                     "<div class='modal-footer flex-center'>"+
-                        "<p class='p-2 m-2'>Uma vez apagado, esse personagem não podera mais ser recuperado!</p>"+
+                        "<p class='p-2 m-2'>Uma vez apagado, esse personagem não poderá mais ser recuperado!</p>"+
                         "<button type='button' class='btn btn-outline-danger' data-dismiss='modal' onClick='apagarPers(" + personagem.id + ");'>Apagar </button>"+
                         "<a type='button' class='btn  btn-danger waves-effect' data-dismiss='modal'>Não</a>"+
                     "</div>"+
