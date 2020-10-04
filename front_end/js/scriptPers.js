@@ -268,21 +268,24 @@ function dados_pers(tipo){
         url: 'http://localhost:5000/dados_pers/'+pers_id,
         method: 'GET',
         dataType: 'json',
-        success: function(personagem){
+        success: function(resposta){
             //Verifica se deseja editar ou visualizar na página específica
             //Feito com um teste de tipo para facilitar callbacks e evitar muitas async
-            if (tipo == "edit"){
-                povoar_campos(personagem);
+            if (resposta.resultado == "erro"){
+                alert("Personagem não econtrado!");
+            }
+            else if (tipo == "edit"){
+                povoar_campos(resposta);
             }
             else if (tipo == "delete_esp"){
-                $("#pers_nome").text(personagem.nome);
+                $("#pers_nome").text(resposta.nome);
             }
             else{
-                mostrar_especifico(personagem);
+                mostrar_especifico(resposta);
             };
         },
         error: function() {
-        alert("Erro ao receber os dados do personagem, verifique o backend");
+            alert("Erro ao receber os dados do personagem, verifique o backend");
         }
     });
   
