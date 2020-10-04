@@ -11,7 +11,7 @@ $(function() { // quando o documento estiver pronto/carregado
             dataType: 'json',
             success: listar, 
             error: function() {
-            alert("Erro ao ler dados, verifique o backend");
+            alert("Erro ao ler dados, verifique o backend!");
             }
         });
 
@@ -176,9 +176,6 @@ const registrar_pers = async() =>  {
         };
 };
 
-function a(){
-    return "a";
-}
 
 // Código para a edição de um personagem
 // Também execução asincrona devido a conversão de img
@@ -278,7 +275,8 @@ function dados_pers(tipo){
             //Verifica se deseja editar ou visualizar na página específica
             //Feito com um teste de tipo para facilitar callbacks e evitar muitas async
             if (resposta.resultado == "erro"){
-                alert("Personagem não econtrado!");
+                alert("Personagem não encontrado! \nConfirme para voltar para a Home...");
+                window.location.href = "index.html";
             }
             else if (tipo == "edit"){
                 povoar_campos(resposta);
@@ -291,7 +289,7 @@ function dados_pers(tipo){
             };
         },
         error: function() {
-            alert("Erro ao receber os dados do personagem, verifique o backend");
+            alert("Erro ao receber os dados do personagem, verifique o backend!");
         }
     });
   
