@@ -175,7 +175,7 @@
 
                 <!-- Enviar -->
                 <div class="form-group text-right">
-                    <button id="btIncluirPersonagem" type="button" class="btn btn-success" onClick="registrar_pers();" disabled>Registrar</button>
+                    <button id="btIncluirPersonagem" type="button" class="btn btn-success" onClick="if (checkForm()) {registrar_pers()};" disabled>Registrar</button>
                 </div>
              
             </fieldset>
@@ -202,8 +202,9 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 <!-- código específico do front-end -->
-<script src="../js/scriptPers.js"></script>
 <script src="../js/real_time_form.js"></script>
+<script src="../js/scriptPers.js"></script>
+
  
 </body>
 </html>

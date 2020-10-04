@@ -176,9 +176,14 @@ const registrar_pers = async() =>  {
         };
 };
 
+function a(){
+    return "a";
+}
+
 // Código para a edição de um personagem
 // Também execução asincrona devido a conversão de img
 const  editar_pers = async() =>  { 
+
 
     //Pega o ID pelo link 
     let pers_id = document.location.search.replace(/^.*?\=/,'');
@@ -225,6 +230,7 @@ const  editar_pers = async() =>  {
             alert("Ocorreu um erro ao editar esse personagem!");
         }, 
     });
+    
 };
 
 

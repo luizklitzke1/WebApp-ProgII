@@ -1,7 +1,5 @@
 //Script para declaração e controle da validação dos forumários em tempo real
 
-$(document).ready(function() {
-
     //Variável que garante que todos os campos sejam válidos 
     var formValid = {
         nome : false,
@@ -46,12 +44,12 @@ $(document).ready(function() {
 
         //Fora do loop para evitar problemas com sync 
         if (check){
-            //console.log("Formulário validado!");
             $('#btIncluirPersonagem').removeAttr('disabled');
+            return true;
         }
         else{
-            //console.log("Deu ruim!");
             $('#btIncluirPersonagem').attr('disabled', true);
+            return false;
         }
         
         };
@@ -279,4 +277,3 @@ $(document).ready(function() {
     //var textEspHist = new RegExp(/^[\p{L}a-zA-Z0-9-!?"'/,. ]+$/);
 
 
-});
