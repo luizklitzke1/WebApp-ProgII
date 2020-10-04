@@ -11,6 +11,7 @@ Aplicação Web com front-end em **JavaScript**,  e lógica do back-end em **Fla
 
 ## Observações
 - Todos os requisitos estão especificados no *requirements.txt*, junto da pasta back-end.
+- Vários arquivos de estilo **CSS** são utilizados, porém os principais estão localizados em **/static/style.css**.
 - Os *scritps* utilizados estão nas pastas **js** e **src**, vários vindos direto do **MaterialDesignBoostrap**, porém os realmente desenvolvidos do zero são:
   - **js/scriptPers.js** : Responsável pelas funções gerais e chamadas do back-end.
   - **js/real_time_form.js** : Responsável pela definição e checagem das diretrizes dos *forms*.
