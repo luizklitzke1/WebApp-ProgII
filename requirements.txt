@@ -4,8 +4,3 @@ Pillow
 datetime 
 flask_bcrypt
 flask_cors
-base64
-os
-io
-
-
