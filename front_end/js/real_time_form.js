@@ -96,7 +96,7 @@
     $("#campoRaca").on('input', function() {
         var input= $(this); 
         if (input.val().length <3){
-            msg("#inv-raca","O raça deve ter no mínimo 3 caracteres!");
+            msg("#inv-raca","A raça deve ter no mínimo 3 caracteres!");
             formValid["raca"] = false;
         }
         else {
