@@ -35,7 +35,7 @@ Demonstração dos *cards* com dados dos personagens.
 
 ### Tela de Registro
 Formulário de registro e edição dos personagens, com validação em tempo real.
-![Tela de Registro](https://i.ibb.co/NKpcq8G/validacao-registro.png)
+![Tela de Registro](https://i.ibb.co/YLj25nq/validacao-registro.png)
 
 ### Remoção de dados
 Deletar qualquer personagem, com um *modal* para confirmação.
