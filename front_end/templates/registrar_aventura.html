@@ -44,7 +44,9 @@
               <div class="navbar-nav mr-auto">
                 <a class="nav-item nav-link" href="index.html">Home</a>
                 
-                <a class="nav-item nav-link" href="registrar_personagem.html">Registrar Aventura</a>
+                <a class="nav-item nav-link" href="registrar_personagem.html">Registrar Personagem</a>
+
+                <a class="nav-item nav-link" href="registrar_aventura.html">Registrar Aventura</a>
 
               </div>
 
@@ -78,7 +80,7 @@
                         <label for="campoNomeMestre">Nome do Mestre</label>
 
                         <input type="text" class="form-control form-control-lg invalid" id="campoNomeMestre" required >
-                        <span class="invalid-feedback" id="inv-nomemestre">
+                        <span class="invalid-feedback" id="inv-nome_mestre">
                         </span>
                     </div>
 
@@ -116,7 +118,7 @@
 
                 <!-- Enviar -->
                 <div class="form-group text-right">
-                    <button id="btIncluirPersonagem" type="button" class="btn btn-success" onClick="if (checkForm()) {registrar_pers()};" disabled>Registrar</button>
+                    <button id="btIncluirAventura" type="button" class="btn btn-success" onClick="if (checkForm()) {registrar_adv()};" disabled>Registrar</button>
                 </div>
              
             </fieldset>
@@ -143,7 +145,7 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 <!-- código específico do front-end -->
-<script src="../js/real_time_form.js"></script>
+<script src="../js/real_time_form_adv.js"></script>
 <script src="../js/scriptPers.js"></script>
 
  
