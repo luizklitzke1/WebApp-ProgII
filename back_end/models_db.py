@@ -109,7 +109,7 @@ if __name__ == "__main__":
         tematica = "Classica",
         resumo = """Scourge of the Howling Horde is a generic setting adventure module for the 3.5 edition 
         of the Dungeons & Dragons roleplaying game. The adventure is designed for 1st level characters. It contains a 32-page adventure.""",
-        foto = "7a03cfe14c20c52bef"
+        foto = "7a03cfe14c20c52bef.png"
     )
     
     
@@ -123,7 +123,7 @@ if __name__ == "__main__":
         head of a great army to conquer and build a kingdom on the Material Plane, with allies among the drow, the illithids, and fellow natives of the evil Outer Planes. 
         The adventure begins when the player characters investigate events involving local craftsmen, following the trail of clues to the city of Rigus, which leads into the 
         plane of Acheron. """,
-        foto = "20a9e81435f9fa687d"
+        foto = "20a9e81435f9fa687d.png"
     )
     
     
@@ -145,7 +145,7 @@ if __name__ == "__main__":
                     amado por um grupo seleto, porém temido por todos.
                     Porta sua característica arma de duas mão, famosa por sua letalidade em ataques diretos, 
                     além de sua incrível capacidade de intimidação.""", 
-                    foto="d0912a5bfa2c778266")
+                    foto="d0912a5bfa2c778266.png")
     
     p2 = Personagem(nome="Clint com o Anão", 
                     raca="Humano e Anão",
@@ -161,22 +161,9 @@ if __name__ == "__main__":
                     Formado por uma série de fatos improváveis, tal dupla se concretiza como sérios 
                     contratantes da região mais hostil e selvagem da Fronteira
                     """, 
-                    foto="564424e3928ba1c88a")
+                    foto="564424e3928ba1c88a.png")
     
-    p3 = Personagem(nome="Mangle", 
-                    raca="Animatronic",
-                    classe="Monstro	", 
-                    nivel=65,
-                    forca=12, 
-                    destreza=22,
-                    constituicao=13, 
-                    inteligencia=11,
-                    sabedoria=7, 
-                    carisma=6,
-                    historia="""QUer comer pizza? Tenha cuidado para não ser comido também!.""", 
-                    foto="c34cb551ebee1df255")
-    
-    p4 = Personagem(nome="Hulk Agiota", 
+    p3 = Personagem(nome="Hulk Agiota", 
                     raca="Hulk	",
                     classe="Agiota	", 
                     nivel=23,
@@ -192,9 +179,9 @@ if __name__ == "__main__":
                     fôlego e quando finalmente você se aproxima da superfície para enfim respirar, é subitamente puxado de 
                     volta para fundo. A falsa esperança que vem acompanhada de terror, sofrimento e acima de tudo, arrependimento.
                     Por isso lembre-se, uma dívida com o Hulk Agiota, NUNCA será esquecida.""", 
-                    foto="1a9460c091846ad35f")
+                    foto="1a9460c091846ad35f.png")
     
-    p5 = Personagem(nome="Jarbas do Sul", 
+    p4 = Personagem(nome="Jarbas do Sul", 
                     raca="Humano",
                     classe="Sulista	", 
                     nivel=12,
@@ -206,9 +193,9 @@ if __name__ == "__main__":
                     carisma=15,
                     historia="""Grandíssimo mestre da arte da sinuca, porém superado devido ao seu ego e pressa, sendo a 
                     contrapartida perfeita para o mestre de Mauá""", 
-                    foto="20a9de87e4f9fa687d")
+                    foto="20a9de87e4f9fa687d.png")
     
-    p6 = Personagem(nome="Deivid Elton", 
+    p5 = Personagem(nome="Deivid Elton", 
                     raca="Humano?",
                     classe="Deusvis", 
                     nivel=23,
@@ -221,7 +208,7 @@ if __name__ == "__main__":
                     historia="""Sua origem ainda é incerta, porém sua fama o precede.
                     Sua chegada nunca é anunciada formalmente, porém Deivola pode ser sentido a 21cm de distância 
                     por vários sentidos distintos.""", 
-                    foto="7a03cfee7a20c52bef")
+                    foto="7a03cfee7a20c52bef.png")
     
     
     db.session.add(p1)
@@ -229,9 +216,11 @@ if __name__ == "__main__":
     db.session.add(p3)
     db.session.add(p4)
     db.session.add(p5)
-    db.session.add(p6)
     db.session.commit()
     
-    # Print de um Personagem normal e em Json
+    # Print de um Personagem e Aventura normal e em Json
     print(p3)
     print(p3.json())
+    
+    print(a1)
+    print(a1.json())
