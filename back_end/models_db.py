@@ -61,6 +61,34 @@ class Aventura(db.Model):
             "resumo": self.resumo, "data_criacao": self.data_criacao,
             "foto": self.foto,
         }
+        
+#Classe para os dados de um registro de presença
+class Presenca(db.Model):
+    id_presenc = db.Column(db.Integer, primary_key=True)
+    nome_jogador = db.Column(db.String(33), nullable=False)
+    observacao = db.Column(db.Text, nullable=False, default='Nenhuma observação informada.')
+    data_presenca = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    #Chave estrangeira do personagem
+    pers_id = db.Column(db.Integer, db.ForeignKey(Personagem.id_pers), nullable = False)
+    personagem = db.relationship("Personagem")
+    #Chave estrangeira da aventura
+    adv_id = db.Column(db.Integer, db.ForeignKey(Aventura.id_avent), nullable = False)
+    aventura = db.relationship("Aventura")
+    
+    
+    #Representação em String
+    def __repr__(self):
+        return f"ID: '{self.id_presenc}', Nome do jogador: '{self.nome_jogador}', Observação: '{self.observacao}', Data: '{self.data_presenca}'"
+
+    #Expressão da classe em Json - todos os dados para conversão
+    def json(self):
+        return{
+            "id_presenc": self.id_presenc, "nome_jogador": self.nome_jogador,
+            "observacao": self.observacao, "data_presenca":self.data_presenca,
+            "personagem": self.personagem.json(),
+            "aventura": self.aventura.json(),
+        }
 
 #Cria os valores para teste, caso executado esse modulo diretamente
 if __name__ == "__main__":
@@ -194,6 +222,7 @@ if __name__ == "__main__":
                     Sua chegada nunca é anunciada formalmente, porém Deivola pode ser sentido a 21cm de distância 
                     por vários sentidos distintos.""", 
                     foto="7a03cfee7a20c52bef")
+    
     
     db.session.add(p1)
     db.session.add(p2)

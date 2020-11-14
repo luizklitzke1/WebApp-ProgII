@@ -1,4 +1,4 @@
-from models_db import Personagem, Aventura
+from models_db import Personagem, Aventura, Presenca
 from PIL import Image
 import base64
 from config import *
