@@ -24,15 +24,15 @@ $(function() { // quando o documento estiver pronto/carregado
 
                 //Cria o  HTML de um Card custom para os dados do personagem
                 card = 
-                "<card class='content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1 animated slideInUp' style='max-width: 340px; min-width: 310px; text-align: center;' id='card_"+ personagem.id+ "'> " +
+                "<card class='content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1 animated slideInUp' style='max-width: 340px; min-width: 310px; text-align: center;' id='card_"+ personagem.id_pers+ "'> " +
                     "<div class='media-body'>" +
                         "<div class='article-metadata'>" +
                             "<span >Raça: " + personagem.raca + "</span>" + 
                             "<small class='text-muted ml-1'>Classe: " + personagem.classe + "</small>" + 
                         "</div>" +
-                        "<h2> <a class='article-title' href='../templates/personagem.html?pers_id="+personagem.id+"'>" + personagem.nome + "</a> </h2>" +
+                        "<h2> <a class='article-title' href='../templates/personagem.html?pers_id="+personagem.id_pers+"'>" + personagem.nome + "</a> </h2>" +
                         "<p class='article-content'>Nível: " + personagem.nivel + "</p>" +
-                        "<a class='article-title' href='../templates/personagem.html?pers_id="+personagem.id+"'>"+
+                        "<a class='article-title' href='../templates/personagem.html?pers_id="+personagem.id_pers+"'>"+
                             "<img class='account-img' src='../static/imagens_personagens/" + personagem.foto +"' ></a>" + 
                     "</div>" + 
                     
@@ -53,15 +53,15 @@ $(function() { // quando o documento estiver pronto/carregado
                             "</span> </div> </div>"+
                     "<br><small class='text-muted'>Criado em: " + personagem.data_criacao + "</small>" +
                     "<div>" +
-                    "<button type='button' class='btn btn-mec btn-danger btn-m p-2 float-right' data-toggle='modal' data-target='#DeleteModal"+ personagem.id + "'>Apagar</button>"+
-                    "<a href = '../templates/editar_personagem.html?pers_id="+personagem.id+"'><button type='button' class='btn btn-mec btn-info btn-m p-2 float-left'  data-toggle='modal'>Editar</button></a>"+
+                    "<button type='button' class='btn btn-mec btn-danger btn-m p-2 float-right' data-toggle='modal' data-target='#DeleteModal"+ personagem.id_pers + "'>Apagar</button>"+
+                    "<a href = '../templates/editar_personagem.html?pers_id="+personagem.id_pers+"'><button type='button' class='btn btn-mec btn-info btn-m p-2 float-left'  data-toggle='modal'>Editar</button></a>"+
                     "</div>"+
                 "</card>";
 
                 // Modal separado para apagar o personagem 
                 // Mais fácil do que ficar mudando com cada clique, e remover, como feito no esp.
                 modal = 
-                "<div class='modal fade ' id='DeleteModal" + personagem.id + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>"+
+                "<div class='modal fade ' id='DeleteModal" + personagem.id_pers + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>"+
                 "<div class='modal-dialog modal-m modal-notify modal-danger modal-bg' role='document'>"+
 
                     "<div class='modal-content text-center'>"+
@@ -76,7 +76,7 @@ $(function() { // quando o documento estiver pronto/carregado
 
                     "<div class='modal-footer flex-center'>"+
                         "<p class='p-2 m-2'>Uma vez apagado, esse personagem não poderá mais ser recuperado!</p>"+
-                        "<button type='button' class='btn btn-outline-danger' data-dismiss='modal' onClick='apagarPers(" + personagem.id + ");'>Apagar </button>"+
+                        "<button type='button' class='btn btn-outline-danger' data-dismiss='modal' onClick='apagarPers(" + personagem.id_pers + ");'>Apagar </button>"+
                         "<a type='button' class='btn  btn-danger waves-effect' data-dismiss='modal'>Não</a>"+
                     "</div>"+
                     "</div>"+
@@ -319,7 +319,7 @@ function mostrar_especifico(personagem){
     $("#datacriacao").text(personagem.data_criacao);
 
     //Adicionar ID ao botão de edit
-    $("#edit_btn").attr("href",("../templates/editar_personagem.html?pers_id="+personagem.id));
+    $("#edit_btn").attr("href",("../templates/editar_personagem.html?pers_id="+personagem.id_pers));
     
 };
 

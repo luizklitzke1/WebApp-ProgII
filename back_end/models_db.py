@@ -1,7 +1,8 @@
 from config import *
 
+#Classe para os dados dos Personagens
 class Personagem(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id_pers = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150), nullable=False)
     raca = db.Column(db.String(33), nullable=False)
     classe = db.Column(db.String(33), nullable=False)
@@ -26,13 +27,39 @@ class Personagem(db.Model):
     #Expressão da classe em Json - todos os dados para conversão
     def json(self):
         return{
-            "id": self.id, "nome": self.nome,
+            "id_pers": self.id_pers, "nome": self.nome,
             "raca": self.raca, "classe":self.classe,
             "nivel": self.nivel, "forca": self.forca,
             "destreza": self.destreza, "constituicao": self.constituicao,
             "inteligencia": self.inteligencia, "sabedoria": self.sabedoria,
             "carisma": self.carisma, "historia": self.historia,
             "data_criacao": self.data_criacao, "foto": self.foto,
+        }
+        
+
+#Classe para os dados de uma aventura
+class Aventura(db.Model):
+    id_avent = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(150), nullable=False)
+    nome_mestre = db.Column(db.String(33), nullable=False)
+    tematica = db.Column(db.String(33), nullable=False)
+    resumo = db.Column(db.Text, nullable=False, default='Nenhuma resumo informado.')
+    data_criacao = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    #Endereço em string para o arquivo salvo em Static - gera ao registrar -
+    foto = db.Column(db.String(20), nullable=False, default='personagem.png')
+
+    #Representação em String
+    def __repr__(self):
+        return f"Nome: '{self.nome}', Nome do mestre: '{self.nome_mestre}', Temática: '{self.tematica}', Criação: '{self.data_criacao}'"
+
+    #Expressão da classe em Json - todos os dados para conversão
+    def json(self):
+        return{
+            "id_avent": self.id_avent, "nome": self.nome,
+            "nome_mestre": self.nome_mestre, "tematica":self.tematica,
+            "resumo": self.resumo, "data_criacao": self.data_criacao,
+            "foto": self.foto,
         }
 
 #Cria os valores para teste, caso executado esse modulo diretamente
@@ -45,6 +72,36 @@ if __name__ == "__main__":
         
     db.create_all()
 
+
+    # Aventuras de teste
+    
+    a1 = Aventura(
+        nome="Scourge of the Howling Horde",
+        nome_mestre = "Gwendolyn F.M. Kestrel",
+        tematica = "Classica",
+        resumo = """Scourge of the Howling Horde is a generic setting adventure module for the 3.5 edition 
+        of the Dungeons & Dragons roleplaying game. The adventure is designed for 1st level characters. It contains a 32-page adventure.""",
+        foto = "7a03cfe14c20c52bef"
+    )
+    
+    
+    a2 = Aventura(
+        nome="Lord of the Iron Fortress",
+        nome_mestre = "	Andy Collins",
+        tematica = "Classica - Customizada",
+        resumo = """According to the adventure background provided, the plot involves the Blade of Fiery Might once wielded by the sultan of the efreet, 
+        which was destroyed and scattered across the planes. Imperagon, a half-duergar/half-dragon and ruler of the Iron Fortress of Zandikar on the plane of Acheron, 
+        has been reforging the sword using the trapped spirits of the greatest forgemasters of history as slave labor. Imperagon intends to wield the ancient blade at the 
+        head of a great army to conquer and build a kingdom on the Material Plane, with allies among the drow, the illithids, and fellow natives of the evil Outer Planes. 
+        The adventure begins when the player characters investigate events involving local craftsmen, following the trail of clues to the city of Rigus, which leads into the 
+        plane of Acheron. """,
+        foto = "20a9e81435f9fa687d"
+    )
+    
+    
+    db.session.add(a1)
+    db.session.add(a2)
+    
     # Personagens de teste
     p1 = Personagem(nome="Onerom", 
                     raca="Humano",
