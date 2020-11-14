@@ -47,7 +47,7 @@ class Aventura(db.Model):
     data_criacao = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     #Endereço em string para o arquivo salvo em Static - gera ao registrar -
-    foto = db.Column(db.String(20), nullable=False, default='personagem.png')
+    foto = db.Column(db.String(20), nullable=False, default='aventura.png')
 
     #Representação em String
     def __repr__(self):

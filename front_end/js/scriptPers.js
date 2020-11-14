@@ -384,5 +384,66 @@ async function readFile(file_img) {
     });
 
 };
+
+
+// Código para inclusão de aventuras
+// Com execução asincrona devído a um call de await da img
+const registrar_adv = async() =>  {
+
+    nome = $("#campoNome").val();
+    nome_mestre = $("#campoNomeMestre").val();
+    tematica = $("#campoTematica").val();
+    resumo = $("#campoResumo").val();
+
+    //Verifica se alguma imagem foi enviada
+    var img_file = document.getElementById("campoImagem").files[0];
+    if (img_file != undefined){
+        //Converte o BLOB em Base64 para passar por Json 
+        foto = await readFile(img_file);
+    }
+    else{
+        foto = null;
+    };
+
+    var dados = JSON.stringify({ nome: nome, nome_mestre: nome_mestre, 
+                                 tematica: tematica,  resumo: resumo, foto: foto});
+
+    // Enivo dos dados ao back-end para a inclusão
+    $.ajax({
+        url: 'http://localhost:5000/registrar_aventura',
+        type: 'POST',
+        dataType: 'json', contentType: 'application/json',
+        data: dados, 
+        success: aventuraIncluida, 
+        error: erroAoIncluir
+
+    });
+    function aventuraIncluida (retorno) {
+        if (retorno.resultado == "ok") { 
+            alert("Aventura " + nome + " registrada com sucesso!");
+            // Limpar os campos
+            $("#campoNome").val("");
+            $("#campoNomeMestre").val("");
+            $("#campoTematica").val("");
+            $("#campoResumo").val("");
+
+            //Limpa o campo e preview da img
+            $("#campoImagem").val("");
+            $('#img_pers')
+            .attr('src', " ")
+            .width(0)
+            .height(0);
+
+        } 
+        else {
+            // informar mensagem de erro
+            alert(retorno.resultado + ":" + retorno.detalhes);
+        };            
+    };
+        function erroAoIncluir (retorno) {
+            // informar mensagem de erro
+            alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes);
+        };
+};
   
 

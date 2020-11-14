@@ -139,3 +139,27 @@ def apagar_imagem(diretorio, foto):
         caminho = os.path.join(app.root_path, diretorio, foto)
         os.remove(caminho)
 
+
+# Rota para registrar aventuras
+@app.route("/registrar_aventura", methods=['POST'])
+def registrar_Aventura():
+    
+    resposta = jsonify({"resultado":"ok","detalhes": "ok"})
+    dados = request.get_json()
+    try: #Tenta fazer o registro
+        
+        nova_Aventura = Aventura(**dados)
+        
+        #Testa se foi informada alguma foto, ou mantém a padrão
+        if (dados["foto"] != None):
+            nova_Aventura.foto = salvar_imagem_base64('../front_end/static/imagens_aventuras',(dados["foto"]))
+        
+        db.session.add(nova_Aventura)
+        db.session.commit()
+        
+    except Exception as e: 
+        resposta = jsonify({"resultado":"erro","detalhes":str(e)})
+        
+    resposta.headers.add("Access-Control-Allow-Origin","*")
+    
+    return resposta
