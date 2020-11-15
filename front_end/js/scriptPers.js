@@ -9,15 +9,15 @@ $(function() { // quando o documento estiver pronto/carregado
             url: 'http://localhost:5000/listar_personagens',
             method: 'GET',
             dataType: 'json',
-            success: listar, 
+            success: listar_pers, 
             error: function() {
             alert("Erro ao ler dados, verifique o backend!");
             }
         });
 
-        function listar (personagens) {
+        function listar_pers (personagens) {
             // Limpa a div com as cards
-            $('#cards').empty();
+            $('#cards_pers').empty();
         
             // Percorre a lista recebida
             for (personagem of personagens) { 
@@ -84,7 +84,7 @@ $(function() { // quando o documento estiver pronto/carregado
                 "</div>"
             
                 // Adiciona a card e o modal
-                $('#cards').append(card);
+                $('#cards_pers').append(card);
                 $('#modals').append(modal);
             }
         }
@@ -93,8 +93,89 @@ $(function() { // quando o documento estiver pronto/carregado
     
 
     //Chama listagem caso esteja na página 
-    if($("#cards").length){
-        exibir_personagens()
+    if($("#cards_pers").length){
+        exibir_personagens();
+
+    }; 
+
+
+    // Exibir aventuras registrados
+    function exibir_aventuras() {
+        $.ajax({
+            url: 'http://localhost:5000/listar_aventuras',
+            method: 'GET',
+            dataType: 'json',
+            success: listar_aventuras, 
+            error: function() {
+            alert("Erro ao ler dados, verifique o backend!");
+            }
+    });
+
+        function listar_aventuras (aventuras) {
+            // Limpa a div com as cards
+            $('#cards_advs').empty();
+        
+            // Percorre a lista recebida
+            for (aventura of aventuras) { 
+
+                //Cria o  HTML de um Card custom para os dados do personagem
+                card = 
+                "<card class='content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1 animated slideInUp' style='max-width: 340px; min-width: 310px; text-align: center;' id='card_"+ personagem.id_pers+ "'> " +
+                    "<div class='media-body'>" +
+                        "<h2> <a class='article-title' href='../templates/aventura.html?adv_id="+aventura.id_adv+"'>" + aventura.nome + "</a> </h2>" +
+                        "<a class='article-title' href='../templates/aventura.html?adv_id="+aventura.id_adv+"'>"+
+                            "<img class='account-img' src='../static/imagens_aventuras/" + aventura.foto +"' ></a>" + 
+                    "</div>" + 
+                    "<div class='article-metadata'>" +
+                                "<span > Temática: " + aventura.tematica + "</span> <br>" + 
+                                "<small class='text-muted ml-1'>Nome do mestre: " + aventura.nome_mestre + "</small>" + 
+                            "</div>" +
+                    
+                    " <div class='container mt-4'> "+
+                    "<br><small class='text-muted'>Criada em: " + personagem.data_criacao + "</small>" +
+                    "<div>" +
+                    "<button type='button' class='btn btn-mec btn-danger btn-m p-2 float-right' data-toggle='modal' data-target='#DeleteModal"+ aventura.id_adv + "'>Apagar</button>"+
+                    "<a href = '../templates/editar_personagem.html?pers_id="+aventura.id_adv+"'><button type='button' class='btn btn-mec btn-info btn-m p-2 float-left'  data-toggle='modal'>Editar</button></a>"+
+                    "</div>"+
+                "</card>";
+
+                // Modal separado para apagar aaventura 
+                // Mais fácil do que ficar mudando com cada clique, e remover, como feito no esp.
+                modal = 
+                "<div class='modal fade ' id='DeleteModal" + aventura.id_adv + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>"+
+                "<div class='modal-dialog modal-m modal-notify modal-danger modal-bg' role='document'>"+
+
+                    "<div class='modal-content text-center'>"+
+                    "<div class='modal-header d-flex justify-content-center'>"+
+                        "<p class='heading'>Apagar aventura</p>"+
+                    "</div>"+
+
+                    "<div class='modal-body'>"+
+                        "<p class='p2'>Você tem certeza que deseja a aventura</p>"+
+                        "<spam class='h3 vermelho fonte_mec'>"+aventura.nome+"</span> <span style='color: white; font-weight: normal'>?</span>"+
+                    "</div>"+
+
+                    "<div class='modal-footer flex-center'>"+
+                        "<p class='p-2 m-2'>Uma vez apagado, essa aventura não poderá mais ser recuperada!</p>"+
+                        "<button type='button' class='btn btn-outline-danger' data-dismiss='modal' onClick='apagarAdv(" + aventura.id_adv + ");'>Apagar </button>"+
+                        "<a type='button' class='btn  btn-danger waves-effect' data-dismiss='modal'>Não</a>"+
+                    "</div>"+
+                    "</div>"+
+                "</div>"+
+                "</div>"
+            
+                // Adiciona a card e o modal
+                $('#cards_adv').append(card);
+                $('#modals').append(modal);
+            }
+        }
+
+        };
+
+
+    //Chama listagem caso esteja na página 
+    if($("#cards_adv").length){
+        exibir_aventuras()
     }; 
 
 
@@ -445,5 +526,9 @@ const registrar_adv = async() =>  {
             alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes);
         };
 };
+
+
+
+
   
 

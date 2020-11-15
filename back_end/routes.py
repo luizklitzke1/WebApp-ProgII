@@ -163,3 +163,13 @@ def registrar_Aventura():
     resposta.headers.add("Access-Control-Allow-Origin","*")
     
     return resposta
+
+
+# Rota para listar personagens
+@app.route("/listar_aventuras")
+def listar_aventuras():
+   
+    aventuras = db.session.query(Aventura).all()
+    aventuras_json = [Aventura.json() for Aventura in aventuras]
+    return (jsonify(aventuras_json))
+
