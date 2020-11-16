@@ -72,6 +72,7 @@ class Participacao(db.Model):
     #Chave estrangeira do personagem
     pers_id = db.Column(db.Integer, db.ForeignKey(Personagem.id_pers), nullable = False)
     personagem = db.relationship("Personagem")
+    
     #Chave estrangeira da aventura
     adv_id = db.Column(db.Integer, db.ForeignKey(Aventura.id_avent), nullable = False)
     aventura = db.relationship("Aventura")
@@ -79,13 +80,13 @@ class Participacao(db.Model):
     
     #Representação em String
     def __repr__(self):
-        return f"ID: '{self.id_presenc}', Nome do jogador: '{self.nome_jogador}', Observação: '{self.observacao}', Data: '{self.data_presenca}'"
+        return f"ID: '{self.id_part}', Nome do jogador: '{self.nome_jogador}', Observação: '{self.observacao}', Data: '{self.data_part}'"
 
     #Expressão da classe em Json - todos os dados para conversão
     def json(self):
         return{
-            "id_presenc": self.id_presenc, "nome_jogador": self.nome_jogador,
-            "observacao": self.observacao, "data_presenca":self.data_presenca,
+            "id_part": self.id_part, "nome_jogador": self.nome_jogador,
+            "observacao": self.observacao, "data_part":self.data_part,
             "personagem": self.personagem.json(),
             "aventura": self.aventura.json(),
         }
@@ -129,6 +130,8 @@ if __name__ == "__main__":
     
     db.session.add(a1)
     db.session.add(a2)
+    
+    db.session.commit()
     
     # Personagens de teste
     p1 = Personagem(nome="Onerom", 
@@ -218,9 +221,37 @@ if __name__ == "__main__":
     db.session.add(p5)
     db.session.commit()
     
+    
+    par1 = Participacao(
+        nome_jogador = "Carlos",
+        observacao = "Foi bem daora",
+        
+        personagem = p5,
+        aventura = a2
+    )
+    
+    
+    par2 = Participacao(
+        nome_jogador = "Jorge",
+        observacao = "Mec",
+        
+        personagem = p2,
+        aventura = a1
+    )
+    
+    db.session.add(par1)
+    db.session.add(par2)
+    db.session.commit()
+    
     # Print de um Personagem e Aventura normal e em Json
     print(p3)
     print(p3.json())
     
     print(a1)
     print(a1.json())
+    
+    # Print da participação em STR e Json e da seu personagem e aventura
+    print(par1)
+    print(par1.json())
+    print(par1.personagem)
+    print(par1.aventura)
