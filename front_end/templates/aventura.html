@@ -23,10 +23,10 @@
       <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       
-      <title>Projeto RPG JS - Personagem </title>
+      <title>Projeto RPG JS - Aventura </title>
 
   </head>
-  <body class='pt-4' onload="dados_pers('vizu');">
+  <body class='pt-4' onload="dados_adv('vizu');">
       <header class="site-header">
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
           <div class="container">
@@ -73,46 +73,12 @@
                                         <h2><a class="article-title" href="#">  <span id="nome">Nome</span> </a></h2>
                                 </div>
 
-                                    <div class="row text-center">
-                                        <span class="col-md lead"><span class="vermelho">Raça:</span> <span id="raca"></span></span>
-                                        <span class="col-md lead"><span class="vermelho">Classe:</span> <span id="classe"></span> </span>
-                                        <span class="col-md lead"><span class="vermelho">Nível: </span> <span id="nivel"></span> </span>
-                                    </div>
-
-                                    <div class="container mt-4">
-                                        <div class="row p-0 text-center">
-                                                    
-                                            <div class="col" >
-                                                <span class="col mr-3 pl-4 vermelho fonte_mec">Força</span>
-                                                <span class="col" id="forca"> </span> 
-                                            </div>
-                                                    
-                                            <div class="col">
-                                                    <span class="col vermelho fonte_mec">Destreza</span> 
-                                                    <span class="col"  id="destreza"></span>  
-                                            </div>
-                                            <div class="col">
-                                                <span class="col vermelho fonte_mec">Constituição</span> 
-                                                <span class="col"  id="constituicao"></span> 
-                                            </div>
-                                            <div class="col">
-                                                <span class="col vermelho fonte_mec">Inteligencia</span> 
-                                                <span class="col"  id="inteligencia"></span> 
-                                            </div>
-                                                
-                                            <div class="col">
-                                                <span class="col vermelho fonte_mec">Sabedoria</span>
-                                                <span class="col"  id="sabedoria"></span>
-                                            </div>
-                            
-                                            <div class="col">
-                                                <span class="col vermelho fonte_mec">Carisma</span> 
-                                                <span class="col"  id="carisma"></span> 
-                                            </div>
-                                        </div>
+                                    <span class="ml-3 p-3 lead"><span class="vermelho">Nome mestre:</span> <span id="nome_mestre"></span></span>
+                                    <br>
+                                    <span class="ml-3 p-3 lead"><span class="vermelho">Temática:</span> <span id="tematica"></span> </span>
 
                                         <div class="ml-3 p-3 text-justify">
-                                            <span  id="historia"></span>
+                                            <span  id="resumo"></span>
                                         </div>
                                     </div>
                                     <div> 

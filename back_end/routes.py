@@ -7,7 +7,11 @@ import os, io
 # Rota para a home
 @app.route("/")
 def inicio_backend():
-    return "<a href='/listar_personagens'>Listar personagens</a>"
+    return """<a href='/listar_personagens'>Listar personagens</a>
+            <a href='/listar_aventuras'>Listar aventuras</a>
+            <a href='/listar_participacoes'>Listar participações</a>
+            """
+
 
 # Rota para listar personagens
 @app.route("/listar_personagens")
@@ -16,6 +20,23 @@ def listar_personagens():
     personagens = db.session.query(Personagem).all()
     personagens_json = [Personagem.json() for Personagem in personagens]
     return (jsonify(personagens_json))
+
+# Rota para listar aventuras
+@app.route("/listar_aventuras")
+def listar_aventuras():
+   
+    aventuras = db.session.query(Aventura).all()
+    aventuras_json = [Aventura.json() for Aventura in aventuras]
+    return (jsonify(aventuras_json))
+
+# Rota para listar participações
+@app.route("/listar_participacoes")
+def listar_participacoes():
+   
+    participacoes = db.session.query(Participacao).all()
+    participacoes_json = [Participacao.json() for Participacao in participacoes]
+    return (jsonify(participacoes_json))
+
 
 
 # Rota para registrar personagens
@@ -114,6 +135,21 @@ def dados_Personagem(id_pers):
     return resposta
 
 
+# Rota pegar os dados de uma Aventura específica
+@app.route("/dados_adv/<int:id_adv>",  methods=['GET'])
+def dados_Aventura(id_adv):
+    
+    try: #Tentar achar a aventura
+        aventura = Aventura.query.get_or_404(id_adv)
+        resposta = jsonify(aventura.json())
+        
+    except Exception as e:  #Envie mensagem em caso de erro
+        resposta = jsonify({"resultado":"erro", "detalhes":str(e)}) 
+        
+    resposta.headers.add("Access-Control-Allow-Origin","*")
+    return resposta
+
+
 # Método para salvar imagens de perfil compactadas
 def salvar_imagem_base64(diretorio, base64str):
     
@@ -135,7 +171,7 @@ def salvar_imagem_base64(diretorio, base64str):
 def apagar_imagem(diretorio, foto):
     
     #Verifica se não é a imagem padrão
-    if (foto != "personagem.png"):
+    if (foto != "personagem.png" or foto!= "aventura.png"):
         caminho = os.path.join(app.root_path, diretorio, foto)
         os.remove(caminho)
 
@@ -163,16 +199,6 @@ def registrar_Aventura():
     resposta.headers.add("Access-Control-Allow-Origin","*")
     
     return resposta
-
-
-# Rota para listar personagens
-@app.route("/listar_aventuras")
-def listar_aventuras():
-   
-    aventuras = db.session.query(Aventura).all()
-    aventuras_json = [Aventura.json() for Aventura in aventuras]
-    return (jsonify(aventuras_json))
-
 
 
 # Rota para apagar uma Aventura

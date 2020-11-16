@@ -361,7 +361,7 @@ function dados_pers(tipo){
                 window.location.href = "index.html";
             }
             else if (tipo == "edit"){
-                povoar_campos(resposta);
+                povoar_campos_pers(resposta);
             }
             else if (tipo == "delete_esp"){
                 $("#pers_nome").text(resposta.nome);
@@ -406,7 +406,7 @@ function mostrar_especifico(personagem){
 };
 
 //Povoar os campos de um form com dados do personagem
-function povoar_campos(personagem){
+function povoar_campos_pers(personagem){
     $("#campoNome").val(personagem.nome);
     $("#campoRaca").val(personagem.raca);
     $("#campoClasse").val(personagem.classe);
@@ -562,7 +562,82 @@ function apagarAdv(id_avent){
 };
 
 
+//Editar a aventura baseado no ID
+function dados_adv(tipo){
+    //Pega o ID através do link
+    let adv_id = document.location.search.replace(/^.*?\=/,'');
+    $.ajax({
+        url: 'http://localhost:5000/dados_adv/'+adv_id,
+        method: 'GET',
+        dataType: 'json',
+        success: function(resposta){
+            //Verifica se deseja editar ou visualizar na página específica
+            //Feito com um teste de tipo para facilitar callbacks e evitar muitas async
+            if (resposta.resultado == "erro"){
+                alert("Aventura não encontrado! \nConfirme para voltar para a Home...");
+                window.location.href = "index.html";
+            }
+            else if (tipo == "edit"){
+                povoar_campos_adv(resposta);
+            }
+            else if (tipo == "delete_esp"){
+                $("#pers_nome").text(resposta.nome);
+            }
+            else{
+                mostrar_especifico_adv(resposta);
+            };
+        },
+        error: function() {
+            alert("Erro ao receber os dados do personagem, verifique o backend!");
+        }
+    });
+  
+};
 
+//Mostras os dados de um pers especifico em uma pag
+function mostrar_especifico_adv(aventura){
+
+    //Adiciona o nome ao title da pag
+    document.title += (" " + aventura.nome);
+
+    $("#nome").text(aventura.nome);
+    $("#nome_mestre").text(aventura.nome_mestre);
+    $("#tematica").text(aventura.tematica);
+
+    $("#resumo").text(aventura.resumo);
+
+    $("#img_adv").attr("src","../static/imagens_aventuras/"+aventura.foto);
+    $("#datacriacao").text(aventura.data_criacao);
+
+    //Adicionar ID ao botão de edit
+    $("#edit_btn").attr("href",("../templates/editar_aventura.html?adv_id="+aventura.id_avent));
+    
+};
+
+//Povoar os campos de um form com dados do personagem
+function povoar_campos_adv(aventura){
+    $("#nome").val(aventura.nome);
+    $("#nome_mestre").val(aventura.raca);
+    $("#tematica").val(aventura.tematica);
+
+    $("#resumo").val(aventura.resumo);
+
+    $("#img_adv").attr("src","../static/imagens_aventuras/"+aventura.foto);
+    $("#datacriacao").text(aventura.data_criacao);
+    
+};
+
+//Adicionar os dados de delete do personagem em sua página esp
+function apagarEsp_adv() {
+    //Pega o ID através do link
+    let adv_id = document.location.search.replace(/^.*?\=/,'');
+
+    //Pega a aventura em si e muda o nome no modal
+    dados_adv("delete_esp");
+    //Adiciona a função ao botão do modal
+    document.getElementById("btn_delete").setAttribute( "onClick", ("apagarAdv("+adv_id+");"));
+
+};
 
   
 
