@@ -120,10 +120,10 @@ $(function() { // quando o documento estiver pronto/carregado
 
                 //Cria o  HTML de um Card custom para os dados do personagem
                 card = 
-                "<card class='content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1 animated slideInUp' style='max-width: 340px; min-width: 310px; text-align: center;' id='card_"+ personagem.id_pers+ "'> " +
+                "<card class='content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1 animated slideInUp' style='max-width: 340px; min-width: 310px; text-align: center;' id='card_adv_"+ aventura.id_avent+ "'> " +
                     "<div class='media-body'>" +
-                        "<h2> <a class='article-title' href='../templates/aventura.html?adv_id="+aventura.id_adv+"'>" + aventura.nome + "</a> </h2>" +
-                        "<a class='article-title' href='../templates/aventura.html?adv_id="+aventura.id_adv+"'>"+
+                        "<h2> <a class='article-title' href='../templates/aventura.html?id_avent="+aventura.id_avent+"'>" + aventura.nome + "</a> </h2>" +
+                        "<a class='article-title' href='../templates/aventura.html?id_avent="+aventura.id_avent+"'>"+
                             "<img class='account-img' src='../static/imagens_aventuras/" + aventura.foto +"' ></a>" + 
                     "</div>" + 
                     "<div class='article-metadata'>" +
@@ -134,15 +134,15 @@ $(function() { // quando o documento estiver pronto/carregado
                     " <div class='container mt-4'> "+
                     "<br><small class='text-muted'>Criada em: " + personagem.data_criacao + "</small>" +
                     "<div>" +
-                    "<button type='button' class='btn btn-mec btn-danger btn-m p-2 float-right' data-toggle='modal' data-target='#DeleteModal"+ aventura.id_adv + "'>Apagar</button>"+
-                    "<a href = '../templates/editar_personagem.html?pers_id="+aventura.id_adv+"'><button type='button' class='btn btn-mec btn-info btn-m p-2 float-left'  data-toggle='modal'>Editar</button></a>"+
+                    "<button type='button' class='btn btn-mec btn-danger btn-m p-2 float-right' data-toggle='modal' data-target='#DeleteModalAdv"+ aventura.id_avent + "'>Apagar</button>"+
+                    "<a href = '../templates/editar_personagem.html?pers_id="+aventura.id_avent+"'><button type='button' class='btn btn-mec btn-info btn-m p-2 float-left'  data-toggle='modal'>Editar</button></a>"+
                     "</div>"+
                 "</card>";
 
                 // Modal separado para apagar aaventura 
                 // Mais fácil do que ficar mudando com cada clique, e remover, como feito no esp.
                 modal = 
-                "<div class='modal fade ' id='DeleteModal" + aventura.id_adv + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>"+
+                "<div class='modal fade ' id='DeleteModalAdv" + aventura.id_avent + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>"+
                 "<div class='modal-dialog modal-m modal-notify modal-danger modal-bg' role='document'>"+
 
                     "<div class='modal-content text-center'>"+
@@ -157,7 +157,7 @@ $(function() { // quando o documento estiver pronto/carregado
 
                     "<div class='modal-footer flex-center'>"+
                         "<p class='p-2 m-2'>Uma vez apagado, essa aventura não poderá mais ser recuperada!</p>"+
-                        "<button type='button' class='btn btn-outline-danger' data-dismiss='modal' onClick='apagarAdv(" + aventura.id_adv + ");'>Apagar </button>"+
+                        "<button type='button' class='btn btn-outline-danger' data-dismiss='modal' onClick='apagarAdv(" + aventura.id_avent + ");'>Apagar </button>"+
                         "<a type='button' class='btn  btn-danger waves-effect' data-dismiss='modal'>Não</a>"+
                     "</div>"+
                     "</div>"+
@@ -314,6 +314,7 @@ const  editar_pers = async() =>  {
 
 //Apagar o personagem do BD baseado no ID
 function apagarPers(id_pers){
+
     $.ajax({
         url: 'http://localhost:5000/apagar_pers/'+id_pers,
         type: 'DELETE',
@@ -525,6 +526,39 @@ const registrar_adv = async() =>  {
             // informar mensagem de erro
             alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes);
         };
+};
+
+
+//Apagar a aventura do BD baseado no ID
+function apagarAdv(id_avent){
+    $.ajax({
+        url: 'http://localhost:5000/apagar_adv/'+id_avent,
+        type: 'DELETE',
+        dataType: 'json', contentType: 'application/json',
+        data: JSON.stringify({ id_avent: id_avent}), 
+        success: function(retorno){
+            if (retorno.resultado == "ok") {
+                alert($("#card_adv_" + id_avent));
+                $("#card_adv_" + id_avent).fadeOut(1000, function(){ 
+                $("#DeleteModalAdv" + id_avent).remove();
+                alert("Aventura removida com sucesso!"); 
+                
+            });
+            //Redireciona para a home caso a adv seja apagada em pag esp
+            if ($("#DeleteModalAdv").length){
+                window.location.href = "index.html";
+                alert("Aventura removida com sucesso!\nConfirme para voltar para a Home..."); 
+            }
+            
+        }
+            else {
+                alert(retorno.resultado + " : " + retorno.detalhes);
+            }
+        },
+        error: function (error){
+            alert("Ocorreu um erro ao apagar essa aventura!");
+        }
+    })
 };
 
 

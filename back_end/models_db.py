@@ -46,7 +46,7 @@ class Aventura(db.Model):
     resumo = db.Column(db.Text, nullable=False, default='Nenhuma resumo informado.')
     data_criacao = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-    #Endereço em string para o arquivo salvo em Static - gera ao registrar -
+    #Endereço em string para o arquivo salvo em Static - gera ao registrar
     foto = db.Column(db.String(20), nullable=False, default='aventura.png')
 
     #Representação em String
@@ -63,11 +63,11 @@ class Aventura(db.Model):
         }
         
 #Classe para os dados de um registro de presença
-class Presenca(db.Model):
-    id_presenc = db.Column(db.Integer, primary_key=True)
+class Participacao(db.Model):
+    id_part = db.Column(db.Integer, primary_key=True)
     nome_jogador = db.Column(db.String(33), nullable=False)
     observacao = db.Column(db.Text, nullable=False, default='Nenhuma observação informada.')
-    data_presenca = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    data_part= db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     #Chave estrangeira do personagem
     pers_id = db.Column(db.Integer, db.ForeignKey(Personagem.id_pers), nullable = False)
@@ -115,7 +115,7 @@ if __name__ == "__main__":
     
     a2 = Aventura(
         nome="Lord of the Iron Fortress",
-        nome_mestre = "	Andy Collins",
+        nome_mestre = "Andy Collins",
         tematica = "Classica - Customizada",
         resumo = """According to the adventure background provided, the plot involves the Blade of Fiery Might once wielded by the sultan of the efreet, 
         which was destroyed and scattered across the planes. Imperagon, a half-duergar/half-dragon and ruler of the Iron Fortress of Zandikar on the plane of Acheron, 

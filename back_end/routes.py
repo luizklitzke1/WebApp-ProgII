@@ -1,4 +1,4 @@
-from models_db import Personagem, Aventura, Presenca
+from models_db import Personagem, Aventura, Participacao
 from PIL import Image
 import base64
 from config import *
@@ -172,4 +172,25 @@ def listar_aventuras():
     aventuras = db.session.query(Aventura).all()
     aventuras_json = [Aventura.json() for Aventura in aventuras]
     return (jsonify(aventuras_json))
+
+
+
+# Rota para apagar uma Aventura
+@app.route("/apagar_adv/<int:id_adv>",  methods=['DELETE'])
+def apagar_Aventura(id_adv):
+    
+    resposta = jsonify({"resultado":"ok","detalhes": "ok"})
+    
+    try: #Tentar realizar a exclusão
+        aventura = Aventura.query.get_or_404(id_adv)
+        apagar_imagem('../front_end/static/imagens_aventuras', aventura.foto)
+        db.session.delete(aventura)
+        db.session.commit()
+        
+        
+    except Exception as e:  #Envie mensagem em caso de erro
+        resposta = jsonify({"resultado":"erro", "detalhes":str(e)}) 
+        
+    resposta.headers.add("Access-Control-Allow-Origin","*")
+    return resposta
 
