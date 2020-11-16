@@ -135,7 +135,7 @@ $(function() { // quando o documento estiver pronto/carregado
                     "<br><small class='text-muted'>Criada em: " + personagem.data_criacao + "</small>" +
                     "<div>" +
                     "<button type='button' class='btn btn-mec btn-danger btn-m p-2 float-right' data-toggle='modal' data-target='#DeleteModalAdv"+ aventura.id_avent + "'>Apagar</button>"+
-                    "<a href = '../templates/editar_personagem.html?pers_id="+aventura.id_avent+"'><button type='button' class='btn btn-mec btn-info btn-m p-2 float-left'  data-toggle='modal'>Editar</button></a>"+
+                    "<a href = '../templates/editar_aventura.html?adv_id="+aventura.id_avent+"'><button type='button' class='btn btn-mec btn-info btn-m p-2 float-left'  data-toggle='modal'>Editar</button></a>"+
                     "</div>"+
                 "</card>";
 
@@ -581,14 +581,14 @@ function dados_adv(tipo){
                 povoar_campos_adv(resposta);
             }
             else if (tipo == "delete_esp"){
-                $("#pers_nome").text(resposta.nome);
+                $("#adv_nome").text(resposta.nome);
             }
             else{
                 mostrar_especifico_adv(resposta);
             };
         },
         error: function() {
-            alert("Erro ao receber os dados do personagem, verifique o backend!");
+            alert("Erro ao receber os dados da aventura, verifique o backend!");
         }
     });
   
@@ -616,11 +616,11 @@ function mostrar_especifico_adv(aventura){
 
 //Povoar os campos de um form com dados do personagem
 function povoar_campos_adv(aventura){
-    $("#nome").val(aventura.nome);
-    $("#nome_mestre").val(aventura.raca);
-    $("#tematica").val(aventura.tematica);
+    $("#campoNome").val(aventura.nome);
+    $("#campoNomeMestre").val(aventura.nome_mestre);
+    $("#campoTematica").val(aventura.tematica);
 
-    $("#resumo").val(aventura.resumo);
+    $("#campoResumo").val(aventura.resumo);
 
     $("#img_adv").attr("src","../static/imagens_aventuras/"+aventura.foto);
     $("#datacriacao").text(aventura.data_criacao);
@@ -640,4 +640,46 @@ function apagarEsp_adv() {
 };
 
   
+// Código para a edição de uma aventura
+// Também execução asincrona devido a conversão de img
+const  editar_adv = async() =>  { 
 
+
+    //Pega o ID pelo link 
+    let adv_id = document.location.search.replace(/^.*?\=/,'');
+    
+    //Pegar os dados dos campos
+    nome = $("#campoNome").val();
+    nome_mestre = $("#campoNomeMestre").val();
+    tematica = $("#campoTematica").val();
+    resumo = $("#campoResumo").val();
+
+    //Manter a mesma imagem caso nenhuma nova seja informada
+    var img_file = document.getElementById("campoImagem").files[0];
+    if (img_file != undefined){
+        //Processamento da img informada para Base64
+        foto = await readFile(img_file);
+    }
+    else{
+        foto = null;
+    };
+
+    var dados = JSON.stringify({ nome: nome, nome_mestre: nome_mestre,
+                                 tematica: tematica, resumo: resumo, 
+                                 foto: foto});
+
+    // Enivo dos dados ao back-end para a inclusão
+    $.ajax({
+        url: 'http://localhost:5000/editar_aventura/'+adv_id,
+        type: 'POST',
+        dataType: 'json', contentType: 'application/json',
+        data: dados, 
+        success: function(){
+            alert("Aventura editada com sucesso!");
+        }, 
+        error: function(){
+            alert("Ocorreu um erro ao editar essa aventura!");
+        }, 
+    });
+    
+};

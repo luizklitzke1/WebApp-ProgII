@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <!-- Meta Tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="author" content="Ace of Spades">
+      <meta name="description" content="Site com um sistema simples e pratico de registro e edição de personagens de RPG ">
+      <meta name="keywords" content="rpg, personagens, crud">
+      <link rel="icon" type="image/png" href="../static/d20_logo.png" />
+
+      <!--Link para CSS  do Bootstrap-->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+      <!-- Material Design Bootstrap -->
+      <link rel="stylesheet" href="../css/mdb.min.css">
+
+      <!-- Link para estilo customizado-->
+      <link rel="stylesheet" type="text/css" href="../static/style.css">
+      <link href="https://fonts.googleapis.com/css?family=Supermercado+One&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+      <title>Projeto RPG JS - Editar Aventura </title>
+
+
+  </head>
+  <body class='pt-4' onload="dados_adv('edit')">
+        <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+          <div class="container">
+
+            <!-- Logo do site -->
+            <a href="index.html"><img src="../static/d20_logo.png" width="60" height="60" class="d-inline-block align-top p-0 mr-2 animated rotateIn" alt="logo_site"></a>
+            <a class="navbar-brand mr-4 fonte_mec" href="index.html">Projeto RPG</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" 
+                    aria-label="Alternar visualização">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Itens - Menu do Cabeçalho -->
+            <div class="collapse navbar-collapse" id="navbarToggle">
+              <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="index.html">Home</a>
+                
+                <a class="nav-item nav-link" href="registrar_personagem.html">Registrar personagem</a>
+
+                <a class="nav-item nav-link" href="registrar_aventura.html">Registrar Aventura</a>
+
+              </div>
+
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Parte principal do site - Conteúdo -->
+    <main role="main" class="container ml- p-0 principal1 animated slideInUp">
+    <div class="content-section p-4 pl-4 pr-4 ">
+
+        <form method="POST" action="" enctype="multipart/form-data" id="form_editar">
+            
+            <fieldset class="form-group">
+                
+                <legend class="border-bottom">Editar Personagem</legend>
+
+                <!-- Nome do personagem-->
+                <div class="form-group row pr-3 pl-3 mt-3">
+                    <label for="campoNome">Nome</label>
+                    
+                    <input type="text" class="form-control form-control-lg invalid" id="campoNome" required>
+                    <span class="invalid-feedback" id="inv-nome">
+                    </span>
+                </div>
+
+                <!-- Nome do mestre-->
+                <div class="form-group row pr-3 pl-3 mt-3">
+                    <label for="campoNomeMestre">Nome do mestre</label>
+                    
+                    <input type="text" class="form-control form-control-lg invalid" id="campoNomeMestre" required>
+                    <span class="invalid-feedback" id="inv-nome">
+                    </span>
+                </div>
+
+
+                <!-- Temática -->
+                <div class="form-group row pr-3 pl-3 mt-3">
+                    <label for="campoTematica">Temática</label>
+                    
+                    <input type="text" class="form-control form-control-lg invalid" id="campoTematica" required>
+                    <span class="invalid-feedback" id="inv-nome">
+                    </span>
+                </div>
+
+            
+
+            </form>
+                <!-- Resumo -->
+                <div class="form-group">
+                    <label for="campoResumo">Resumo</label>
+                    
+                    <textarea class="form-control form-control-lg h-25" id="campoResumo"  form="form_registro"></textarea>
+                    <span class="invalid-feedback" id="inv-historia">
+                    </span>
+                    
+                </div>
+
+                <!-- Foto de referência -->
+                <div>
+                    <label for="campoImagem">Imagem de referência</label>
+                    
+                    <br><img id="img_adv" src=" " /><br>
+                    <input type='file' class="valid" onchange="readURL(this);"  id="campoImagem"/>
+
+                    
+
+                </div>
+
+
+                <!-- Enviar -->
+                <div class="form-group text-right">
+                    <button id="btIncluirAventura" type="button" class="btn btn-success" onClick="if (checkForm()) { editar_adv() };" disabled>Editar</button>
+                </div>
+             
+            </fieldset>
+        
+    </div>
+
+</main>
+        
+<!-- Footer -->
+  <footer class="page-footer font-small special-color-dark pt-4">
+    <div class="container">
+      <div class="footer-copyright text-center py-3">© 2019 Copyright:
+        <a href="#"> ProjetoRPG.com</a>
+      </div>
+    </div>
+  </footer>
+
+ <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+<!-- código específico do front-end -->
+<script src="../js/scriptPers.js"></script>
+<script src="../js/real_time_form_adv.js"></script>
+ 
+</body>
+</html>
+

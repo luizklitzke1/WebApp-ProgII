@@ -7,6 +7,19 @@
         tematica : false,
         resumo : true,
     };
+
+     
+    //Torna todos os valores válidos caso estiver apenas editando
+    if ($("#form_editar").length){
+        formValid = { 
+            nome : true,
+            nome_mestre : true,
+            tematica : true,
+            resumo : true,
+        };
+        checkForm();
+    }
+
     
 
     //Verifica se todos os campos estão válidos
