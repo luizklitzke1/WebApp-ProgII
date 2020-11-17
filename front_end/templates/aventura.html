@@ -95,21 +95,63 @@
 
     <!-- Mostrar as participações-->
     <fieldset class="justify-content-xl-center">
+
+        <div class="container-fluid card p-4 animated slideInUp" >
+            <form method="POST" action="" enctype="multipart/form-data" id="form_registro">
+                
+                <fieldset class="form-group">
+                    
+                    <legend class="border-bottom">Registrar Participação</legend>
+
+                    <!-- Nome do jogador-->
+            
+                    <div class="form-group row pr-3 pl-3 mt-3">
+                        <label for="campoNome">Nome do jogador</label>
+                        
+                        <input type="text" class="form-control form-control-lg invalid" id="campoNome" required>
+                        <span class="invalid-feedback" id="inv-nome_jogador">
+                        </span>
+                    </div>
+
+                    <div class="row">
+                        <!-- ID do Personagem -->
+                        <div class="form-group col-sm-6">
+                            <label for="campoIDPers">ID do Personagem</label>
+
+                            <input type="number" class="form-control form-control-lg invalid" id="campoIDPers" required >
+                            <span class="invalid-feedback" id="inv-idpers">
+                            </span>
+                        </div>
+
+                    </div>
+
+            </form>
+
+
+            <!-- Observação -->
+            <div class="form-group">
+                <label for="campoObservacao">Observação</label>
+                
+                <textarea class="form-control form-control-lg h-25" id="campoResumo"  form="form_registro"></textarea>
+                <span class="invalid-feedback" id="inv-observacao">
+                </span>
+                
+            </div>
+
+            <!-- Enviar -->
+            <div class="form-group text-right">
+                <button id="btIncluirPart" type="button" class="btn btn-success" onClick="if (checkForm()) {registrar_part()};" disabled>Registrar</button>
+            </div>
+
+        </div>
+
         <h2 class="ml-1">Participações Registradas</h2>
 
         <div class="container-fluid" id = "participacoes">
 
-                {% for avaliacao in avaliacoes.items %}
-
-                    
-                    
-        
-            </div>
+                
         </div>
         
-
-
-
         </fieldset>
 
    
@@ -158,6 +200,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <!-- código específico do front-end -->
+    <script src="../js/real_time_form_part.js"></script>
     <script src="../js/scriptPers.js"></script>
      
 </body>

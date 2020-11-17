@@ -263,3 +263,23 @@ def editar_Aventura(adv_id):
     resposta.headers.add("Access-Control-Allow-Origin","*")
     return resposta
 
+
+# Rota para registrar participações
+@app.route("/registrar_participacao", methods=['POST'])
+def registrar_Participacao():
+    
+    resposta = jsonify({"resultado":"ok","detalhes": "ok"})
+    dados = request.get_json()
+    try: #Tenta fazer o registro
+        
+        nova_Participacao = Participacao(**dados)
+        
+        db.session.add(nova_Participacao)
+        db.session.commit()
+        
+    except Exception as e: 
+        resposta = jsonify({"resultado":"erro","detalhes":str(e)})
+        
+    resposta.headers.add("Access-Control-Allow-Origin","*")
+    
+    return resposta

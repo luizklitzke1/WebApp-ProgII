@@ -201,7 +201,7 @@ $(function() { // quando o documento estiver pronto/carregado
 
                 //Cria o  HTML custom para os dados da participacao
                 part = 
-                "<div class='container animated slideInUp'>   "+             
+                "<div class='container animated slideInUp' id='card_part_" + participacao.id_part + "'>   "+             
                     "<div class='card p-3'>"+
                         "<div class='card-body'>"+
                             "<div class='row'>"+
@@ -227,30 +227,29 @@ $(function() { // quando o documento estiver pronto/carregado
                         "</div>"+
 
                         "<div class='text-right mt-4'>"+
-                            "<button type='button' class='btn btn-danger m-1'  data-toggle='modal' data-target='#DeleteModal{{avaliacao.autor.id}}'>Apagar</button>"+
+                            "<button type='button' class='btn btn-danger m-1'  data-toggle='modal' data-target='DeleteModalAdv" + participacao.id_part + "'>Apagar</button>"+
                         "</div>"+
 
-                        "<!-- Modal para apagar uma participação-->"+
-                        "<div class='modal fade' id='DeleteModal{{avaliacao.autor.id}}' tabindex='-1' role='dialog' aria-labelledby='DeleteModalLongTitle' aria-hidden='true'>"+
-                        "<div class='modal-dialog' role='document'>"+
-                        "<div class='modal-content'>"+
+                        "<div class='modal fade ' id='DeleteModalAdv" + participacao.id_part + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>"+
+                        "<div class='modal-dialog modal-m modal-notify modal-danger modal-bg' role='document'>"+
 
-                            "<div class='modal-header'>"+
-                            "<h5 class='modal-title' id='DeleteModalLongTitle'>Apagar <span class='modal-nome'>participação?</span></h5>"+
-                                "<span class='modal-span'>Tem certeza que deseja apagar essa participação de <span class='modal-nome'>{{avaliacao.autor.nome}}</span>  do personagem <span class='modal-nome'>{{personagem.nome}}?</span>"+
-                                "</div>"+
-                            "<div class='modal-body'>"+
-                            "Uma vez apagada, essa participação não podera mais ser recuperada!"+
-                                "</div>"+
-                            "<div class='modal-footer'>"+
-                            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Fechar</button>"+
-                                "<form action='{{url_for('personagens.apagar_avaliacao', personagem_id = personagem.id, autor_id = avaliacao.autor.id )}}' method='POST'>"+
-                                "<input class='btn btn-danger' type='submit' value='Apagar'>"+
-                                    "</form>"+
-                                "</div>"+
-                            "</div>"+
-                            "</div>"+
+                        "<div class='modal-content text-center'>"+
+                        "<div class='modal-header d-flex justify-content-center'>"+
+                            "<p class='heading'>Apagar aventura</p>"+
                         "</div>"+
+
+                        "<div class='modal-body'>"+
+                            "<p class='p2'>Você tem certeza que deseja a aventura</p>"+
+                        "</div>"+
+
+                        "<div class='modal-footer flex-center'>"+
+                            "<p class='p-2 m-2'>Uma vez apagado, essa aventura não poderá mais ser recuperada!</p>"+
+                            "<button type='button' class='btn btn-outline-danger' data-dismiss='modal' onClick='apagarPart(" + participacao.id_par  + ");'>Apagar </button>"+
+                            "<a type='button' class='btn  btn-danger waves-effect' data-dismiss='modal'>Não</a>"+
+                        "</div>"+
+                        "</div>"+
+                    "</div>"+
+                    "</div>"
 
                         "</div>"+   
                     
@@ -778,3 +777,75 @@ const  editar_adv = async() =>  {
     });
     
 };
+
+
+// Código para inclusão de participações
+// Com execução asincrona devído a um call de await da img
+const registrar_part = async() =>  {
+
+    nome_jogador = $("#campoNome").val();
+    pers_id = $("#campoIDPers").val();
+    observacoes = $("#campoObservacao").val();
+    let adv_id = document.location.search.replace(/^.*?\=/,'');
+
+    var dados = JSON.stringify({ nome_jogador: nome_jogador, pers_id: pers_id, 
+                                 observacoes: observacoes,  adv_id: adv_id});
+
+    // Enivo dos dados ao back-end para a inclusão
+    $.ajax({
+        url: 'http://localhost:5000/registrar_participacao',
+        type: 'POST',
+        dataType: 'json', contentType: 'application/json',
+        data: dados, 
+        success: participacaoIncluida, 
+        error: erroAoIncluir
+
+    });
+    function participacaoIncluida (retorno) {
+        if (retorno.resultado == "ok") { 
+            alert("Participação de " + nome_jogador + " registrada com sucesso!");
+            // Limpar os campos
+            $("#campoNome").val("");
+            $("#campoIDPers").val("");
+            $("#campoObservacao").val("");
+            location.reload();
+
+        } 
+        else {
+            // informar mensagem de erro
+            alert(retorno.resultado + ":" + retorno.detalhes);
+        };            
+    };
+        function erroAoIncluir (retorno) {
+            // informar mensagem de erro
+            alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes);
+        };
+};
+
+
+//Apagar a participação do BD baseado no ID
+function apagarPart(id_part){
+    $.ajax({
+        url: 'http://localhost:5000/apagar_part/'+id_part,
+        type: 'DELETE',
+        dataType: 'json', contentType: 'application/json',
+        data: JSON.stringify({ id_part: id_part}), 
+        success: function(retorno){
+            if (retorno.resultado == "ok") {
+                alert($("#card_adv_" + id_part));
+                $("#card_part_" + id_part).fadeOut(1000, function(){ 
+                alert("Aventura removida com sucesso!"); 
+                
+            });
+            
+        }
+            else {
+                alert(retorno.resultado + " : " + retorno.detalhes);
+            }
+        },
+        error: function (error){
+            alert("Ocorreu um erro ao apagar essa aventura!");
+        }
+    })
+};
+

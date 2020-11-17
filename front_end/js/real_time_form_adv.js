@@ -5,7 +5,6 @@
         nome : false,
         nome_mestre : false,
         tematica : false,
-        resumo : true,
     };
 
      
@@ -15,7 +14,6 @@
             nome : true,
             nome_mestre : true,
             tematica : true,
-            resumo : true,
         };
         checkForm();
     }
