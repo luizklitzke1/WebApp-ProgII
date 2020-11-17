@@ -239,8 +239,17 @@ if __name__ == "__main__":
         aventura = a1
     )
     
+    par3 = Participacao(
+        nome_jogador = "Jonas",
+        observacao = "Bastante interessante",
+        
+        personagem = p2,
+        aventura = a2
+    )
+    
     db.session.add(par1)
     db.session.add(par2)
+    db.session.add(par3)
     db.session.commit()
     
     # Print de um Personagem e Aventura normal e em Json

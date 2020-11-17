@@ -29,11 +29,21 @@ def listar_aventuras():
     aventuras_json = [Aventura.json() for Aventura in aventuras]
     return (jsonify(aventuras_json))
 
-# Rota para listar participações
+# Rota para listar TODAS participações
 @app.route("/listar_participacoes")
 def listar_participacoes():
    
     participacoes = db.session.query(Participacao).all()
+    participacoes_json = [Participacao.json() for Participacao in participacoes]
+    return (jsonify(participacoes_json))
+
+
+# Rota para listar participações de uma adv especifica
+@app.route("/listar_participacoes_esp/<int:id_avent>",  methods=['POST', 'GET'])
+def listar_participacoes_esp(id_avent):
+   
+    participacoes = Participacao.query.filter(Participacao.adv_id == id_avent).all()
+    
     participacoes_json = [Participacao.json() for Participacao in participacoes]
     return (jsonify(participacoes_json))
 

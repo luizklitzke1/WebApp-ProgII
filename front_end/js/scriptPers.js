@@ -109,7 +109,7 @@ $(function() { // quando o documento estiver pronto/carregado
             error: function() {
             alert("Erro ao ler dados, verifique o backend!");
             }
-    });
+        });
 
         function listar_aventuras (aventuras) {
             // Limpa a div com as cards
@@ -181,18 +181,18 @@ $(function() { // quando o documento estiver pronto/carregado
 
 
     // Exibir as participações
-    function exibir_participacoes() {
+    function exibir_participacoes(id_avent) {
         $.ajax({
-            url: 'http://localhost:5000/listar_participacoes',
-            method: 'GET',
+            url: 'http://localhost:5000/listar_participacoes_esp/' + id_avent,
+            method: 'POST',
             dataType: 'json',
-            success: listar_participacoes, 
+            success: listar_participacoes_esp, 
             error: function() {
             alert("Erro ao ler dados, verifique o backend!");
             }
-    });
+        });
 
-        function listar_participacoes (participacoes) {
+        function listar_participacoes_esp (participacoes) {
             // Limpa a div com as cards
             $('#participacoes').empty();
         
@@ -269,7 +269,8 @@ $(function() { // quando o documento estiver pronto/carregado
 
     //Chama listagem caso esteja na página 
     if($("#participacoes").length){
-        exibir_participacoes()
+        let adv_id = document.location.search.replace(/^.*?\=/,'');
+        exibir_participacoes(adv_id);
     }; 
 
 
