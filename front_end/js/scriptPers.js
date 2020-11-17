@@ -118,7 +118,7 @@ $(function() { // quando o documento estiver pronto/carregado
             // Percorre a lista recebida
             for (aventura of aventuras) { 
 
-                //Cria o  HTML de um Card custom para os dados do personagem
+                //Cria o  HTML de um Card custom para os dados da aventura
                 card = 
                 "<card class='content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1 animated slideInUp' style='max-width: 340px; min-width: 310px; text-align: center;' id='card_adv_"+ aventura.id_avent+ "'> " +
                     "<div class='media-body'>" +
@@ -173,9 +173,103 @@ $(function() { // quando o documento estiver pronto/carregado
         };
 
 
+
     //Chama listagem caso esteja na página 
     if($("#cards_adv").length){
         exibir_aventuras()
+    }; 
+
+
+    // Exibir as participações
+    function exibir_participacoes() {
+        $.ajax({
+            url: 'http://localhost:5000/listar_participacoes',
+            method: 'GET',
+            dataType: 'json',
+            success: listar_participacoes, 
+            error: function() {
+            alert("Erro ao ler dados, verifique o backend!");
+            }
+    });
+
+        function listar_participacoes (participacoes) {
+            // Limpa a div com as cards
+            $('#participacoes').empty();
+        
+            // Percorre a lista recebida
+            for (participacao of participacoes) { 
+
+                //Cria o  HTML custom para os dados da participacao
+                part = 
+                "<div class='container animated slideInUp'>   "+             
+                    "<div class='card p-3'>"+
+                        "<div class='card-body'>"+
+                            "<div class='row'>"+
+                                "<div class='col-md-2 text-center'>"+
+                                    "<img src='../static/imagens_personagens/" + participacao.personagem.foto + "' class='img img-rounded img-fluid'>"+
+                                    "<p class='text-muted text-center mt-2'>Em: " + participacao.data_part + "</p>"+
+                            "</div>"+
+                        
+                        "<div class='col-md-10'>"+
+            
+                            "<!-- Conteudo da participação -->"+
+                                "<div class='clearfix'></div>"+
+                                "<h2> <a class='article-title' href='../templates/personagem.html?pers_id="+participacao.personagem.id_pers+"'>" + participacao.personagem.nome + "</a> </h2>" +
+                                "<br><span class='lead'><span class='vermelho'>Nome do jogagor: </span> <span>"  + participacao.nome_jogador + "</span>  <br>"  +          
+                                
+                                "<br><span class='mt-5 vermelho '>Observação:</span>"  +  
+                                "<div class='text-justify'> "+
+                                    "<span  id='observacao'> "+ participacao.observacao + "</span> "+
+                                "</div> "+
+
+                            "</div>"+
+
+                        "</div>"+
+
+                        "<div class='text-right mt-4'>"+
+                            "<button type='button' class='btn btn-danger m-1'  data-toggle='modal' data-target='#DeleteModal{{avaliacao.autor.id}}'>Apagar</button>"+
+                        "</div>"+
+
+                        "<!-- Modal para apagar uma participação-->"+
+                        "<div class='modal fade' id='DeleteModal{{avaliacao.autor.id}}' tabindex='-1' role='dialog' aria-labelledby='DeleteModalLongTitle' aria-hidden='true'>"+
+                        "<div class='modal-dialog' role='document'>"+
+                        "<div class='modal-content'>"+
+
+                            "<div class='modal-header'>"+
+                            "<h5 class='modal-title' id='DeleteModalLongTitle'>Apagar <span class='modal-nome'>participação?</span></h5>"+
+                                "<span class='modal-span'>Tem certeza que deseja apagar essa participação de <span class='modal-nome'>{{avaliacao.autor.nome}}</span>  do personagem <span class='modal-nome'>{{personagem.nome}}?</span>"+
+                                "</div>"+
+                            "<div class='modal-body'>"+
+                            "Uma vez apagada, essa participação não podera mais ser recuperada!"+
+                                "</div>"+
+                            "<div class='modal-footer'>"+
+                            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Fechar</button>"+
+                                "<form action='{{url_for('personagens.apagar_avaliacao', personagem_id = personagem.id, autor_id = avaliacao.autor.id )}}' method='POST'>"+
+                                "<input class='btn btn-danger' type='submit' value='Apagar'>"+
+                                    "</form>"+
+                                "</div>"+
+                            "</div>"+
+                            "</div>"+
+                        "</div>"+
+
+                        "</div>"+   
+                    
+                    "</div>"+
+            "</div>"+
+            "</div>"
+                   
+            
+                // Adiciona a card e o modal
+                $('#participacoes').append(part);
+            }
+        }
+
+        };
+
+
+    //Chama listagem caso esteja na página 
+    if($("#participacoes").length){
+        exibir_participacoes()
     }; 
 
 
