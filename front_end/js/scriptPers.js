@@ -770,6 +770,7 @@ const  editar_adv = async() =>  {
         data: dados, 
         success: function(){
             alert("Aventura editada com sucesso!");
+            location.reload();
         }, 
         error: function(){
             alert("Ocorreu um erro ao editar essa aventura!");
@@ -833,7 +834,7 @@ function apagarPart(id_part){
         success: function(retorno){
             if (retorno.resultado == "ok") {
                 $("#card_part_" + id_part).fadeOut(1000, function(){ 
-                alert("Aventura removida com sucesso!"); 
+                alert("Participação removida com sucesso!"); 
                 
             });
             
