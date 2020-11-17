@@ -283,3 +283,21 @@ def registrar_Participacao():
     resposta.headers.add("Access-Control-Allow-Origin","*")
     
     return resposta
+
+# Rota para apagar uma Aventura
+@app.route("/apagar_participacao/<int:id_part>",  methods=['DELETE'])
+def apagar_Participacao(id_part):
+    
+    resposta = jsonify({"resultado":"ok","detalhes": "ok"})
+    
+    try: #Tentar realizar a exclusão
+        participacao = Participacao.query.get_or_404(id_part)
+        db.session.delete(participacao)
+        db.session.commit()
+        
+        
+    except Exception as e:  #Envie mensagem em caso de erro
+        resposta = jsonify({"resultado":"erro", "detalhes":str(e)}) 
+        
+    resposta.headers.add("Access-Control-Allow-Origin","*")
+    return resposta

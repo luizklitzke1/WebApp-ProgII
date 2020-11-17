@@ -82,7 +82,7 @@
                                         </div>
                                     </div>
                                     <div> 
-                                      <button type="button" class="btn btn-mec btn-danger btn-m p-2 float-right" data-toggle="modal" data-target="#DeleteModal" onClick="apagarEsp();">Apagar</button>
+                                      <button type="button" class="btn btn-mec btn-danger btn-m p-2 float-right" data-toggle="modal" data-target="#DeleteModal" onClick="apagarEsp_adv();">Apagar</button>
                                       <a id="edit_btn" href ="#"><button type="button" class="btn btn-mec btn-info btn-m p-2 float-right "  data-toggle="modal">Editar</button></a>
                                     </div>
                                     
@@ -164,22 +164,24 @@
   
           <div class="modal-content text-center">
               <div class="modal-header d-flex justify-content-center">
-                  <p class="heading">Apagar personagem</p>
+                  <p class="heading">Apagar aventura</p>
               </div>
   
               <div class="modal-body">
-                  <p class="p2">Você tem certeza que deseja o personagem</p>
-                  <span class="h3 vermelho fonte_mec" id="pers_nome"> </span> <span style="color: white;" class="h3">?</span>
+                  <p class="p2">Você tem certeza que deseja a aventura</p>
+                  <span class="h3 vermelho fonte_mec" id="adv_nome"> </span> <span style="color: white;" class="h3">?</span>
               </div>
   
               <div class="modal-footer flex-center">
-                  <p class="p-2 m-2">Uma vez apagado, esse personagem não poderá mais ser recuperado!</p>
+                  <p class="p-2 m-2">Uma vez apagado, essa aventura não poderá mais ser recuperada!</p>
                   <button type="button" id="btn_delete" class="btn btn-outline-danger" data-dismiss="modal" onClick="">Apagar </button>
                   <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Não</a>
               </div>
           </div>
       </div>
     </div>
+
+    <div id="modals"></div>
 
         
     <!-- Footer -->

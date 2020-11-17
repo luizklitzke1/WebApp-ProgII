@@ -156,7 +156,7 @@ $(function() { // quando o documento estiver pronto/carregado
                     "</div>"+
 
                     "<div class='modal-footer flex-center'>"+
-                        "<p class='p-2 m-2'>Uma vez apagado, essa aventura não poderá mais ser recuperada!</p>"+
+                        "<p class='p-2 m-2'>Uma vez apagada, essa aventura não poderá mais ser recuperada!</p>"+
                         "<button type='button' class='btn btn-outline-danger' data-dismiss='modal' onClick='apagarAdv(" + aventura.id_avent + ");'>Apagar </button>"+
                         "<a type='button' class='btn  btn-danger waves-effect' data-dismiss='modal'>Não</a>"+
                     "</div>"+
@@ -227,39 +227,39 @@ $(function() { // quando o documento estiver pronto/carregado
                         "</div>"+
 
                         "<div class='text-right mt-4'>"+
-                            "<button type='button' class='btn btn-danger m-1'  data-toggle='modal' data-target='DeleteModalAdv" + participacao.id_part + "'>Apagar</button>"+
+                            "<button type='button' class='btn btn-danger m-1'  data-toggle='modal' data-target='#DeleteModalPart" + participacao.id_part + "'>Apagar</button>"+
                         "</div>"+
-
-                        "<div class='modal fade ' id='DeleteModalAdv" + participacao.id_part + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>"+
-                        "<div class='modal-dialog modal-m modal-notify modal-danger modal-bg' role='document'>"+
-
-                        "<div class='modal-content text-center'>"+
-                        "<div class='modal-header d-flex justify-content-center'>"+
-                            "<p class='heading'>Apagar aventura</p>"+
-                        "</div>"+
-
-                        "<div class='modal-body'>"+
-                            "<p class='p2'>Você tem certeza que deseja a aventura</p>"+
-                        "</div>"+
-
-                        "<div class='modal-footer flex-center'>"+
-                            "<p class='p-2 m-2'>Uma vez apagado, essa aventura não poderá mais ser recuperada!</p>"+
-                            "<button type='button' class='btn btn-outline-danger' data-dismiss='modal' onClick='apagarPart(" + participacao.id_par  + ");'>Apagar </button>"+
-                            "<a type='button' class='btn  btn-danger waves-effect' data-dismiss='modal'>Não</a>"+
-                        "</div>"+
-                        "</div>"+
-                    "</div>"+
-                    "</div>"
 
                         "</div>"+   
                     
                     "</div>"+
             "</div>"+
-            "</div>"
+            "</div>" 
                    
-            
+                modal =
+                "<div class='modal fade ' id='DeleteModalPart" + participacao.id_part + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>"+
+                "<div class='modal-dialog modal-m modal-notify modal-danger modal-bg' role='document'>"+
+
+                "<div class='modal-content text-center'>"+
+                "<div class='modal-header d-flex justify-content-center'>"+
+                    "<p class='heading'>Apagar participação</p>"+
+                "</div>"+
+
+                "<div class='modal-body'>"+
+                    "<p class='p2'>Você tem certeza que deseja essa participação?</p>"+
+                "</div>"+
+
+                "<div class='modal-footer flex-center'>"+
+                    "<p class='p-2 m-2'>Uma vez apagada, essa participação não poderá mais ser recuperada!</p>"+
+                    "<button type='button' class='btn btn-outline-danger' data-dismiss='modal' onClick='apagarPart(" + participacao.id_part  + ");'>Apagar </button>"+
+                    "<a type='button' class='btn  btn-danger waves-effect' data-dismiss='modal'>Não</a>"+
+                "</div>"+
+                "</div>"+
+                "</div>"+
+                "</div>"
                 // Adiciona a card e o modal
                 $('#participacoes').append(part);
+                $('#modals').append(modal);
             }
         }
 
@@ -826,13 +826,12 @@ const registrar_part = async() =>  {
 //Apagar a participação do BD baseado no ID
 function apagarPart(id_part){
     $.ajax({
-        url: 'http://localhost:5000/apagar_part/'+id_part,
+        url: 'http://localhost:5000/apagar_participacao/'+id_part,
         type: 'DELETE',
         dataType: 'json', contentType: 'application/json',
         data: JSON.stringify({ id_part: id_part}), 
         success: function(retorno){
             if (retorno.resultado == "ok") {
-                alert($("#card_adv_" + id_part));
                 $("#card_part_" + id_part).fadeOut(1000, function(){ 
                 alert("Aventura removida com sucesso!"); 
                 
@@ -844,7 +843,7 @@ function apagarPart(id_part){
             }
         },
         error: function (error){
-            alert("Ocorreu um erro ao apagar essa aventura!");
+            alert("Ocorreu um erro ao apagar essa paritipação!");
         }
     })
 };
