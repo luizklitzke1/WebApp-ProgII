@@ -116,10 +116,12 @@
                     <div class="row">
                         <!-- ID do Personagem -->
                         <div class="form-group col-sm-6">
-                            <label for="campoIDPers">ID do Personagem</label>
-                            <small class="text-muted">*Adicionar pesquisa com lista posteriomente</small>
+                            <label for="listaIDPers">ID do Personagem</label>
+                            <small class="text-muted">*Lista com todos os personagens registrados</small>
 
-                            <input type="number" class="form-control form-control-lg invalid" id="campoIDPers" required >
+                            <select id="listaIDPers" name="listaIDPers" class="form-control form-control-lg invalid" required>
+
+                            </select>
                             <span class="invalid-feedback" id="inv-idpers">
                             </span>
                         </div>
@@ -133,7 +135,7 @@
             <div class="form-group">
                 <label for="campoObservacao">Observação</label>
                 
-                <textarea class="form-control form-control-lg h-25" id="campoResumo"  form="form_registro"></textarea>
+                <textarea class="form-control form-control-lg h-25" id="campoObservacao"  form="form_registro"></textarea>
                 <span class="invalid-feedback" id="inv-observacao">
                 </span>
                 

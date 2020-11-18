@@ -397,6 +397,7 @@ const  editar_pers = async() =>  {
         data: dados, 
         success: function(){
             alert("Personagem editado com sucesso!");
+            
         }, 
         error: function(){
             alert("Ocorreu um erro ao editar esse personagem!");
@@ -705,6 +706,31 @@ function mostrar_especifico_adv(aventura){
 
     //Adicionar ID ao botão de edit
     $("#edit_btn").attr("href",("../templates/editar_aventura.html?adv_id="+aventura.id_avent));
+
+    //Adicionar os personagens como opções para o registro de participação
+
+    //Pega os personagens disponíveis
+    $.ajax({
+        url: 'http://localhost:5000/listar_personagens',
+        method: 'GET',
+        dataType: 'json',
+        success: adicionar_opcoes, 
+        error: function() {
+        alert("Erro ao ler dados, verifique o backend!");
+        }
+    });
+
+    function adicionar_opcoes(personagens){
+
+        for (personagem of personagens) {
+
+            op = "<option value='"+ personagem.id_pers + "'>" + personagem.nome + "</option>";
+            console.log(op);
+            console.log($("listaIDPers"));
+            $("#listaIDPers").append(op);
+        };
+
+    }
     
 };
 
@@ -785,12 +811,13 @@ const  editar_adv = async() =>  {
 const registrar_part = async() =>  {
 
     nome_jogador = $("#campoNome").val();
-    pers_id = $("#campoIDPers").val();
-    observacoes = $("#campoObservacao").val();
+    pers_id = $("#listaIDPers").val();
+    observacao = $("#campoObservacao").val();
+
     let adv_id = document.location.search.replace(/^.*?\=/,'');
 
     var dados = JSON.stringify({ nome_jogador: nome_jogador, pers_id: pers_id, 
-                                 observacoes: observacoes,  adv_id: adv_id});
+                                 observacao: observacao,  adv_id: adv_id});
 
     // Enivo dos dados ao back-end para a inclusão
     $.ajax({

@@ -3,7 +3,6 @@
     //Variável que garante que todos os campos sejam válidos 
     var formValid = {
         nome_jogador : false,
-        pers_id : false,
     };
    
 
@@ -68,35 +67,3 @@
         checkForm();
        
     });
-
-
-    //Padrão de teste e respostas para os valores inteiros
-    var testeNums = new RegExp(/^[\p{L}a-zA-Z1-9]+$/);
-    var txt_ints = new String("O valor deve ser inteiro e maior que 1!");
-
-    //Verificação customizada do id do personagem
-    //Verificação customizada do nível
-    $("#campoIDPers").on('input', function() {
-        var input= $(this);
-        if (!(testeNums.test(input.val())) || (input.val()>99)){
-            
-            msg("#inv-idpers", txt_ints);
-            formValid["pers_id"] = false;
-            input.removeClass("valid").addClass("invalid");
-            show("#inv-idpers");
-        }   
-        else {
-            formValid["pers_id"] = true;
-            $("#inv-idpers").hide();
-            input.removeClass("invalid").addClass("valid");
-        }   
-        checkForm();
-    });
-
-
-
-    //Padrão de verificação dos caracteres de texto para o resumo
-    //Desativado por problemas com UTF-8
-    //var textEspHist = new RegExp(/^[\p{L}a-zA-Z0-9-!?"'/,. ]+$/);
-
-

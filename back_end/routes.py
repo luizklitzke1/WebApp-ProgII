@@ -235,14 +235,12 @@ def apagar_Aventura(id_adv):
 @app.route("/editar_aventura/<int:adv_id>",  methods=['POST'])
 def editar_Aventura(adv_id):
     
-    print("aaaaaaaaaaaa")
     resposta = jsonify({"resultado":"ok","detalhes": "ok"})
     dados = request.get_json()
     
     try: #Tentar realizar a edição
         
         a = Aventura.query.get_or_404(adv_id)
-        print(a)
 
         a.nome = dados["nome"]
         a.nome_mestre = dados["nome_mestre"]
@@ -270,6 +268,10 @@ def registrar_Participacao():
     
     resposta = jsonify({"resultado":"ok","detalhes": "ok"})
     dados = request.get_json()
+    
+    if (dados['observacao'] == ""):
+        dados['observacao'] = None
+        
     try: #Tenta fazer o registro
         
         nova_Participacao = Participacao(**dados)
