@@ -42,5 +42,6 @@ Deletar qualquer personagem, com um *modal* para confirmação.
 ![ModalDelete](https://i.ibb.co/vDrFfKC/modal-delete.png)
 
 ### Página específica
-Págian com os dados mais completos de cada personagem.
+Página com os dados mais completos de cada personagem e aventura.
 ![DescEsp](https://i.ibb.co/ssMwmz0/pers-detalhado.png)
+![DescEspADV](https://i.ibb.co/zxZq2bT/adv-detalhado.png)
