@@ -633,7 +633,6 @@ function apagarAdv(id_avent){
         data: JSON.stringify({ id_avent: id_avent}), 
         success: function(retorno){
             if (retorno.resultado == "ok") {
-                alert($("#card_adv_" + id_avent));
                 $("#card_adv_" + id_avent).fadeOut(1000, function(){ 
                 $("#DeleteModalAdv" + id_avent).remove();
                 alert("Aventura removida com sucesso!"); 
@@ -669,7 +668,7 @@ function dados_adv(tipo){
             //Verifica se deseja editar ou visualizar na página específica
             //Feito com um teste de tipo para facilitar callbacks e evitar muitas async
             if (resposta.resultado == "erro"){
-                alert("Aventura não encontrado! \nConfirme para voltar para a Home...");
+                alert("Aventura não encontrada! \nConfirme para voltar para a Home...");
                 window.location.href = "index.html";
             }
             else if (tipo == "edit"){
@@ -725,8 +724,6 @@ function mostrar_especifico_adv(aventura){
         for (personagem of personagens) {
 
             op = "<option value='" + personagem.id_pers + "'>" + personagem.nome + "</option>";
-            console.log(op);
-            console.log($("listaIDPers"));
             $("#listaIDPers").append(op);
         };
 

@@ -1,6 +1,0 @@
-flask 
-flask_sqlalchemy 
-Pillow
-datetime 
-flask_bcrypt
-flask_cors

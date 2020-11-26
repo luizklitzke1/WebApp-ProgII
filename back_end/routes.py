@@ -188,7 +188,7 @@ def salvar_imagem_base64(diretorio, base64str):
 def apagar_imagem(diretorio, foto):
     
     #Verifica se não é a imagem padrão
-    if (foto != "personagem.png" or foto!= "aventura.png"):
+    if (foto != "personagem.png" and foto!= "aventura.png"):
         caminho = os.path.join(app.root_path, diretorio, foto)
         os.remove(caminho)
 
@@ -227,8 +227,17 @@ def apagar_Aventura(id_adv):
     try: #Tentar realizar a exclusão
         aventura = Aventura.query.get_or_404(id_adv)
         apagar_imagem('../front_end/static/imagens_aventuras', aventura.foto)
+        
+        #Apaga as participações da aventura
+        participacoes = Participacao.query.filter_by(adv_id = id_adv)
+        
+        for participacao in participacoes:
+            db.session.delete(participacao)
+            
         db.session.delete(aventura)
         db.session.commit()
+        
+        
         
         
     except Exception as e:  #Envie mensagem em caso de erro
