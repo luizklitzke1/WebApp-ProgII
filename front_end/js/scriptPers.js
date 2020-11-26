@@ -724,7 +724,7 @@ function mostrar_especifico_adv(aventura){
 
         for (personagem of personagens) {
 
-            op = "<option value='"+ personagem.id_pers + "'>" + personagem.nome + "</option>";
+            op = "<option value='" + personagem.id_pers + "'>" + personagem.nome + "</option>";
             console.log(op);
             console.log($("listaIDPers"));
             $("#listaIDPers").append(op);

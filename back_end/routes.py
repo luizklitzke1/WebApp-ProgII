@@ -82,6 +82,13 @@ def apagar_Personagem(id_pers):
     try: #Tentar realizar a exclusão
         personagem = Personagem.query.get_or_404(id_pers)
         apagar_imagem('../front_end/static/imagens_personagens', personagem.foto)
+        
+        #Apaga as participações do personagem
+        participacoes = Participacao.query.filter_by(pers_id = id_pers)
+        
+        for participacao in participacoes:
+            db.session.delete(participacao)
+                                               
         db.session.delete(personagem)
         db.session.commit()
         
