@@ -47,4 +47,5 @@ Página com os dados mais completos de cada personagem e aventura.
 
 ### Pregistro de participação
 Sistema que permite registrar participações de personagens em uma determinada aventura e ver a relação de todas as já registradas para cada uma.
+
 ![DescEspADV](https://i.ibb.co/LRcNhXw/adv-detalhado.png)
