@@ -44,4 +44,7 @@ Deletar qualquer personagem, com um *modal* para confirmação.
 ### Página específica
 Página com os dados mais completos de cada personagem e aventura.
 ![DescEsp](https://i.ibb.co/ssMwmz0/pers-detalhado.png)
+
+### Pregistro de participação
+Sistema que permite registrar participações de personagens em uma determinada aventura e ver a relação de todas as já registradas para cada uma.
 ![DescEspADV](https://i.ibb.co/LRcNhXw/adv-detalhado.png)
