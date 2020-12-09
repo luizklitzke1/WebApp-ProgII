@@ -132,7 +132,7 @@ $(function() { // quando o documento estiver pronto/carregado
                             "</div>" +
                     
                     " <div class='container mt-4'> "+
-                    "<br><small class='text-muted'>Criada em: " + personagem.data_criacao + "</small>" +
+                    "<br><small class='text-muted'>Criada em: " + aventura.data_criacao + "</small>" +
                     "<div>" +
                     "<button type='button' class='btn btn-mec btn-danger btn-m p-2 float-right' data-toggle='modal' data-target='#DeleteModalAdv"+ aventura.id_avent + "'>Apagar</button>"+
                     "<a href = '../templates/editar_aventura.html?adv_id="+aventura.id_avent+"'><button type='button' class='btn btn-mec btn-info btn-m p-2 float-left'  data-toggle='modal'>Editar</button></a>"+
@@ -811,6 +811,7 @@ const registrar_part = async() =>  {
     pers_id = $("#listaIDPers").val();
     observacao = $("#campoObservacao").val();
 
+    //Pega o id da aventura pelo link da página
     let adv_id = document.location.search.replace(/^.*?\=/,'');
 
     var dados = JSON.stringify({ nome_jogador: nome_jogador, pers_id: pers_id, 

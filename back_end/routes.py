@@ -237,9 +237,7 @@ def apagar_Aventura(id_adv):
         db.session.delete(aventura)
         db.session.commit()
         
-        
-        
-        
+    
     except Exception as e:  #Envie mensagem em caso de erro
         resposta = jsonify({"resultado":"erro", "detalhes":str(e)}) 
         
