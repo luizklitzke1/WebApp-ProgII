@@ -31,11 +31,11 @@ Mais disponíveis em https://github.com/luizklitzke1/WebApp-ProgII/tree/master/i
 
 ### Home do site
 Demonstração dos *cards* com dados dos personagens.
-![Home](https://i.ibb.co/0sjH5rW/home1.png)
+![Home](https://i.ibb.co/sPH899d/home-new.png)
 
 ### Tela de Registro
 Formulário de registro e edição dos personagens, com validação em tempo real.
-![Tela de Registro](https://i.ibb.co/YLj25nq/validacao-registro.png)
+![Tela de Registro](https://i.ibb.co/HdBR8FK/validacao-registro.png)
 
 ### Remoção de dados
 Deletar qualquer personagem, com um *modal* para confirmação.
@@ -44,4 +44,4 @@ Deletar qualquer personagem, com um *modal* para confirmação.
 ### Página específica
 Página com os dados mais completos de cada personagem e aventura.
 ![DescEsp](https://i.ibb.co/ssMwmz0/pers-detalhado.png)
-![DescEspADV](https://i.ibb.co/zxZq2bT/adv-detalhado.png)
+![DescEspADV](https://i.ibb.co/LRcNhXw/adv-detalhado.png)
